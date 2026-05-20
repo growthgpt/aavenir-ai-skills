@@ -1,0 +1,147 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://aavenir.com/schemas/procurement-intelligence/v1.0.0.json",
+  "title": "Aavenir Procurement Intelligence Output",
+  "type": "object",
+  "required": ["skill", "version", "generated_at", "confidence", "result"],
+  "properties": {
+    "skill": { "const": "aavenir-procurement-intelligence" },
+    "version": { "type": "string", "pattern": "^\\d+\\.\\d+\\.\\d+$" },
+    "generated_at": { "type": "string", "format": "date-time" },
+    "confidence": { "enum": ["low", "medium", "high"] },
+    "result": {
+      "type": "object",
+      "properties": {
+        "decision_frame": {
+          "type": "object",
+          "required": ["category", "scope", "weights"],
+          "properties": {
+            "category": { "type": "string" },
+            "scope": { "type": "string" },
+            "business_outcome": { "type": "string" },
+            "weights": {
+              "type": "object",
+              "required": ["cost", "capability", "risk", "compliance", "delivery", "strategic_fit"],
+              "properties": {
+                "cost": { "type": "number", "minimum": 0, "maximum": 1 },
+                "capability": { "type": "number", "minimum": 0, "maximum": 1 },
+                "risk": { "type": "number", "minimum": 0, "maximum": 1 },
+                "compliance": { "type": "number", "minimum": 0, "maximum": 1 },
+                "delivery": { "type": "number", "minimum": 0, "maximum": 1 },
+                "strategic_fit": { "type": "number", "minimum": 0, "maximum": 1 }
+              }
+            }
+          }
+        },
+        "vendors": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "required": ["name", "scores", "weighted_total"],
+            "properties": {
+              "name": { "type": "string" },
+              "tco_3yr": {
+                "type": "object",
+                "properties": {
+                  "amount": { "type": "number" },
+                  "currency": { "type": "string", "pattern": "^[A-Z]{3}$" },
+                  "components": {
+                    "type": "object",
+                    "properties": {
+                      "year1": { "type": "number" },
+                      "year2": { "type": "number" },
+                      "year3": { "type": "number" },
+                      "implementation": { "type": "number" },
+                      "support": { "type": "number" },
+                      "variable": { "type": "number" }
+                    }
+                  },
+                  "delta_vs_lowest_pct": { "type": "number" },
+                  "assumptions": { "type": "array", "items": { "type": "string" } }
+                }
+              },
+              "scores": {
+                "type": "object",
+                "required": ["cost", "capability", "risk", "compliance", "delivery", "strategic_fit"],
+                "properties": {
+                  "cost": { "$ref": "#/$defs/scoredDimension" },
+                  "capability": { "$ref": "#/$defs/scoredDimension" },
+                  "risk": { "$ref": "#/$defs/scoredDimension" },
+                  "compliance": { "$ref": "#/$defs/scoredDimension" },
+                  "delivery": { "$ref": "#/$defs/scoredDimension" },
+                  "strategic_fit": { "$ref": "#/$defs/scoredDimension" }
+                }
+              },
+              "weighted_total": { "type": "number", "minimum": 1, "maximum": 5 },
+              "red_flags": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "required": ["category", "severity", "description"],
+                  "properties": {
+                    "category": { "enum": ["financial", "regulatory", "security", "concentration", "legal", "delivery", "lock_in", "esg"] },
+                    "severity": { "enum": ["low", "medium", "high", "critical"] },
+                    "description": { "type": "string" },
+                    "evidence": { "type": "string" }
+                  }
+                }
+              },
+              "strengths": { "type": "array", "items": { "type": "string" } },
+              "gaps": { "type": "array", "items": { "type": "string" } }
+            }
+          }
+        },
+        "recommendation": {
+          "type": "object",
+          "required": ["primary", "executive_summary"],
+          "properties": {
+            "primary": {
+              "type": "object",
+              "required": ["vendor", "rationale"],
+              "properties": {
+                "vendor": { "type": "string" },
+                "rationale": { "type": "string" },
+                "conditions": { "type": "array", "items": { "type": "string" } }
+              }
+            },
+            "fallback": {
+              "type": "object",
+              "properties": {
+                "vendor": { "type": "string" },
+                "rationale": { "type": "string" }
+              }
+            },
+            "not_recommended": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "required": ["vendor", "reason"],
+                "properties": {
+                  "vendor": { "type": "string" },
+                  "reason": { "type": "string" }
+                }
+              }
+            },
+            "executive_summary": {
+              "type": "array",
+              "minItems": 3,
+              "maxItems": 8,
+              "items": { "type": "string" }
+            }
+          }
+        }
+      }
+    }
+  },
+  "$defs": {
+    "scoredDimension": {
+      "type": "object",
+      "required": ["value", "rationale"],
+      "properties": {
+        "value": { "type": "integer", "minimum": 1, "maximum": 5 },
+        "rationale": { "type": "string" }
+      }
+    }
+  }
+}

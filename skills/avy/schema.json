@@ -1,0 +1,75 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://aavenir.com/schemas/avy/v1.0.0.json",
+  "title": "AVY Universal Assistant Output",
+  "type": "object",
+  "required": ["skill", "version", "generated_at", "confidence", "result"],
+  "properties": {
+    "skill": { "const": "aavenir-avy" },
+    "version": { "type": "string", "pattern": "^\\d+\\.\\d+\\.\\d+$" },
+    "generated_at": { "type": "string", "format": "date-time" },
+    "confidence": { "enum": ["low", "medium", "high"] },
+    "result": {
+      "type": "object",
+      "required": ["intent", "routing_decision", "actions_taken", "conversational_answer", "next_step"],
+      "properties": {
+        "intent": {
+          "enum": ["contract_review", "clause_rewrite", "vendor_compare", "obligation_track", "plain_english", "workflow_help", "multi_domain", "out_of_scope", "capability_discovery"]
+        },
+        "routing_decision": {
+          "type": "object",
+          "required": ["primary_skill", "reasoning"],
+          "properties": {
+            "primary_skill": {
+              "enum": ["aavenir-contract-intelligence", "aavenir-procurement-intelligence", "aavenir-negotiation-copilot", "aavenir-obligation-monitor", "none"]
+            },
+            "composed_skills": {
+              "type": "array",
+              "items": {
+                "enum": ["aavenir-contract-intelligence", "aavenir-procurement-intelligence", "aavenir-negotiation-copilot", "aavenir-obligation-monitor"]
+              }
+            },
+            "reasoning": { "type": "string" }
+          }
+        },
+        "actions_taken": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["skill", "input_summary", "output_summary"],
+            "properties": {
+              "skill": { "type": "string" },
+              "input_summary": { "type": "string" },
+              "output_summary": { "type": "string" }
+            }
+          }
+        },
+        "conversational_answer": { "type": "string" },
+        "next_step": {
+          "type": "object",
+          "required": ["suggestion"],
+          "properties": {
+            "suggestion": { "type": "string" },
+            "skill": { "type": "string" }
+          }
+        },
+        "citations": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["type", "reference"],
+            "properties": {
+              "type": { "enum": ["contract", "vendor", "obligation", "rfp", "policy"] },
+              "reference": { "type": "string" },
+              "excerpt": { "type": "string" }
+            }
+          }
+        },
+        "clarifying_question": {
+          "type": "string",
+          "description": "Set only when AVY cannot route without one clarification"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,142 @@
+{
+  "skill": "aavenir-procurement-intelligence",
+  "version": "1.0.0",
+  "examples": [
+    {
+      "id": "three-vendor-saas-rfp",
+      "label": "3-vendor SaaS RFP — clear winner with mitigation",
+      "input": {
+        "user_message": "We ran an RFP for an enterprise observability platform. Here are the three responses. Score them and tell me who to pick.",
+        "objective": "Replace incumbent observability stack across 4 business units; 3-year horizon; ~12,000 hosts at peak.",
+        "vendors": [
+          { "name": "Supplier A", "annual_fee_usd": 80000, "implementation_usd": 25000, "tier": "Enterprise", "soc2": "Type II current", "iso27001": true, "dpa": "Standard, GDPR Art. 28", "uptime_sla": "99.95%", "references": 8, "implementation_weeks": 6, "compliance_score_pct": 97, "notes": "Robust API, mature integrations, public roadmap aligned" },
+          { "name": "Supplier B", "annual_fee_usd": 65000, "implementation_usd": 40000, "tier": "Pro", "soc2": "Type II in progress", "iso27001": false, "dpa": "Custom, weak audit rights", "uptime_sla": "99.9%", "references": 3, "implementation_weeks": 14, "compliance_score_pct": 78, "notes": "Lower headline price but heavier integration lift; SOC 2 not yet issued" },
+          { "name": "Supplier C", "annual_fee_usd": 110000, "implementation_usd": 15000, "tier": "Enterprise Plus", "soc2": "Type II current", "iso27001": true, "dpa": "Standard GDPR + HIPAA BAA", "uptime_sla": "99.99%", "references": 14, "implementation_weeks": 4, "compliance_score_pct": 99, "notes": "Premium incumbent in space; highest cost; deepest capability" }
+        ]
+      },
+      "output": {
+        "skill": "aavenir-procurement-intelligence",
+        "version": "1.0.0",
+        "generated_at": "2026-05-20T15:00:00Z",
+        "confidence": "high",
+        "result": {
+          "decision_frame": {
+            "category": "Enterprise observability platform",
+            "scope": "12,000 hosts at peak, 4 business units, 3-year horizon",
+            "business_outcome": "Reduce MTTR and consolidate from incumbent stack",
+            "weights": { "cost": 0.30, "capability": 0.25, "risk": 0.15, "compliance": 0.15, "delivery": 0.10, "strategic_fit": 0.05 }
+          },
+          "vendors": [
+            {
+              "name": "Supplier A",
+              "tco_3yr": {
+                "amount": 265000,
+                "currency": "USD",
+                "components": { "year1": 80000, "year2": 80000, "year3": 80000, "implementation": 25000, "support": 0, "variable": 0 },
+                "delta_vs_lowest_pct": 4.7,
+                "assumptions": ["0% annual escalator (vendor did not state — flagged)", "Support included in Enterprise tier"]
+              },
+              "scores": {
+                "cost": { "value": 4, "rationale": "USD 265k 3-year TCO; ~5% above lowest. Implementation fee fair." },
+                "capability": { "value": 4, "rationale": "Robust API, mature integrations, roadmap aligned with our consolidation goal." },
+                "risk": { "value": 4, "rationale": "Stable vendor; 8 reference customers similar to our scale." },
+                "compliance": { "value": 5, "rationale": "SOC 2 Type II current, ISO 27001, standard GDPR DPA." },
+                "delivery": { "value": 4, "rationale": "6-week implementation; resourced." },
+                "strategic_fit": { "value": 4, "rationale": "Roadmap aligns with our cloud + on-prem hybrid posture." }
+              },
+              "weighted_total": 4.15,
+              "red_flags": [
+                {
+                  "category": "lock_in",
+                  "severity": "low",
+                  "description": "Annual escalator not stated — exposes us to first-renewal surprise.",
+                  "evidence": "No escalator clause in submitted pricing exhibit."
+                }
+              ],
+              "strengths": ["Balanced cost-capability tradeoff", "Strong compliance posture", "Reference fit at our scale"],
+              "gaps": ["No stated annual escalator"]
+            },
+            {
+              "name": "Supplier B",
+              "tco_3yr": {
+                "amount": 235000,
+                "currency": "USD",
+                "components": { "year1": 65000, "year2": 65000, "year3": 65000, "implementation": 40000, "support": 0, "variable": 0 },
+                "delta_vs_lowest_pct": 0,
+                "assumptions": ["0% annual escalator (unstated)", "Heavier implementation reflected in 14-week schedule"]
+              },
+              "scores": {
+                "cost": { "value": 5, "rationale": "Lowest TCO at USD 235k 3-year." },
+                "capability": { "value": 3, "rationale": "Functional but only 3 reference customers; Pro tier capability gaps surfaced in technical scoring." },
+                "risk": { "value": 2, "rationale": "SOC 2 Type II in progress (not yet issued); shorter customer list; weaker audit rights in DPA." },
+                "compliance": { "value": 2, "rationale": "No ISO 27001, SOC 2 not issued, custom DPA with weak audit rights." },
+                "delivery": { "value": 2, "rationale": "14-week implementation vs 6 weeks for Supplier A — material business cost." },
+                "strategic_fit": { "value": 3, "rationale": "Capable but no public roadmap commitment in our key area." }
+              },
+              "weighted_total": 3.05,
+              "red_flags": [
+                {
+                  "category": "security",
+                  "severity": "high",
+                  "description": "SOC 2 Type II not yet issued — vendor cannot meet our minimum infosec floor.",
+                  "evidence": "RFP response Section 8: 'Type II in progress, expected Q4'."
+                },
+                {
+                  "category": "delivery",
+                  "severity": "medium",
+                  "description": "14-week implementation more than 2x Supplier A — delay cost to consolidation program.",
+                  "evidence": "RFP response Section 4: 'Implementation Schedule'."
+                }
+              ],
+              "strengths": ["Lowest headline cost"],
+              "gaps": ["SOC 2 not issued", "No ISO 27001", "Weak DPA audit rights", "Long implementation"]
+            },
+            {
+              "name": "Supplier C",
+              "tco_3yr": {
+                "amount": 345000,
+                "currency": "USD",
+                "components": { "year1": 110000, "year2": 110000, "year3": 110000, "implementation": 15000, "support": 0, "variable": 0 },
+                "delta_vs_lowest_pct": 46.8,
+                "assumptions": ["Enterprise Plus tier includes premium support"]
+              },
+              "scores": {
+                "cost": { "value": 2, "rationale": "Highest TCO; +47% vs lowest." },
+                "capability": { "value": 5, "rationale": "Deepest feature set; 99.99% uptime SLA; HIPAA BAA included." },
+                "risk": { "value": 5, "rationale": "Market leader; 14 reference customers; financially stable." },
+                "compliance": { "value": 5, "rationale": "SOC 2 + ISO 27001 + HIPAA BAA." },
+                "delivery": { "value": 5, "rationale": "4-week implementation; dedicated CSM." },
+                "strategic_fit": { "value": 4, "rationale": "Strong roadmap but heavier than our hybrid posture needs." }
+              },
+              "weighted_total": 3.80,
+              "red_flags": [],
+              "strengths": ["Best-in-class capability and compliance", "Fastest implementation"],
+              "gaps": ["Highest cost — premium not justified vs Supplier A for our use case"]
+            }
+          ],
+          "recommendation": {
+            "primary": {
+              "vendor": "Supplier A",
+              "rationale": "Best weighted score (4.15). Balanced cost/capability/compliance fit. Implementation timeline aligned with consolidation deadline.",
+              "conditions": ["Negotiate explicit annual escalator cap (e.g., CPI or 5% max)", "Confirm support response times in MSA"]
+            },
+            "fallback": {
+              "vendor": "Supplier C",
+              "rationale": "If budget expands or HIPAA scope is added, Supplier C becomes justifiable at premium. Score 3.80, no red flags."
+            },
+            "not_recommended": [
+              { "vendor": "Supplier B", "reason": "Score 3.05 below 'qualified yes' threshold. Two high/medium red flags: SOC 2 not issued (infosec floor) and 14-week implementation (delivery risk)." }
+            ],
+            "executive_summary": [
+              "Recommend Supplier A — best weighted score (4.15) and best cost-capability-compliance balance.",
+              "Decisive factors: full SOC 2 + ISO, roadmap fit, 6-week implementation, ~$80k delta vs the premium incumbent.",
+              "Top trade-off: capability ceiling lower than Supplier C; acceptable for our hybrid scope.",
+              "Condition: negotiate annual escalator cap before signature (currently unstated).",
+              "Next step: invite Supplier A to BAFO with two negotiation asks (escalator cap, support SLAs); hold Supplier C as fallback."
+            ]
+          }
+        }
+      }
+    }
+  ]
+}

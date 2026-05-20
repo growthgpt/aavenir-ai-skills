@@ -1,0 +1,93 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://aavenir.com/schemas/obligation-monitor/v1.0.0.json",
+  "title": "Aavenir Obligation Monitor Output",
+  "type": "object",
+  "required": ["skill", "version", "generated_at", "confidence", "result"],
+  "properties": {
+    "skill": { "const": "aavenir-obligation-monitor" },
+    "version": { "type": "string", "pattern": "^\\d+\\.\\d+\\.\\d+$" },
+    "generated_at": { "type": "string", "format": "date-time" },
+    "confidence": { "enum": ["low", "medium", "high"] },
+    "result": {
+      "type": "object",
+      "required": ["contract", "obligations", "summary"],
+      "properties": {
+        "contract": {
+          "type": "object",
+          "required": ["counterparty", "user_party"],
+          "properties": {
+            "counterparty": { "type": "string" },
+            "user_party": { "type": "string" },
+            "contract_type": { "type": "string" },
+            "effective_date": { "type": ["string", "null"], "format": "date" },
+            "term_end": { "type": ["string", "null"], "format": "date" },
+            "auto_renew": { "type": ["boolean", "null"] }
+          }
+        },
+        "obligations": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["id", "owing_party", "obligation_text", "type", "category", "owner"],
+            "properties": {
+              "id": { "type": "string", "pattern": "^OBL-\\d{3,}$" },
+              "owing_party": { "enum": ["user_party", "counterparty", "both"] },
+              "obligation_text": { "type": "string" },
+              "quoted_text": { "type": "string" },
+              "section_reference": { "type": ["string", "null"] },
+              "type": { "enum": ["one_time", "recurring", "event_triggered", "conditional", "self_executing", "untimed"] },
+              "category": { "enum": ["payment", "reporting", "audit", "security", "delivery", "renewal", "termination", "warranty", "data", "other"] },
+              "owner": { "enum": ["finance", "legal", "procurement", "infosec", "operations", "compliance", "it", "hr", "other"] },
+              "deadline": { "type": ["string", "null"] },
+              "frequency": { "enum": ["daily", "weekly", "monthly", "quarterly", "annually", "one_time", null] },
+              "lead_time_days": {
+                "type": "array",
+                "items": { "type": "integer", "minimum": 0 }
+              },
+              "actions": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "required": ["action_type", "trigger"],
+                  "properties": {
+                    "action_type": { "enum": ["schedule_alert", "create_recurring_task", "wait_for_event", "monitor_metric"] },
+                    "trigger": { "type": "string" },
+                    "recipient": { "type": "string" },
+                    "payload": { "type": "string" }
+                  }
+                }
+              },
+              "risk_level": { "enum": ["low", "medium", "high", "critical"] },
+              "risk_note": { "type": "string" }
+            }
+          }
+        },
+        "renewal_triggers": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["type", "owner"],
+            "properties": {
+              "type": { "enum": ["auto_renewal", "renewal_option", "termination_for_convenience", "expiration"] },
+              "trigger_date": { "type": ["string", "null"], "format": "date" },
+              "notice_deadline": { "type": ["string", "null"], "format": "date" },
+              "lead_time_alerts_days": {
+                "type": "array",
+                "items": { "type": "integer", "minimum": 0 }
+              },
+              "owner": { "type": "string" },
+              "action_required": { "type": "string" }
+            }
+          }
+        },
+        "summary": {
+          "type": "array",
+          "minItems": 3,
+          "maxItems": 8,
+          "items": { "type": "string" }
+        }
+      }
+    }
+  }
+}

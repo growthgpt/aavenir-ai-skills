@@ -1,0 +1,156 @@
+{
+  "skill": "aavenir-obligation-monitor",
+  "version": "1.0.0",
+  "examples": [
+    {
+      "id": "saas-post-signature-plan",
+      "label": "Post-signature obligation plan for a signed SaaS MSA",
+      "input": {
+        "user_message": "We just signed this SaaS deal. Build me a post-signature tracking plan.",
+        "contract_excerpt": "Effective Date: 2026-06-01. Term: 24 months ending 2028-05-31. Auto-renews for 12 months unless either party gives 60 days' written notice. Annual fee USD 240,000, invoiced annually in advance, due net 30. Provider shall maintain 99.9% monthly uptime, with 5% service credit per 0.1% miss, reported in the monthly invoice. Provider shall provide a quarterly security report (SOC 2 status + incidents) by the 15th of the month following quarter-end. Customer shall give Provider written notice within 5 business days of any suspected data breach. Customer has audit rights once per year on 30 days' notice."
+      },
+      "output": {
+        "skill": "aavenir-obligation-monitor",
+        "version": "1.0.0",
+        "generated_at": "2026-05-20T17:00:00Z",
+        "confidence": "high",
+        "result": {
+          "contract": {
+            "counterparty": "Provider",
+            "user_party": "Customer",
+            "contract_type": "SaaS",
+            "effective_date": "2026-06-01",
+            "term_end": "2028-05-31",
+            "auto_renew": true
+          },
+          "obligations": [
+            {
+              "id": "OBL-001",
+              "owing_party": "user_party",
+              "obligation_text": "Pay annual subscription fee of USD 240,000 in advance, net 30",
+              "quoted_text": "Annual fee USD 240,000, invoiced annually in advance, due net 30.",
+              "section_reference": null,
+              "type": "recurring",
+              "category": "payment",
+              "owner": "finance",
+              "deadline": "2026-07-01",
+              "frequency": "annually",
+              "lead_time_days": [7, 1],
+              "actions": [
+                { "action_type": "create_recurring_task", "trigger": "Annually starting Effective Date + invoice receipt", "recipient": "finance", "payload": "Process USD 240,000 invoice from Provider; verify amount; approve for payment" },
+                { "action_type": "schedule_alert", "trigger": "7 days before payment due", "recipient": "finance", "payload": "Payment due in 7 days" }
+              ],
+              "risk_level": "low"
+            },
+            {
+              "id": "OBL-002",
+              "owing_party": "counterparty",
+              "obligation_text": "Maintain 99.9% monthly uptime",
+              "quoted_text": "Provider shall maintain 99.9% monthly uptime",
+              "section_reference": null,
+              "type": "recurring",
+              "category": "delivery",
+              "owner": "operations",
+              "deadline": null,
+              "frequency": "monthly",
+              "lead_time_days": [],
+              "actions": [
+                { "action_type": "monitor_metric", "trigger": "Monthly uptime measurement", "recipient": "operations", "payload": "Track Provider's reported uptime against 99.9% threshold; flag any miss" }
+              ],
+              "risk_level": "low"
+            },
+            {
+              "id": "OBL-003",
+              "owing_party": "counterparty",
+              "obligation_text": "Provide 5% service credit per 0.1% SLA miss in the following monthly invoice",
+              "quoted_text": "5% service credit per 0.1% miss, reported in the monthly invoice",
+              "section_reference": null,
+              "type": "event_triggered",
+              "category": "delivery",
+              "owner": "finance",
+              "deadline": null,
+              "frequency": null,
+              "lead_time_days": [],
+              "actions": [
+                { "action_type": "wait_for_event", "trigger": "SLA miss detected in OBL-002", "recipient": "finance", "payload": "Verify Provider applies correct service credit on next invoice; reconcile" }
+              ],
+              "risk_level": "medium",
+              "risk_note": "Customer must independently verify credits are applied — Providers commonly under-credit unless flagged."
+            },
+            {
+              "id": "OBL-004",
+              "owing_party": "counterparty",
+              "obligation_text": "Provide quarterly security report (SOC 2 status + incidents) by the 15th of the month following quarter-end",
+              "quoted_text": "Provider shall provide a quarterly security report (SOC 2 status + incidents) by the 15th of the month following quarter-end",
+              "section_reference": null,
+              "type": "recurring",
+              "category": "reporting",
+              "owner": "infosec",
+              "deadline": null,
+              "frequency": "quarterly",
+              "lead_time_days": [14, 3],
+              "actions": [
+                { "action_type": "create_recurring_task", "trigger": "15th of January, April, July, October", "recipient": "infosec", "payload": "Confirm receipt of Provider's quarterly security report; review SOC 2 status and incident list" },
+                { "action_type": "schedule_alert", "trigger": "14 days before report due", "recipient": "infosec", "payload": "Provider quarterly security report due in 14 days — confirm Provider has it on calendar" }
+              ],
+              "risk_level": "medium",
+              "risk_note": "Vendor-delivered reports are commonly late — proactive nudge at T-14 reduces miss rate."
+            },
+            {
+              "id": "OBL-005",
+              "owing_party": "user_party",
+              "obligation_text": "Give Provider written notice within 5 business days of any suspected data breach",
+              "quoted_text": "Customer shall give Provider written notice within 5 business days of any suspected data breach",
+              "section_reference": null,
+              "type": "event_triggered",
+              "category": "data",
+              "owner": "infosec",
+              "deadline": null,
+              "frequency": null,
+              "lead_time_days": [],
+              "actions": [
+                { "action_type": "wait_for_event", "trigger": "Customer-side data breach incident", "recipient": "infosec", "payload": "On any suspected breach, notify Provider in writing within 5 business days; log notification" }
+              ],
+              "risk_level": "high",
+              "risk_note": "Short notice window — must be wired into Customer's incident response playbook, not relied on as ad-hoc."
+            },
+            {
+              "id": "OBL-006",
+              "owing_party": "user_party",
+              "obligation_text": "Audit Provider once per year on 30 days' notice (optional right)",
+              "quoted_text": "Customer has audit rights once per year on 30 days' notice",
+              "section_reference": null,
+              "type": "conditional",
+              "category": "audit",
+              "owner": "infosec",
+              "deadline": null,
+              "frequency": "annually",
+              "lead_time_days": [30],
+              "actions": [
+                { "action_type": "create_recurring_task", "trigger": "Annual review window (e.g., Q1 each year)", "recipient": "infosec", "payload": "Decide whether to exercise annual audit right; if yes, send 30-day notice to Provider" }
+              ],
+              "risk_level": "low"
+            }
+          ],
+          "renewal_triggers": [
+            {
+              "type": "auto_renewal",
+              "trigger_date": "2028-05-31",
+              "notice_deadline": "2028-04-01",
+              "lead_time_alerts_days": [90, 60, 30],
+              "owner": "procurement",
+              "action_required": "Decide renewal vs non-renewal vs renegotiate; if non-renew, deliver written notice to Provider by 2028-04-01."
+            }
+          ],
+          "summary": [
+            "SaaS MSA between Customer and Provider, USD 240k/year, term 2026-06-01 to 2028-05-31, auto-renewing for 12 months.",
+            "6 obligations extracted: 2 recurring payment/reporting, 2 event-triggered (SLA credit, breach notice), 1 conditional audit right, 1 SLA-monitored.",
+            "Highest-risk: OBL-005 breach notification (5 business days) — wire into incident response; OBL-003 service-credit reconciliation — verify each invoice.",
+            "Critical renewal date: notice deadline 2028-04-01 (60 days before auto-renew). Alerts at T-90/60/30.",
+            "Recommended cadence: monthly SLA review (operations), quarterly security report intake (infosec), annual audit decision (infosec), annual invoice processing (finance), renewal decision (procurement, owned at T-90 days)."
+          ]
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,130 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://aavenir.com/schemas/contract-intelligence/v1.0.0.json",
+  "title": "Aavenir Contract Intelligence Output",
+  "description": "Structured analysis returned by the aavenir-contract-intelligence skill. Consumable directly by Aavenir Contractflow and downstream Flows.",
+  "type": "object",
+  "required": ["skill", "version", "generated_at", "confidence", "result"],
+  "properties": {
+    "skill": { "const": "aavenir-contract-intelligence" },
+    "version": { "type": "string", "pattern": "^\\d+\\.\\d+\\.\\d+$" },
+    "generated_at": { "type": "string", "format": "date-time" },
+    "confidence": { "enum": ["low", "medium", "high"] },
+    "result": {
+      "type": "object",
+      "required": ["contract_type", "metadata", "risks", "missing_clauses", "obligations", "executive_summary"],
+      "properties": {
+        "contract_type": {
+          "enum": ["MSA", "NDA", "SOW", "SaaS", "DPA", "vendor", "partnership", "employment", "lease", "license", "amendment", "other"]
+        },
+        "metadata": {
+          "type": "object",
+          "properties": {
+            "parties": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "required": ["name", "role"],
+                "properties": {
+                  "name": { "type": "string" },
+                  "role": { "type": "string", "description": "e.g. Customer, Supplier, Licensor, Licensee, Processor, Controller" },
+                  "confidence": { "enum": ["low", "medium", "high"] }
+                }
+              }
+            },
+            "effective_date": {
+              "type": "object",
+              "properties": {
+                "value": { "type": ["string", "null"], "format": "date" },
+                "confidence": { "enum": ["low", "medium", "high"] }
+              }
+            },
+            "term": {
+              "type": "object",
+              "properties": {
+                "length": { "type": ["string", "null"] },
+                "auto_renew": { "type": ["boolean", "null"] },
+                "notice_period_days": { "type": ["integer", "null"] }
+              }
+            },
+            "governing_law": {
+              "type": "object",
+              "properties": {
+                "jurisdiction": { "type": ["string", "null"] },
+                "venue": { "type": ["string", "null"] }
+              }
+            },
+            "contract_value": {
+              "type": "object",
+              "properties": {
+                "amount": { "type": ["number", "null"] },
+                "currency": { "type": ["string", "null"], "pattern": "^[A-Z]{3}$" },
+                "billing": { "type": ["string", "null"], "description": "e.g. annual, monthly, one-time, milestone" }
+              }
+            }
+          }
+        },
+        "risks": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["category", "risk_level", "reason", "quoted_text"],
+            "properties": {
+              "category": {
+                "enum": ["liability", "indemnity", "commercial", "compliance", "operational", "ip", "termination", "confidentiality", "data", "warranty", "governance", "force_majeure"]
+              },
+              "risk_level": { "enum": ["low", "medium", "high", "critical"] },
+              "reason": { "type": "string" },
+              "quoted_text": { "type": "string" },
+              "section_reference": { "type": ["string", "null"] },
+              "suggested_action": { "type": ["string", "null"] }
+            }
+          }
+        },
+        "missing_clauses": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["clause_name", "severity"],
+            "properties": {
+              "clause_name": { "type": "string" },
+              "category": { "type": "string" },
+              "why_expected": { "type": "string" },
+              "severity": { "enum": ["low", "medium", "high", "critical"] }
+            }
+          }
+        },
+        "obligations": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["party", "obligation_text"],
+            "properties": {
+              "party": { "type": "string" },
+              "obligation_text": { "type": "string" },
+              "trigger": { "type": ["string", "null"] },
+              "deadline": { "type": ["string", "null"] },
+              "frequency": { "enum": ["one-time", "daily", "weekly", "monthly", "quarterly", "annually", "event-based", "other"] },
+              "category": { "enum": ["payment", "reporting", "audit", "security", "renewal", "termination", "delivery", "warranty", "other"] }
+            }
+          }
+        },
+        "renewal": {
+          "type": "object",
+          "properties": {
+            "auto_renew": { "type": ["boolean", "null"] },
+            "renewal_term": { "type": ["string", "null"] },
+            "notice_window_days": { "type": ["integer", "null"] },
+            "notice_deadline": { "type": ["string", "null"], "format": "date" }
+          }
+        },
+        "executive_summary": {
+          "type": "array",
+          "minItems": 3,
+          "maxItems": 7,
+          "items": { "type": "string" }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,189 @@
+{
+  "skill": "aavenir-contract-intelligence",
+  "version": "1.0.0",
+  "description": "Few-shot examples for in-context learning. Use as `examples` in API calls or as reference for fine-tuning.",
+  "examples": [
+    {
+      "id": "msa-uncapped-indemnity",
+      "label": "MSA with uncapped indemnity and missing liability cap",
+      "input": {
+        "user_message": "Review this MSA and identify legal risks.",
+        "contract_excerpt": "MASTER SERVICES AGREEMENT between Acme Corp ('Customer') and Vendor Inc ('Supplier'). Effective Date: March 15, 2026. Term: Three (3) years, auto-renewing for successive 1-year terms unless either party provides written notice. Section 7. INDEMNIFICATION. Supplier shall indemnify, defend, and hold harmless Customer from any and all claims, damages, losses, costs, and expenses arising out of or related to the Services, without limitation. Section 8. PAYMENT. Customer shall pay all invoices within thirty (30) days of receipt. Section 12. GOVERNING LAW. This Agreement shall be governed by the laws of the State of Delaware."
+      },
+      "output": {
+        "skill": "aavenir-contract-intelligence",
+        "version": "1.0.0",
+        "generated_at": "2026-05-20T14:00:00Z",
+        "confidence": "high",
+        "result": {
+          "contract_type": "MSA",
+          "metadata": {
+            "parties": [
+              {"name": "Acme Corp", "role": "Customer", "confidence": "high"},
+              {"name": "Vendor Inc", "role": "Supplier", "confidence": "high"}
+            ],
+            "effective_date": {"value": "2026-03-15", "confidence": "high"},
+            "term": {"length": "3 years", "auto_renew": true, "notice_period_days": null},
+            "governing_law": {"jurisdiction": "Delaware, USA", "venue": null},
+            "contract_value": {"amount": null, "currency": null, "billing": null}
+          },
+          "risks": [
+            {
+              "category": "indemnity",
+              "risk_level": "critical",
+              "reason": "Uncapped indemnification with no exclusions creates unlimited financial exposure for Supplier. Customer-favorable but materially non-market.",
+              "quoted_text": "Supplier shall indemnify, defend, and hold harmless Customer from any and all claims, damages, losses, costs, and expenses arising out of or related to the Services, without limitation.",
+              "section_reference": "Section 7",
+              "suggested_action": "Negotiate carve-outs (gross negligence, willful misconduct) and a cap tied to fees paid in the prior 12 months."
+            },
+            {
+              "category": "termination",
+              "risk_level": "high",
+              "reason": "Auto-renewal is present but no notice period is specified, creating a perpetual rollover risk.",
+              "quoted_text": "auto-renewing for successive 1-year terms unless either party provides written notice",
+              "section_reference": "Recitals",
+              "suggested_action": "Require 60-day or 90-day written notice prior to renewal date."
+            }
+          ],
+          "missing_clauses": [
+            {"clause_name": "Limitation of Liability", "category": "liability", "why_expected": "Standard in every MSA — caps exposure and excludes consequential damages.", "severity": "critical"},
+            {"clause_name": "Confidentiality", "category": "confidentiality", "why_expected": "Standard in MSAs governing services that involve information exchange.", "severity": "high"},
+            {"clause_name": "IP Ownership", "category": "ip", "why_expected": "MSAs governing services must allocate IP in work product.", "severity": "high"},
+            {"clause_name": "Termination for Cause", "category": "termination", "why_expected": "Provides remedy for material breach.", "severity": "high"},
+            {"clause_name": "Force Majeure", "category": "force_majeure", "why_expected": "Standard market.", "severity": "medium"}
+          ],
+          "obligations": [
+            {"party": "Acme Corp", "obligation_text": "Pay all invoices within 30 days of receipt", "trigger": "Receipt of invoice", "deadline": "30 days from invoice receipt", "frequency": "event-based", "category": "payment"}
+          ],
+          "renewal": {
+            "auto_renew": true,
+            "renewal_term": "1 year",
+            "notice_window_days": null,
+            "notice_deadline": null
+          },
+          "executive_summary": [
+            "MSA between Acme Corp (Customer) and Vendor Inc (Supplier), effective March 15, 2026, 3-year term with auto-renewal.",
+            "1 critical risk: uncapped indemnity creates unlimited Supplier exposure.",
+            "5 standard clauses missing: Limitation of Liability (critical), Confidentiality, IP Ownership, Termination for Cause, Force Majeure.",
+            "Only payment-side obligation visible: Customer to pay invoices within 30 days.",
+            "Recommended action: do not sign. Escalate to legal — negotiate liability cap, indemnity carve-outs, and missing clauses before signature."
+          ]
+        }
+      }
+    },
+    {
+      "id": "saas-mostly-clean",
+      "label": "SaaS agreement with mostly clean terms, two medium flags",
+      "input": {
+        "user_message": "Quick risk pass on this SaaS contract before I send it to procurement.",
+        "contract_excerpt": "SAAS SUBSCRIPTION AGREEMENT. Customer: Globex Industries. Provider: SkyData Inc. Effective Date: 2026-06-01. Subscription Term: 12 months, auto-renewing for 12-month periods unless either party gives written notice at least 30 days prior to the end of the then-current term. Annual Subscription Fee: USD 120,000, billed annually in advance. SLA: 99.9% monthly uptime with 5% service credits for each 0.1% below. Liability cap: 12 months of fees paid. Mutual indemnification for third-party IP infringement claims. Data: Provider is data processor; DPA attached as Exhibit B with GDPR Article 28 terms. Governing law: California."
+      },
+      "output": {
+        "skill": "aavenir-contract-intelligence",
+        "version": "1.0.0",
+        "generated_at": "2026-05-20T14:05:00Z",
+        "confidence": "high",
+        "result": {
+          "contract_type": "SaaS",
+          "metadata": {
+            "parties": [
+              {"name": "Globex Industries", "role": "Customer", "confidence": "high"},
+              {"name": "SkyData Inc", "role": "Provider", "confidence": "high"}
+            ],
+            "effective_date": {"value": "2026-06-01", "confidence": "high"},
+            "term": {"length": "12 months", "auto_renew": true, "notice_period_days": 30},
+            "governing_law": {"jurisdiction": "California, USA", "venue": null},
+            "contract_value": {"amount": 120000, "currency": "USD", "billing": "annual"}
+          },
+          "risks": [
+            {
+              "category": "termination",
+              "risk_level": "medium",
+              "reason": "30-day notice window for non-renewal is tight for enterprise procurement cycles — easy to miss.",
+              "quoted_text": "auto-renewing for 12-month periods unless either party gives written notice at least 30 days prior",
+              "section_reference": "Subscription Term",
+              "suggested_action": "Set Aavenir Obligationflow renewal alert at T-60 days to allow buffer."
+            },
+            {
+              "category": "liability",
+              "risk_level": "medium",
+              "reason": "Liability cap at 12 months fees is standard but does not appear to carve out data breach or confidentiality breach — typical exceptions for SaaS handling EU data.",
+              "quoted_text": "Liability cap: 12 months of fees paid.",
+              "section_reference": "Liability",
+              "suggested_action": "Request super-cap (e.g., 2x fees) for data breach, confidentiality breach, and IP indemnity."
+            }
+          ],
+          "missing_clauses": [
+            {"clause_name": "Sub-processor list and consent", "category": "data", "why_expected": "Standard for SaaS processing personal data under GDPR — usually in DPA, verify Exhibit B.", "severity": "medium"},
+            {"clause_name": "Audit rights", "category": "compliance", "why_expected": "Common in enterprise SaaS contracts processing regulated data.", "severity": "low"}
+          ],
+          "obligations": [
+            {"party": "Globex Industries", "obligation_text": "Pay annual subscription fee of USD 120,000 in advance", "trigger": "Effective date and each renewal", "deadline": "Annual", "frequency": "annually", "category": "payment"},
+            {"party": "SkyData Inc", "obligation_text": "Maintain 99.9% monthly uptime", "trigger": "Each calendar month", "deadline": "Monthly measurement", "frequency": "monthly", "category": "other"},
+            {"party": "SkyData Inc", "obligation_text": "Provide 5% service credits for each 0.1% uptime below 99.9%", "trigger": "SLA miss", "deadline": "Following month invoice", "frequency": "event-based", "category": "other"}
+          ],
+          "renewal": {
+            "auto_renew": true,
+            "renewal_term": "12 months",
+            "notice_window_days": 30,
+            "notice_deadline": "2027-05-01"
+          },
+          "executive_summary": [
+            "SaaS agreement between Globex (Customer) and SkyData (Provider), USD 120k/year, 12-month auto-renewing term.",
+            "2 medium risks: short renewal notice (30 days) and standard liability cap without breach super-cap.",
+            "Sub-processor consent and audit rights to verify in attached DPA (Exhibit B).",
+            "Key obligations: annual prepayment, 99.9% SLA with service credits.",
+            "Recommended action: sign with two negotiated adjustments — super-cap for data/confidentiality breach, renewal alert at T-60 days."
+          ]
+        }
+      }
+    },
+    {
+      "id": "nda-clean",
+      "label": "Standard mutual NDA, low-risk fast review",
+      "input": {
+        "user_message": "Anything weird in this NDA?",
+        "contract_excerpt": "MUTUAL NON-DISCLOSURE AGREEMENT. Between TechCo and PartnerCo. Term: 2 years from effective date. Confidential Information: any non-public business, technical, or financial information disclosed by either party. Permitted Use: solely for evaluating a potential business relationship. Exclusions: information that is publicly known, independently developed, or rightfully received from a third party. Return or destruction within 30 days of termination upon written request. Governing law: New York."
+      },
+      "output": {
+        "skill": "aavenir-contract-intelligence",
+        "version": "1.0.0",
+        "generated_at": "2026-05-20T14:10:00Z",
+        "confidence": "high",
+        "result": {
+          "contract_type": "NDA",
+          "metadata": {
+            "parties": [
+              {"name": "TechCo", "role": "Disclosing & Receiving", "confidence": "high"},
+              {"name": "PartnerCo", "role": "Disclosing & Receiving", "confidence": "high"}
+            ],
+            "effective_date": {"value": null, "confidence": "low"},
+            "term": {"length": "2 years", "auto_renew": false, "notice_period_days": null},
+            "governing_law": {"jurisdiction": "New York, USA", "venue": null},
+            "contract_value": {"amount": null, "currency": null, "billing": null}
+          },
+          "risks": [],
+          "missing_clauses": [
+            {"clause_name": "Remedies / Injunctive Relief", "category": "governance", "why_expected": "Standard in NDAs — gives the disclosing party right to seek injunctive relief without bond.", "severity": "low"}
+          ],
+          "obligations": [
+            {"party": "Both parties", "obligation_text": "Return or destroy confidential information within 30 days of termination upon written request", "trigger": "Termination + written request", "deadline": "30 days from request", "frequency": "event-based", "category": "other"}
+          ],
+          "renewal": {
+            "auto_renew": false,
+            "renewal_term": null,
+            "notice_window_days": null,
+            "notice_deadline": null
+          },
+          "executive_summary": [
+            "Mutual NDA between TechCo and PartnerCo, 2-year term, NY governing law.",
+            "No material risks flagged — clean market-standard mutual NDA.",
+            "Effective date not stated in excerpt — confirm before signature.",
+            "One minor gap: no explicit injunctive relief clause (low severity).",
+            "Recommended action: sign once effective date is confirmed."
+          ]
+        }
+      }
+    }
+  ]
+}

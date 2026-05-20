@@ -1,0 +1,86 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://aavenir.com/schemas/negotiation-copilot/v1.0.0.json",
+  "title": "Aavenir Negotiation Copilot Output",
+  "type": "object",
+  "required": ["skill", "version", "generated_at", "confidence", "result"],
+  "properties": {
+    "skill": { "const": "aavenir-negotiation-copilot" },
+    "version": { "type": "string", "pattern": "^\\d+\\.\\d+\\.\\d+$" },
+    "generated_at": { "type": "string", "format": "date-time" },
+    "confidence": { "enum": ["low", "medium", "high"] },
+    "result": {
+      "oneOf": [
+        { "$ref": "#/$defs/rewriteResult" },
+        { "$ref": "#/$defs/markupReviewResult" }
+      ]
+    }
+  },
+  "$defs": {
+    "rewriteResult": {
+      "type": "object",
+      "required": ["user_position", "clause_category", "original_clause", "risk_summary", "alternatives"],
+      "properties": {
+        "mode": { "const": "rewrite" },
+        "user_position": { "enum": ["customer", "supplier", "neutral"] },
+        "clause_category": {
+          "enum": ["liability", "indemnity", "termination", "confidentiality", "ip", "data", "auto_renewal", "warranty", "governance", "force_majeure", "other"]
+        },
+        "original_clause": { "type": "string" },
+        "risk_summary": { "type": "string" },
+        "alternatives": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 3,
+          "items": {
+            "type": "object",
+            "required": ["position", "rewrite_clean", "rationale"],
+            "properties": {
+              "position": { "enum": ["aggressive", "balanced", "fallback"] },
+              "rewrite_clean": { "type": "string" },
+              "rewrite_redline_markdown": { "type": "string" },
+              "rationale": { "type": "string" },
+              "likely_counterparty_objection": { "type": "string" },
+              "talking_point": { "type": "string" },
+              "market_precedent": { "type": "string" },
+              "escalation_trigger": { "type": "string" }
+            }
+          }
+        },
+        "plain_english": { "type": "string" },
+        "negotiator_notes": {
+          "type": "array",
+          "items": { "type": "string" },
+          "maxItems": 6
+        }
+      }
+    },
+    "markupReviewResult": {
+      "type": "object",
+      "required": ["mode", "overall_verdict", "changes"],
+      "properties": {
+        "mode": { "const": "markup_review" },
+        "user_position": { "enum": ["customer", "supplier", "neutral"] },
+        "overall_verdict": { "enum": ["green", "yellow", "red"] },
+        "changes": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["counterparty_change", "verdict", "rationale"],
+            "properties": {
+              "counterparty_change": { "type": "string" },
+              "verdict": { "enum": ["accept", "reject", "counter"] },
+              "rationale": { "type": "string" },
+              "counter_proposal": { "type": "string" }
+            }
+          }
+        },
+        "negotiator_notes": {
+          "type": "array",
+          "items": { "type": "string" },
+          "maxItems": 6
+        }
+      }
+    }
+  }
+}

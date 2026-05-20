@@ -1,0 +1,100 @@
+{
+  "skill": "aavenir-avy",
+  "version": "1.0.0",
+  "examples": [
+    {
+      "id": "multi-domain-renewal-compliance",
+      "label": "Cross-domain query — renewals filtered by compliance",
+      "input": {
+        "user_message": "Which vendors with compliance scores below 80% have contracts auto-renewing in Q3 2026?"
+      },
+      "output": {
+        "skill": "aavenir-avy",
+        "version": "1.0.0",
+        "generated_at": "2026-05-20T18:00:00Z",
+        "confidence": "high",
+        "result": {
+          "intent": "multi_domain",
+          "routing_decision": {
+            "primary_skill": "aavenir-obligation-monitor",
+            "composed_skills": ["aavenir-procurement-intelligence", "aavenir-obligation-monitor"],
+            "reasoning": "Query joins vendor compliance (procurement-intelligence) with auto-renewal triggers in Q3 (obligation-monitor). Compose both, intersect."
+          },
+          "actions_taken": [
+            { "skill": "aavenir-procurement-intelligence", "input_summary": "List vendors with compliance_score_pct < 80", "output_summary": "Returned 4 vendors: SkyData, MetricCo, BlueShift, QuickStack" },
+            { "skill": "aavenir-obligation-monitor", "input_summary": "List contracts with auto_renewal trigger between 2026-07-01 and 2026-09-30", "output_summary": "Returned 11 contracts; 2 overlap with low-compliance vendor set" }
+          ],
+          "conversational_answer": "Two vendors match — both auto-renewing in Q3 with compliance scores under 80%:\n\n- **MetricCo** — compliance 72%, contract auto-renews 2026-08-15 (notice deadline 2026-06-16, 27 days from today). Risks: no current SOC 2, custom DPA with weak audit rights.\n- **QuickStack** — compliance 76%, contract auto-renews 2026-09-30 (notice deadline 2026-07-31). Risks: ISO 27001 lapsed, no DPA.\n\nBoth are at non-renewal decision risk because notice windows are short. Recommend procurement decision this week on MetricCo.",
+          "next_step": {
+            "suggestion": "Want me to draft non-renewal notices, or run a comparison of replacement vendors for MetricCo?",
+            "skill": "aavenir-procurement-intelligence"
+          },
+          "citations": [
+            { "type": "vendor", "reference": "MetricCo", "excerpt": "Compliance score 72%; SOC 2 not issued" },
+            { "type": "vendor", "reference": "QuickStack", "excerpt": "ISO 27001 lapsed 2026-03; no DPA" },
+            { "type": "obligation", "reference": "OBL-MET-014", "excerpt": "Auto-renew 2026-08-15 unless notice by 2026-06-16" },
+            { "type": "obligation", "reference": "OBL-QS-022", "excerpt": "Auto-renew 2026-09-30 unless notice by 2026-07-31" }
+          ]
+        }
+      }
+    },
+    {
+      "id": "plain-english-routing",
+      "label": "Plain-English request routed to negotiation-copilot",
+      "input": {
+        "user_message": "Explain clause 8 in simple English: 'Each party shall indemnify, defend, and hold harmless the other from third-party claims arising from gross negligence or willful misconduct.'"
+      },
+      "output": {
+        "skill": "aavenir-avy",
+        "version": "1.0.0",
+        "generated_at": "2026-05-20T18:05:00Z",
+        "confidence": "high",
+        "result": {
+          "intent": "plain_english",
+          "routing_decision": {
+            "primary_skill": "aavenir-negotiation-copilot",
+            "composed_skills": [],
+            "reasoning": "Pure plain-English translation request — owned by negotiation-copilot's translation mode."
+          },
+          "actions_taken": [
+            { "skill": "aavenir-negotiation-copilot", "input_summary": "Translate indemnity clause to 8th-grade reading level", "output_summary": "Produced plain-English version with jargon defined inline" }
+          ],
+          "conversational_answer": "In plain English:\n\n**If a third party sues either of us — because of something serious we did wrong, like being grossly careless or doing it on purpose — the party who messed up agrees to pay the other party's legal costs and any damages.**\n\nKey terms:\n- **Indemnify** = pay for the other party's legal trouble\n- **Defend** = hire the lawyer and run the legal defense\n- **Hold harmless** = make sure the other party isn't out-of-pocket\n- **Gross negligence** = a serious lapse, beyond an ordinary mistake\n- **Willful misconduct** = doing it on purpose, knowing it's wrong\n\nThis is mutual (both sides), and limited to third-party claims caused by serious wrongdoing. This is standard market language and generally fair.",
+          "next_step": {
+            "suggestion": "Want me to compare this against your standard indemnity playbook or suggest a redline?",
+            "skill": "aavenir-negotiation-copilot"
+          },
+          "citations": []
+        }
+      }
+    },
+    {
+      "id": "out-of-scope",
+      "label": "Out-of-scope refusal — tax question",
+      "input": {
+        "user_message": "How should we structure this deal to minimize VAT in the EU?"
+      },
+      "output": {
+        "skill": "aavenir-avy",
+        "version": "1.0.0",
+        "generated_at": "2026-05-20T18:10:00Z",
+        "confidence": "high",
+        "result": {
+          "intent": "out_of_scope",
+          "routing_decision": {
+            "primary_skill": "none",
+            "composed_skills": [],
+            "reasoning": "Tax structuring is outside Aavenir's CLM/S2P domain. Route to tax counsel."
+          },
+          "actions_taken": [],
+          "conversational_answer": "VAT structuring is outside my domain — that's a question for your tax advisor or EU VAT specialist. I focus on contract terms, supplier evaluation, obligation tracking, and procurement workflows.\n\nIf you'd like, I can help with the contract side once the tax structure is decided — for example, ensuring the agreement correctly references the chosen entity, VAT clauses, and invoicing terms.",
+          "next_step": {
+            "suggestion": "Once tax counsel has a recommendation, share the contract and I'll review the VAT/tax clauses and make sure they're consistent.",
+            "skill": "aavenir-contract-intelligence"
+          },
+          "citations": []
+        }
+      }
+    }
+  ]
+}

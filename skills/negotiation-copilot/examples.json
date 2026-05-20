@@ -1,0 +1,108 @@
+{
+  "skill": "aavenir-negotiation-copilot",
+  "version": "1.0.0",
+  "examples": [
+    {
+      "id": "indemnity-three-positions",
+      "label": "Customer-side rewrite of an overbroad supplier indemnity",
+      "input": {
+        "user_message": "Rewrite this indemnity clause from the customer side. Give me three positions.",
+        "clause": "Customer shall indemnify, defend, and hold harmless Supplier from any and all claims, damages, losses, costs, and expenses arising out of or related to Customer's use of the Services, without limitation."
+      },
+      "output": {
+        "skill": "aavenir-negotiation-copilot",
+        "version": "1.0.0",
+        "generated_at": "2026-05-20T16:00:00Z",
+        "confidence": "high",
+        "result": {
+          "mode": "rewrite",
+          "user_position": "customer",
+          "clause_category": "indemnity",
+          "original_clause": "Customer shall indemnify, defend, and hold harmless Supplier from any and all claims, damages, losses, costs, and expenses arising out of or related to Customer's use of the Services, without limitation.",
+          "risk_summary": "One-way unlimited indemnity from Customer — exposes Customer to unbounded liability for any claim 'related to' the Services, including claims Customer did not cause.",
+          "alternatives": [
+            {
+              "position": "aggressive",
+              "rewrite_clean": "Each party shall indemnify, defend, and hold harmless the other from third-party claims directly caused by the indemnifying party's gross negligence or willful misconduct in connection with this Agreement. Each party's aggregate indemnification obligation under this Section shall not exceed the fees paid or payable in the 12 months preceding the claim.",
+              "rewrite_redline_markdown": "**Each party shall** ~~Customer shall~~ indemnify, defend, and hold harmless ~~Supplier~~ **the other** from ~~any and all claims, damages, losses, costs, and expenses arising out of or related to Customer's use of the Services, without limitation~~ **third-party claims directly caused by the indemnifying party's gross negligence or willful misconduct in connection with this Agreement. Each party's aggregate indemnification obligation under this Section shall not exceed the fees paid or payable in the 12 months preceding the claim.**",
+              "rationale": "Flips one-way to mutual, narrows trigger to gross negligence/willful misconduct, narrows to third-party claims only, and caps at 12 months fees. Strongest opening posture.",
+              "likely_counterparty_objection": "Supplier will reject mutuality and resist a cap on Customer's indemnity for IP misuse.",
+              "talking_point": "We are happy to indemnify for our own bad acts. A standard MSA limits Customer indemnity to third-party claims caused by Customer; uncapped, one-way indemnity is not market."
+            },
+            {
+              "position": "balanced",
+              "rewrite_clean": "Customer shall indemnify, defend, and hold harmless Supplier from third-party claims to the extent arising out of (i) Customer's use of the Services in violation of this Agreement or applicable law, or (ii) Customer's gross negligence or willful misconduct. Customer's aggregate liability under this Section shall not exceed the greater of (a) USD 1,000,000 or (b) the fees paid by Customer in the 24 months preceding the claim, except that such cap shall not apply to claims arising from Customer's breach of confidentiality or infringement of Supplier's IP.",
+              "rewrite_redline_markdown": "Customer shall indemnify, defend, and hold harmless Supplier from ~~any and all claims, damages, losses, costs, and expenses arising out of or related to Customer's use of the Services, without limitation~~ **third-party claims to the extent arising out of (i) Customer's use of the Services in violation of this Agreement or applicable law, or (ii) Customer's gross negligence or willful misconduct. Customer's aggregate liability under this Section shall not exceed the greater of (a) USD 1,000,000 or (b) the fees paid by Customer in the 24 months preceding the claim, except that such cap shall not apply to claims arising from Customer's breach of confidentiality or infringement of Supplier's IP.**",
+              "rationale": "Standard market: one-way Customer indemnity but narrowed to misuse/breach/willful misconduct, capped with super-cap carve-outs for breaches Supplier reasonably needs uncapped exposure on.",
+              "market_precedent": "Mirrors standard SaaS MSA terms across enterprise vendors (24-month cap with carve-outs for confidentiality and IP)."
+            },
+            {
+              "position": "fallback",
+              "rewrite_clean": "Customer shall indemnify, defend, and hold harmless Supplier from third-party claims arising out of Customer's use of the Services in violation of this Agreement or applicable law. Customer's aggregate liability under this Section shall not exceed the fees paid by Customer in the 24 months preceding the claim, except that such cap shall not apply to claims of confidentiality breach or IP infringement by Customer.",
+              "rewrite_redline_markdown": "Customer shall indemnify, defend, and hold harmless Supplier from ~~any and all claims, damages, losses, costs, and expenses arising out of or related to Customer's use of the Services, without limitation~~ **third-party claims arising out of Customer's use of the Services in violation of this Agreement or applicable law. Customer's aggregate liability under this Section shall not exceed the fees paid by Customer in the 24 months preceding the claim, except that such cap shall not apply to claims of confidentiality breach or IP infringement by Customer.**",
+              "rationale": "Keeps one-way structure to preserve Supplier comfort, but narrows trigger to wrongful use and adds a 24-month cap with limited carve-outs.",
+              "escalation_trigger": "If Supplier rejects any cap whatsoever, escalate — this is the floor for signature."
+            }
+          ],
+          "plain_english": "If a third party sues the supplier because we (Customer) did something wrong with the service — like using it against the contract or against the law — we agree to pay the supplier's legal bills and any damages. But our total payment is capped at the amount we paid them in the prior 24 months, with a few exceptions for serious things like leaking their secrets or stealing their IP.",
+          "negotiator_notes": [
+            "Open with aggressive (mutual + capped + narrow trigger). Most enterprise suppliers will push back on mutuality but accept the narrower trigger.",
+            "If pushed off mutuality, drop to balanced — keep the cap and carve-outs. This is the realistic landing zone.",
+            "Hard floor is the 24-month cap. If Supplier refuses any cap, escalate to GC.",
+            "Watch for Supplier counter that strips the carve-outs — the carve-out wording is the negotiation surface, not the cap number."
+          ]
+        }
+      }
+    },
+    {
+      "id": "auto-renewal-rewrite",
+      "label": "Customer-side rewrite of an auto-renewal trap",
+      "input": {
+        "user_message": "Soften this auto-renewal clause. We always miss the notice window.",
+        "clause": "This Agreement shall automatically renew for successive one (1) year terms unless either party provides written notice of non-renewal at least thirty (30) days prior to the end of the then-current term."
+      },
+      "output": {
+        "skill": "aavenir-negotiation-copilot",
+        "version": "1.0.0",
+        "generated_at": "2026-05-20T16:10:00Z",
+        "confidence": "high",
+        "result": {
+          "mode": "rewrite",
+          "user_position": "customer",
+          "clause_category": "auto_renewal",
+          "original_clause": "This Agreement shall automatically renew for successive one (1) year terms unless either party provides written notice of non-renewal at least thirty (30) days prior to the end of the then-current term.",
+          "risk_summary": "30-day non-renewal window is too tight for enterprise procurement cycles — easy to miss, resulting in unwanted multi-year extensions.",
+          "alternatives": [
+            {
+              "position": "aggressive",
+              "rewrite_clean": "This Agreement shall not auto-renew. Renewal shall require mutual written agreement signed at least sixty (60) days before the end of the then-current term. Fees for any renewal term shall be at the same price-per-unit as the prior term unless the parties otherwise agree.",
+              "rewrite_redline_markdown": "This Agreement shall ~~automatically renew for successive one (1) year terms unless either party provides written notice of non-renewal at least thirty (30) days prior to the end of the then-current term~~ **not auto-renew. Renewal shall require mutual written agreement signed at least sixty (60) days before the end of the then-current term. Fees for any renewal term shall be at the same price-per-unit as the prior term unless the parties otherwise agree.**",
+              "rationale": "Flips opt-out auto-renew to opt-in mutual agreement, locks price-per-unit at renewal — strongest customer position.",
+              "likely_counterparty_objection": "Supplier will resist losing automatic revenue continuity.",
+              "talking_point": "Auto-renewal is operationally risky for both sides — let's commit annually."
+            },
+            {
+              "position": "balanced",
+              "rewrite_clean": "This Agreement shall automatically renew for successive one (1) year terms unless either party provides written notice of non-renewal at least sixty (60) days prior to the end of the then-current term. Fees for any renewal term shall not increase by more than the lesser of (a) the percentage change in the US CPI-U over the prior 12 months or (b) five percent (5%).",
+              "rewrite_redline_markdown": "This Agreement shall automatically renew for successive one (1) year terms unless either party provides written notice of non-renewal at least ~~thirty (30)~~ **sixty (60)** days prior to the end of the then-current term. **Fees for any renewal term shall not increase by more than the lesser of (a) the percentage change in the US CPI-U over the prior 12 months or (b) five percent (5%).**",
+              "rationale": "Preserves auto-renewal for Supplier but doubles notice window (procurement-friendly) and caps escalator. Market standard for enterprise SaaS.",
+              "market_precedent": "60-day notice + CPI-or-5% escalator cap is the prevailing enterprise SaaS norm."
+            },
+            {
+              "position": "fallback",
+              "rewrite_clean": "This Agreement shall automatically renew for successive one (1) year terms unless either party provides written notice of non-renewal at least sixty (60) days prior to the end of the then-current term. Fees for any renewal term shall not increase by more than seven percent (7%) per renewal.",
+              "rewrite_redline_markdown": "This Agreement shall automatically renew for successive one (1) year terms unless either party provides written notice of non-renewal at least ~~thirty (30)~~ **sixty (60)** days prior to the end of the then-current term. **Fees for any renewal term shall not increase by more than seven percent (7%) per renewal.**",
+              "rationale": "Floor — keeps auto-renew, gets 60-day window, gives up CPI-tie but caps at 7%.",
+              "escalation_trigger": "If Supplier refuses any escalator cap, escalate — uncapped renewal pricing is unacceptable."
+            }
+          ],
+          "negotiator_notes": [
+            "Notice window is non-negotiable from 30 to 60 — every enterprise procurement org gets caught by 30-day windows.",
+            "Escalator cap is the second ask — start with CPI-or-5%, accept 7%, do not accept uncapped.",
+            "Auto-renewal itself is rarely worth fighting unless this is a small/strategic deal."
+          ]
+        }
+      }
+    }
+  ]
+}
