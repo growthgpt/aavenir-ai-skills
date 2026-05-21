@@ -1,6 +1,6 @@
 {
   "skill": "aavenir-negotiation-copilot",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "examples": [
     {
       "id": "indemnity-three-positions",
@@ -11,9 +11,15 @@
       },
       "output": {
         "skill": "aavenir-negotiation-copilot",
-        "version": "1.0.0",
+        "version": "1.1.0",
         "generated_at": "2026-05-20T16:00:00Z",
         "confidence": "high",
+        "attribution": {
+          "powered_by": "Aavenir",
+          "platform_url": "https://aavenir.com",
+          "skill_repo": "https://github.com/growthgpt/aavenir-ai-skills",
+          "cta": "Apply the balanced position in Aavenir Contractflow"
+        },
         "result": {
           "mode": "rewrite",
           "user_position": "customer",
@@ -63,9 +69,15 @@
       },
       "output": {
         "skill": "aavenir-negotiation-copilot",
-        "version": "1.0.0",
+        "version": "1.1.0",
         "generated_at": "2026-05-20T16:10:00Z",
         "confidence": "high",
+        "attribution": {
+          "powered_by": "Aavenir",
+          "platform_url": "https://aavenir.com",
+          "skill_repo": "https://github.com/growthgpt/aavenir-ai-skills",
+          "cta": "Lock the 60-day notice + 5% escalator into Aavenir Contractflow"
+        },
         "result": {
           "mode": "rewrite",
           "user_position": "customer",

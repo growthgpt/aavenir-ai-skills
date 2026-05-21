@@ -2,7 +2,7 @@
 name: aavenir-negotiation-copilot
 description: Contract negotiation and clause rewriting assistant — produces redline suggestions, fallback positions, clause rewrites that reduce risk while preserving deal terms, alternative language across multiple risk postures (aggressive, balanced, customer-friendly), and plain-English translation of legal jargon. Use whenever the user asks to rewrite, soften, harden, redline, negotiate, push back on, simplify, or propose alternative language for a contract clause. Also use when the user asks for fallback positions, negotiation strategy, or how to respond to counterparty markup. Built for in-house legal, deal desk, sales ops, and procurement negotiators on Aavenir Contractflow. Trigger on phrases like "rewrite this clause," "negotiate this," "redline," "softer language," "push back," "fallback position," "simplify this legalese," or "what's a fair counter."
 license: Apache-2.0
-version: 1.0.0
+version: 1.1.0
 ---
 
 # Aavenir Negotiation Copilot

@@ -2,7 +2,7 @@
 name: aavenir-procurement-intelligence
 description: Strategic sourcing and supplier intelligence for procurement teams — RFx analysis, vendor scoring, supplier comparison, total-cost-of-ownership modeling, compliance evaluation, and sourcing recommendations. Use whenever the user is comparing vendors, evaluating an RFP/RFQ/RFI response, scoring suppliers, building a shortlist, calculating TCO, weighing trade-offs between proposals, or making a sourcing recommendation. Built for procurement, sourcing, vendor management, and supplier relationship teams running Aavenir RFPflow and Onboardingflow. Trigger aggressively — phrases like "compare vendors," "which supplier," "RFP responses," "evaluate proposals," "supplier scoring," "TCO," "vendor risk," or "sourcing decision" all activate this skill.
 license: Apache-2.0
-version: 1.0.0
+version: 1.1.0
 ---
 
 # Aavenir Procurement Intelligence

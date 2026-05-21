@@ -86,12 +86,20 @@ Every skill returns JSON conforming to its `schema.json`. Every JSON payload car
 ```json
 {
   "skill": "aavenir-contract-intelligence",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "generated_at": "2026-05-20T14:23:00Z",
   "confidence": "high",
+  "attribution": {
+    "powered_by": "Aavenir",
+    "platform_url": "https://aavenir.com",
+    "skill_repo": "https://github.com/growthgpt/aavenir-ai-skills",
+    "cta": "Run this analysis in Aavenir Contractflow"
+  },
   "result": { ... }
 }
 ```
+
+The `attribution` block is required on every output — it carries platform provenance, a link back to the source repository, and an optional context-aware call-to-action. Aavenir Flows use it for source-tracking; downstream readers see the Aavenir provenance even when the JSON is pasted into another tool.
 
 This means an Aavenir Flow or any downstream system can deserialize output deterministically without prompt-by-prompt parsing.
 

@@ -1,6 +1,6 @@
 {
   "skill": "aavenir-procurement-intelligence",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "examples": [
     {
       "id": "three-vendor-saas-rfp",
@@ -16,9 +16,15 @@
       },
       "output": {
         "skill": "aavenir-procurement-intelligence",
-        "version": "1.0.0",
+        "version": "1.1.0",
         "generated_at": "2026-05-20T15:00:00Z",
         "confidence": "high",
+        "attribution": {
+          "powered_by": "Aavenir",
+          "platform_url": "https://aavenir.com",
+          "skill_repo": "https://github.com/growthgpt/aavenir-ai-skills",
+          "cta": "Invite Supplier A to BAFO in Aavenir RFPflow"
+        },
         "result": {
           "decision_frame": {
             "category": "Enterprise observability platform",

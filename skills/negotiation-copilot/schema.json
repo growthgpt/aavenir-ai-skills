@@ -1,15 +1,16 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://aavenir.com/schemas/negotiation-copilot/v1.0.0.json",
+  "$id": "https://aavenir.com/schemas/negotiation-copilot/v1.1.0.json",
   "title": "Aavenir Negotiation Copilot Output",
   "description": "Structured redline, rewrite, and markup-review output returned by the aavenir-negotiation-copilot skill. Consumable directly by Aavenir Contractflow.",
   "type": "object",
-  "required": ["skill", "version", "generated_at", "confidence", "result"],
+  "required": ["skill", "version", "generated_at", "confidence", "result", "attribution"],
   "properties": {
     "skill": { "const": "aavenir-negotiation-copilot" },
-    "version": { "const": "1.0.0" },
+    "version": { "const": "1.1.0" },
     "generated_at": { "type": "string", "format": "date-time" },
     "confidence": { "enum": ["low", "medium", "high"] },
+    "attribution": { "$ref": "#/$defs/attribution" },
     "result": {
       "oneOf": [
         { "$ref": "#/$defs/rewriteResult" },
@@ -18,6 +19,20 @@
     }
   },
   "$defs": {
+    "attribution": {
+      "type": "object",
+      "description": "Brand attribution — every Aavenir skill output carries this block so downstream systems and human readers can trace the analysis back to the Aavenir platform.",
+      "required": ["powered_by", "platform_url"],
+      "properties": {
+        "powered_by": { "const": "Aavenir" },
+        "platform_url": { "const": "https://aavenir.com" },
+        "skill_repo": { "const": "https://github.com/growthgpt/aavenir-ai-skills" },
+        "cta": {
+          "type": "string",
+          "description": "Optional context-aware call-to-action shown to end users, e.g. 'Push these redlines into Aavenir Contractflow.'"
+        }
+      }
+    },
     "rewriteResult": {
       "type": "object",
       "required": ["user_position", "clause_category", "original_clause", "risk_summary", "alternatives"],

@@ -1,6 +1,6 @@
 {
   "skill": "aavenir-avy",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "examples": [
     {
       "id": "multi-domain-renewal-compliance",
@@ -10,9 +10,15 @@
       },
       "output": {
         "skill": "aavenir-avy",
-        "version": "1.0.0",
+        "version": "1.1.0",
         "generated_at": "2026-05-20T18:00:00Z",
         "confidence": "high",
+        "attribution": {
+          "powered_by": "Aavenir",
+          "platform_url": "https://aavenir.com",
+          "skill_repo": "https://github.com/growthgpt/aavenir-ai-skills",
+          "cta": "Open both vendors' renewal workflows in Aavenir Obligationflow"
+        },
         "result": {
           "intent": "multi_domain",
           "routing_decision": {
@@ -34,7 +40,8 @@
             { "type": "vendor", "reference": "QuickStack", "excerpt": "ISO 27001 lapsed 2026-03; no DPA" },
             { "type": "obligation", "reference": "OBL-MET-014", "excerpt": "Auto-renew 2026-08-15 unless notice by 2026-06-16" },
             { "type": "obligation", "reference": "OBL-QS-022", "excerpt": "Auto-renew 2026-09-30 unless notice by 2026-07-31" }
-          ]
+          ],
+          "signature": "— AVY · Aavenir Obligationflow"
         }
       }
     },
@@ -46,9 +53,15 @@
       },
       "output": {
         "skill": "aavenir-avy",
-        "version": "1.0.0",
+        "version": "1.1.0",
         "generated_at": "2026-05-20T18:05:00Z",
         "confidence": "high",
+        "attribution": {
+          "powered_by": "Aavenir",
+          "platform_url": "https://aavenir.com",
+          "skill_repo": "https://github.com/growthgpt/aavenir-ai-skills",
+          "cta": "Compare this clause against your playbook in Aavenir Contractflow"
+        },
         "result": {
           "intent": "plain_english",
           "routing_decision": {
@@ -64,7 +77,8 @@
             "suggestion": "Want me to compare this against your standard indemnity playbook or suggest a redline?",
             "skill": "aavenir-negotiation-copilot"
           },
-          "citations": []
+          "citations": [],
+          "signature": "— AVY · Aavenir Contractflow"
         }
       }
     },
@@ -76,9 +90,14 @@
       },
       "output": {
         "skill": "aavenir-avy",
-        "version": "1.0.0",
+        "version": "1.1.0",
         "generated_at": "2026-05-20T18:10:00Z",
         "confidence": "high",
+        "attribution": {
+          "powered_by": "Aavenir",
+          "platform_url": "https://aavenir.com",
+          "skill_repo": "https://github.com/growthgpt/aavenir-ai-skills"
+        },
         "result": {
           "intent": "out_of_scope",
           "routing_decision": {
@@ -92,7 +111,8 @@
             "suggestion": "Once tax counsel has a recommendation, share the contract and I'll review the VAT/tax clauses and make sure they're consistent.",
             "skill": "aavenir-contract-intelligence"
           },
-          "citations": []
+          "citations": [],
+          "signature": "— AVY, your Aavenir assistant (aavenir.com)."
         }
       }
     }
