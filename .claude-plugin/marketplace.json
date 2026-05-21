@@ -9,10 +9,7 @@
   "plugins": [
     {
       "name": "aavenir-ai-skills",
-      "source": {
-        "source": "github",
-        "repo": "growthgpt/aavenir-ai-skills"
-      },
+      "source": ".",
       "description": "Five enterprise CLM and Source-to-Pay skills — contract intelligence, procurement intelligence, negotiation copilot, obligation monitor, and the Avy router. Outputs Aavenir-grade structured JSON that flows back into Contractflow, Obligationflow, RFPflow, Invoiceflow, and AVY without translation.",
       "homepage": "https://aavenir.com",
       "repository": "https://github.com/growthgpt/aavenir-ai-skills",
