@@ -1,0 +1,1164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Aavenir AI Skills Hub — Drop-in AI for Contracts, Procurement, Negotiation &amp; Obligations</title>
+<meta name="description" content="The Aavenir AI Skill Ecosystem. Five enterprise-grade AI skills — Contract Intelligence, Procurement Intelligence, Negotiation Copilot, Obligation Monitor, and AVY — that run inside Claude, Codex, Cursor, OpenAI Agents, and every MCP-compatible assistant. One contract taxonomy. Same Aavenir output. Everywhere your team works." />
+<meta property="og:title" content="Aavenir AI Skills Hub — From Scattered AI to a Skill Ecosystem" />
+<meta property="og:description" content="Five enterprise-grade AI skills. Six AI surfaces. One Aavenir-defined contract, procurement, and obligation taxonomy." />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://growthgpt.github.io/aavenir-ai-skills/" />
+<meta name="twitter:card" content="summary_large_image" />
+
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%2315295A'/%3E%3Ctext x='32' y='44' font-family='Manrope, sans-serif' font-size='40' font-weight='800' fill='%23FFFCF9' text-anchor='middle'%3EA%3C/text%3E%3Ccircle cx='49' cy='15' r='6' fill='%23F56200'/%3E%3C/svg%3E" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Lato:wght@400;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+<script src="https://cdn.tailwindcss.com?plugins=typography"></script>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          aavenir: {
+            cream: '#FFFCF9',
+            cream2: '#FAF6F0',
+            navy: '#15295A',
+            navy2: '#0F1E44',
+            ink: '#0B1638',
+            orange: '#F56200',
+            orange2: '#D85500',
+            teal: '#48B29E',
+            teal2: '#3B9786',
+            mist: '#E8EDF7',
+            line: '#D9D2C6',
+          },
+        },
+        fontFamily: {
+          display: ['Manrope', 'sans-serif'],
+          body: ['Lato', 'sans-serif'],
+          ui: ['Inter', 'sans-serif'],
+          mono: ['"JetBrains Mono"', 'ui-monospace', 'monospace'],
+        },
+        boxShadow: {
+          card: '0 1px 0 #D9D2C6, 0 24px 48px -24px rgba(21,41,90,0.18)',
+          ring: '0 0 0 1px rgba(21,41,90,0.08)',
+        },
+      },
+    },
+  };
+</script>
+
+<style>
+  html { scroll-behavior: smooth; }
+  body { font-family: 'Lato', sans-serif; background: #FFFCF9; color: #15295A; -webkit-font-smoothing: antialiased; }
+  h1, h2, h3, h4, h5, .display { font-family: 'Manrope', sans-serif; letter-spacing: -0.01em; }
+  .ui { font-family: 'Inter', sans-serif; }
+  .mono { font-family: 'JetBrains Mono', ui-monospace, monospace; }
+
+  /* Eyebrow */
+  .eyebrow { font-family: 'Inter', sans-serif; font-weight: 600; font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; }
+
+  /* Underline accent (matches Aavenir hero treatment) */
+  .accent-underline { background-image: linear-gradient(transparent 70%, rgba(245,98,0,0.25) 70%); padding: 0 0.05em; }
+  .accent-teal { background-image: linear-gradient(transparent 70%, rgba(72,178,158,0.30) 70%); padding: 0 0.05em; }
+
+  /* Subtle dotted grid backdrop */
+  .grid-dots {
+    background-image: radial-gradient(rgba(21,41,90,0.10) 1px, transparent 1px);
+    background-size: 24px 24px;
+  }
+
+  /* Skill card hover lift */
+  .lift { transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease; }
+  .lift:hover { transform: translateY(-2px); border-color: rgba(245,98,0,0.45); box-shadow: 0 1px 0 #D9D2C6, 0 32px 56px -28px rgba(21,41,90,0.28); }
+
+  /* Tab buttons */
+  .tab-btn { transition: background .15s ease, color .15s ease, border-color .15s ease; cursor: pointer; }
+  .tab-btn[aria-selected="true"] { background: #15295A; color: #FFFCF9; border-color: #15295A; }
+  .tab-btn[aria-selected="false"]:hover { border-color: #15295A; }
+
+  /* Tag chips */
+  .chip { font-family: 'Inter', sans-serif; font-weight: 500; font-size: 12px; padding: 4px 10px; border-radius: 999px; border: 1px solid #D9D2C6; background: #FFFCF9; color: #15295A; }
+  .chip-orange { background: rgba(245,98,0,0.08); color: #C24B00; border-color: rgba(245,98,0,0.25); }
+  .chip-teal { background: rgba(72,178,158,0.10); color: #2C7466; border-color: rgba(72,178,158,0.30); }
+  .chip-navy { background: rgba(21,41,90,0.06); color: #15295A; border-color: rgba(21,41,90,0.18); }
+
+  /* Code block */
+  .code {
+    background: #0B1638; color: #E8EDF7;
+    border-radius: 12px; padding: 18px 20px;
+    font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 13px; line-height: 1.7;
+    overflow-x: auto;
+    box-shadow: 0 24px 48px -28px rgba(11,22,56,0.5);
+  }
+  .code .c-comment { color: #6E80A8; }
+  .code .c-key { color: #48B29E; }
+  .code .c-str { color: #F56200; }
+  .code .c-cmd { color: #FFFCF9; }
+
+  /* Copy button */
+  .copy-btn { font-family: 'Inter', sans-serif; font-size: 12px; font-weight: 500; padding: 6px 10px; border-radius: 8px; background: rgba(255,252,249,0.10); color: #FFFCF9; border: 1px solid rgba(255,252,249,0.18); cursor: pointer; transition: background .15s; }
+  .copy-btn:hover { background: rgba(255,252,249,0.18); }
+  .copy-btn.copied { background: #48B29E; border-color: #48B29E; color: #FFFCF9; }
+
+  /* Floating nav backdrop blur */
+  .nav-blur { backdrop-filter: saturate(180%) blur(12px); -webkit-backdrop-filter: saturate(180%) blur(12px); }
+
+  /* Diagonal divider line */
+  .hairline { height: 1px; background: linear-gradient(to right, transparent, #D9D2C6, transparent); }
+
+  /* Marquee */
+  @keyframes marquee {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+  .marquee-track { animation: marquee 40s linear infinite; }
+  @media (prefers-reduced-motion: reduce) {
+    .marquee-track { animation: none; }
+    .lift { transition: none; }
+  }
+
+  /* Focus rings */
+  a:focus-visible, button:focus-visible { outline: 2px solid #F56200; outline-offset: 3px; border-radius: 8px; }
+
+  /* Pulse dot */
+  @keyframes pulse-dot { 0%,100% { transform: scale(1); opacity: 1; } 50% { transform: scale(1.4); opacity: 0.6; } }
+  .pulse-dot { animation: pulse-dot 2s ease-in-out infinite; }
+</style>
+</head>
+
+<body class="font-body text-aavenir-navy bg-aavenir-cream">
+
+<!-- ───────── Navigation ───────── -->
+<header class="fixed top-0 inset-x-0 z-50">
+  <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-4">
+    <nav class="nav-blur bg-aavenir-cream/80 border border-aavenir-line/70 rounded-2xl px-4 sm:px-6 py-3 flex items-center justify-between shadow-ring">
+      <a href="#top" class="flex items-center gap-2.5 group">
+        <span class="grid place-items-center w-9 h-9 rounded-xl bg-aavenir-navy text-aavenir-cream font-display font-bold text-base">A</span>
+        <span class="hidden sm:block leading-tight">
+          <span class="block font-display font-bold text-aavenir-navy text-[15px]">Aavenir</span>
+          <span class="block ui text-[10.5px] uppercase tracking-[0.16em] text-aavenir-navy/60">Skills Hub</span>
+        </span>
+      </a>
+      <ul class="hidden md:flex items-center gap-7 ui text-[14px] text-aavenir-navy/80">
+        <li><a href="#skills" class="hover:text-aavenir-orange transition-colors">Skills</a></li>
+        <li><a href="#compatibility" class="hover:text-aavenir-orange transition-colors">Compatibility</a></li>
+        <li><a href="#demo" class="hover:text-aavenir-orange transition-colors">Live Demo</a></li>
+        <li><a href="#roles" class="hover:text-aavenir-orange transition-colors">For Your Team</a></li>
+        <li><a href="#install" class="hover:text-aavenir-orange transition-colors">Install</a></li>
+      </ul>
+      <div class="flex items-center gap-2">
+        <a href="https://github.com/growthgpt/aavenir-ai-skills" target="_blank" rel="noopener" class="ui hidden sm:inline-flex items-center gap-2 text-[13px] text-aavenir-navy hover:text-aavenir-orange transition-colors px-3 py-2 cursor-pointer">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.36-3.88-1.36-.52-1.33-1.28-1.68-1.28-1.68-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.36.96.11-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.69 0-1.26.45-2.29 1.19-3.1-.12-.29-.52-1.47.11-3.06 0 0 .97-.31 3.18 1.18a11 11 0 0 1 5.78 0c2.21-1.49 3.18-1.18 3.18-1.18.63 1.59.23 2.77.11 3.06.74.81 1.18 1.84 1.18 3.1 0 4.42-2.69 5.39-5.25 5.68.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.79.56C20.21 21.38 23.5 17.07 23.5 12 23.5 5.65 18.35.5 12 .5Z"/></svg>
+          GitHub
+        </a>
+        <a href="https://aavenir.com/demo/" target="_blank" rel="noopener" class="ui inline-flex items-center gap-2 bg-aavenir-orange hover:bg-aavenir-orange2 text-white text-[13px] font-semibold px-4 py-2.5 rounded-xl transition-colors cursor-pointer">
+          Book a Demo
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<!-- ───────── Hero ───────── -->
+<section id="top" class="relative pt-32 pb-20 sm:pt-40 sm:pb-28 overflow-hidden">
+  <div class="absolute inset-0 grid-dots opacity-60 pointer-events-none" aria-hidden="true"></div>
+  <div class="absolute top-24 -left-20 w-72 h-72 rounded-full bg-aavenir-orange/10 blur-3xl pointer-events-none" aria-hidden="true"></div>
+  <div class="absolute bottom-10 -right-20 w-72 h-72 rounded-full bg-aavenir-teal/15 blur-3xl pointer-events-none" aria-hidden="true"></div>
+
+  <div class="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <div class="flex items-center gap-2 mb-6">
+      <span class="chip chip-orange inline-flex items-center gap-2">
+        <span class="w-1.5 h-1.5 rounded-full bg-aavenir-orange pulse-dot"></span>
+        Now available
+      </span>
+      <span class="ui text-[12px] text-aavenir-navy/60">v1.0.0 · Apache-2.0 · Open source</span>
+    </div>
+
+    <h1 class="display text-aavenir-navy text-[44px] sm:text-[64px] lg:text-[80px] leading-[0.98] font-extrabold max-w-5xl">
+      From <span class="accent-underline">Scattered&nbsp;AI</span><br />
+      to an <span class="accent-teal">AI&nbsp;Ecosystem</span>.
+    </h1>
+
+    <p class="mt-7 max-w-2xl text-[19px] sm:text-[20px] leading-[1.55] text-aavenir-navy/80 font-body">
+      The <strong class="font-bold text-aavenir-navy">Aavenir AI Skill Ecosystem</strong> — five enterprise-grade AI skills for contracts, procurement, negotiation, and post-signature obligations. Drop them into <strong class="font-bold text-aavenir-navy">Claude, Codex, Cursor, OpenAI Agents</strong>, or any MCP-compatible assistant. One Aavenir-defined taxonomy. Same structured output. Everywhere your team already works.
+    </p>
+
+    <div class="mt-9 flex flex-col sm:flex-row items-start sm:items-center gap-3">
+      <a href="#install" class="ui inline-flex items-center gap-2.5 bg-aavenir-orange hover:bg-aavenir-orange2 text-white text-[15px] font-semibold px-6 py-3.5 rounded-xl transition-colors cursor-pointer shadow-lg shadow-aavenir-orange/30">
+        Install on Claude Code
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+      </a>
+      <a href="#skills" class="ui inline-flex items-center gap-2.5 bg-aavenir-cream hover:bg-aavenir-cream2 border border-aavenir-navy/20 hover:border-aavenir-navy/40 text-aavenir-navy text-[15px] font-semibold px-6 py-3.5 rounded-xl transition-colors cursor-pointer">
+        Explore the skills
+      </a>
+      <a href="https://github.com/growthgpt/aavenir-ai-skills" target="_blank" rel="noopener" class="ui inline-flex items-center gap-2 text-aavenir-navy/70 hover:text-aavenir-navy text-[14px] font-medium px-3 py-3 transition-colors cursor-pointer">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.36-3.88-1.36-.52-1.33-1.28-1.68-1.28-1.68-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.36.96.11-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.69 0-1.26.45-2.29 1.19-3.1-.12-.29-.52-1.47.11-3.06 0 0 .97-.31 3.18 1.18a11 11 0 0 1 5.78 0c2.21-1.49 3.18-1.18 3.18-1.18.63 1.59.23 2.77.11 3.06.74.81 1.18 1.84 1.18 3.1 0 4.42-2.69 5.39-5.25 5.68.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.79.56C20.21 21.38 23.5 17.07 23.5 12 23.5 5.65 18.35.5 12 .5Z"/></svg>
+        Source on GitHub
+      </a>
+    </div>
+
+    <!-- Stat strip -->
+    <div class="mt-14 grid grid-cols-2 sm:grid-cols-4 gap-6 sm:gap-10 max-w-3xl">
+      <div>
+        <div class="display font-extrabold text-aavenir-navy text-[34px] sm:text-[40px] leading-none">5</div>
+        <div class="ui text-[12px] uppercase tracking-[0.14em] text-aavenir-navy/55 mt-1.5">AI Skills</div>
+      </div>
+      <div>
+        <div class="display font-extrabold text-aavenir-navy text-[34px] sm:text-[40px] leading-none">6+</div>
+        <div class="ui text-[12px] uppercase tracking-[0.14em] text-aavenir-navy/55 mt-1.5">AI Surfaces</div>
+      </div>
+      <div>
+        <div class="display font-extrabold text-aavenir-navy text-[34px] sm:text-[40px] leading-none">1</div>
+        <div class="ui text-[12px] uppercase tracking-[0.14em] text-aavenir-navy/55 mt-1.5">Aavenir Taxonomy</div>
+      </div>
+      <div>
+        <div class="display font-extrabold text-aavenir-navy text-[34px] sm:text-[40px] leading-none">0</div>
+        <div class="ui text-[12px] uppercase tracking-[0.14em] text-aavenir-navy/55 mt-1.5">Vendor Lock-in</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ───────── Compatibility ribbon ───────── -->
+<section id="compatibility" class="relative py-10 border-y border-aavenir-line/70 bg-aavenir-cream2/60">
+  <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <div class="flex flex-col sm:flex-row items-center justify-between gap-6">
+      <div class="ui text-[12px] uppercase tracking-[0.18em] text-aavenir-navy/55 whitespace-nowrap">
+        Works everywhere your teams already work
+      </div>
+      <div class="flex flex-wrap items-center justify-center gap-x-8 gap-y-3 font-display font-semibold text-aavenir-navy/75 text-[15px]">
+        <span class="inline-flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-aavenir-orange"></span>Claude Code</span>
+        <span class="inline-flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-aavenir-orange"></span>Claude Desktop</span>
+        <span class="inline-flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-aavenir-teal"></span>Codex CLI</span>
+        <span class="inline-flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-aavenir-teal"></span>Cursor</span>
+        <span class="inline-flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-aavenir-orange"></span>OpenAI Agents</span>
+        <span class="inline-flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-aavenir-teal"></span>Cline / Roo</span>
+        <span class="inline-flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-aavenir-navy"></span>MCP Clients</span>
+        <span class="inline-flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-aavenir-navy"></span>ServiceNow + AVY</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ───────── Skills ───────── -->
+<section id="skills" class="relative py-24 sm:py-32">
+  <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <div class="max-w-3xl">
+      <div class="eyebrow text-aavenir-orange mb-3">The Ecosystem</div>
+      <h2 class="display text-aavenir-navy text-[36px] sm:text-[52px] leading-[1.05] font-extrabold">
+        Five AI skills.<br />One <span class="accent-underline">Aavenir output contract</span>.
+      </h2>
+      <p class="mt-5 text-[17px] leading-[1.6] text-aavenir-navy/75">
+        Each skill is a self-contained capability module — auto-triggering on the right kinds of tasks, returning structured JSON that flows straight into Aavenir Contractflow, Obligationflow, RFPflow, Onboardingflow, Invoiceflow, and AVY. Zero translation. Zero glue code.
+      </p>
+    </div>
+
+    <div class="mt-14 grid lg:grid-cols-2 gap-5 sm:gap-6">
+      <!-- Skill 1: Contract Intelligence -->
+      <article class="lift relative bg-white rounded-3xl border border-aavenir-line/80 shadow-card p-7 sm:p-8">
+        <div class="flex items-start justify-between gap-4">
+          <div class="grid place-items-center w-12 h-12 rounded-xl bg-aavenir-navy text-aavenir-orange">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3v4a1 1 0 0 0 1 1h4"/><path d="M17 21H7a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h7l5 5v11a2 2 0 0 1-2 2Z"/><path d="M9 13h6M9 17h6M9 9h2"/></svg>
+          </div>
+          <span class="chip chip-navy">Powers Contractflow</span>
+        </div>
+        <h3 class="display text-[22px] font-bold text-aavenir-navy mt-5">Contract Intelligence</h3>
+        <p class="text-[15px] text-aavenir-navy/70 mt-2 leading-[1.55]">
+          Reads MSAs, NDAs, SOWs, DPAs, vendor agreements. Extracts parties, dates, values, governing law. Scores risk per clause with evidence-based citations. Flags missing standard clauses.
+        </p>
+        <ul class="mt-5 grid grid-cols-2 gap-x-3 gap-y-2 ui text-[13px] text-aavenir-navy/85">
+          <li class="flex items-center gap-2"><span class="text-aavenir-orange">✓</span>Clause taxonomy</li>
+          <li class="flex items-center gap-2"><span class="text-aavenir-orange">✓</span>Risk scoring</li>
+          <li class="flex items-center gap-2"><span class="text-aavenir-orange">✓</span>Obligation extraction</li>
+          <li class="flex items-center gap-2"><span class="text-aavenir-orange">✓</span>Missing-clause detection</li>
+          <li class="flex items-center gap-2"><span class="text-aavenir-orange">✓</span>Auto-trigger discovery</li>
+          <li class="flex items-center gap-2"><span class="text-aavenir-orange">✓</span>Renewal &amp; termination</li>
+        </ul>
+        <div class="mt-6 pt-5 border-t border-aavenir-line/70 flex items-center justify-between">
+          <code class="mono text-[12px] text-aavenir-navy/60">aavenir-contract-intelligence</code>
+          <a href="https://github.com/growthgpt/aavenir-ai-skills/tree/main/skills/contract-intelligence" target="_blank" rel="noopener" class="ui text-[13px] font-semibold text-aavenir-orange hover:text-aavenir-orange2 inline-flex items-center gap-1.5 cursor-pointer">
+            See on GitHub
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+          </a>
+        </div>
+      </article>
+
+      <!-- Skill 2: Procurement Intelligence -->
+      <article class="lift relative bg-white rounded-3xl border border-aavenir-line/80 shadow-card p-7 sm:p-8">
+        <div class="flex items-start justify-between gap-4">
+          <div class="grid place-items-center w-12 h-12 rounded-xl bg-aavenir-navy text-aavenir-teal">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 3v18h18"/><path d="M7 16l4-4 3 3 5-6"/><path d="M19 9V6h-3"/></svg>
+          </div>
+          <span class="chip chip-navy">Powers RFPflow &amp; Onboardingflow</span>
+        </div>
+        <h3 class="display text-[22px] font-bold text-aavenir-navy mt-5">Procurement Intelligence</h3>
+        <p class="text-[15px] text-aavenir-navy/70 mt-2 leading-[1.55]">
+          Compares vendor proposals, scores RFx responses, normalizes pricing to 3-year TCO, weights cost vs capability vs risk vs compliance. Multi-criteria, defensible, math you can show.
+        </p>
+        <ul class="mt-5 grid grid-cols-2 gap-x-3 gap-y-2 ui text-[13px] text-aavenir-navy/85">
+          <li class="flex items-center gap-2"><span class="text-aavenir-teal">✓</span>RFx scoring</li>
+          <li class="flex items-center gap-2"><span class="text-aavenir-teal">✓</span>3-year TCO modeling</li>
+          <li class="flex items-center gap-2"><span class="text-aavenir-teal">✓</span>Supplier shortlist</li>
+          <li class="flex items-center gap-2"><span class="text-aavenir-teal">✓</span>Compliance red flags</li>
+          <li class="flex items-center gap-2"><span class="text-aavenir-teal">✓</span>Conflict-of-interest checks</li>
+          <li class="flex items-center gap-2"><span class="text-aavenir-teal">✓</span>Sourcing recommendation</li>
+        </ul>
+        <div class="mt-6 pt-5 border-t border-aavenir-line/70 flex items-center justify-between">
+          <code class="mono text-[12px] text-aavenir-navy/60">aavenir-procurement-intelligence</code>
+          <a href="https://github.com/growthgpt/aavenir-ai-skills/tree/main/skills/procurement-intelligence" target="_blank" rel="noopener" class="ui text-[13px] font-semibold text-aavenir-orange hover:text-aavenir-orange2 inline-flex items-center gap-1.5 cursor-pointer">
+            See on GitHub
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+          </a>
+        </div>
+      </article>
+
+      <!-- Skill 3: Negotiation Copilot -->
+      <article class="lift relative bg-white rounded-3xl border border-aavenir-line/80 shadow-card p-7 sm:p-8">
+        <div class="flex items-start justify-between gap-4">
+          <div class="grid place-items-center w-12 h-12 rounded-xl bg-aavenir-navy text-aavenir-orange">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20l9-16M3 20l9-16M3 12h18"/></svg>
+          </div>
+          <span class="chip chip-navy">Powers Contractflow Redlines</span>
+        </div>
+        <h3 class="display text-[22px] font-bold text-aavenir-navy mt-5">Negotiation Copilot</h3>
+        <p class="text-[15px] text-aavenir-navy/70 mt-2 leading-[1.55]">
+          Three calibrated rewrites for every clause — aggressive, balanced, fallback. Counterparty markup review with accept / reject / counter verdicts. Plain-English translation for business stakeholders.
+        </p>
+        <ul class="mt-5 grid grid-cols-2 gap-x-3 gap-y-2 ui text-[13px] text-aavenir-navy/85">
+          <li class="flex items-center gap-2"><span class="text-aavenir-orange">✓</span>Three positions per clause</li>
+          <li class="flex items-center gap-2"><span class="text-aavenir-orange">✓</span>Track-changes output</li>
+          <li class="flex items-center gap-2"><span class="text-aavenir-orange">✓</span>Markup review</li>
+          <li class="flex items-center gap-2"><span class="text-aavenir-orange">✓</span>Negotiator talk-tracks</li>
+          <li class="flex items-center gap-2"><span class="text-aavenir-orange">✓</span>Plain-English mode</li>
+          <li class="flex items-center gap-2"><span class="text-aavenir-orange">✓</span>Standard clause moves</li>
+        </ul>
+        <div class="mt-6 pt-5 border-t border-aavenir-line/70 flex items-center justify-between">
+          <code class="mono text-[12px] text-aavenir-navy/60">aavenir-negotiation-copilot</code>
+          <a href="https://github.com/growthgpt/aavenir-ai-skills/tree/main/skills/negotiation-copilot" target="_blank" rel="noopener" class="ui text-[13px] font-semibold text-aavenir-orange hover:text-aavenir-orange2 inline-flex items-center gap-1.5 cursor-pointer">
+            See on GitHub
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+          </a>
+        </div>
+      </article>
+
+      <!-- Skill 4: Obligation Monitor -->
+      <article class="lift relative bg-white rounded-3xl border border-aavenir-line/80 shadow-card p-7 sm:p-8">
+        <div class="flex items-start justify-between gap-4">
+          <div class="grid place-items-center w-12 h-12 rounded-xl bg-aavenir-navy text-aavenir-teal">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+          </div>
+          <span class="chip chip-navy">Powers Obligationflow</span>
+        </div>
+        <h3 class="display text-[22px] font-bold text-aavenir-navy mt-5">Obligation Monitor</h3>
+        <p class="text-[15px] text-aavenir-navy/70 mt-2 leading-[1.55]">
+          Post-signature workflow brain. Pulls every commitment, classifies by type, routes to the right functional owner, schedules T-90 / T-30 / T-7 lead-time alerts. Renewal cycles never slip again.
+        </p>
+        <ul class="mt-5 grid grid-cols-2 gap-x-3 gap-y-2 ui text-[13px] text-aavenir-navy/85">
+          <li class="flex items-center gap-2"><span class="text-aavenir-teal">✓</span>Two-sided tracking</li>
+          <li class="flex items-center gap-2"><span class="text-aavenir-teal">✓</span>Recurring &amp; conditional</li>
+          <li class="flex items-center gap-2"><span class="text-aavenir-teal">✓</span>Lead-time alerts</li>
+          <li class="flex items-center gap-2"><span class="text-aavenir-teal">✓</span>Owner routing</li>
+          <li class="flex items-center gap-2"><span class="text-aavenir-teal">✓</span>SLA &amp; service credits</li>
+          <li class="flex items-center gap-2"><span class="text-aavenir-teal">✓</span>Renewal triggers</li>
+        </ul>
+        <div class="mt-6 pt-5 border-t border-aavenir-line/70 flex items-center justify-between">
+          <code class="mono text-[12px] text-aavenir-navy/60">aavenir-obligation-monitor</code>
+          <a href="https://github.com/growthgpt/aavenir-ai-skills/tree/main/skills/obligation-monitor" target="_blank" rel="noopener" class="ui text-[13px] font-semibold text-aavenir-orange hover:text-aavenir-orange2 inline-flex items-center gap-1.5 cursor-pointer">
+            See on GitHub
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+          </a>
+        </div>
+      </article>
+
+      <!-- Skill 5: AVY (full width) -->
+      <article class="lift relative lg:col-span-2 bg-aavenir-navy text-aavenir-cream rounded-3xl border border-aavenir-navy/80 p-7 sm:p-10 overflow-hidden">
+        <div class="absolute -right-12 -bottom-12 w-56 h-56 rounded-full bg-aavenir-orange/20 blur-3xl pointer-events-none" aria-hidden="true"></div>
+        <div class="absolute -left-12 -top-12 w-56 h-56 rounded-full bg-aavenir-teal/20 blur-3xl pointer-events-none" aria-hidden="true"></div>
+
+        <div class="relative grid md:grid-cols-[1fr_auto] items-start gap-6">
+          <div>
+            <div class="flex items-center gap-3 mb-4">
+              <div class="grid place-items-center w-12 h-12 rounded-xl bg-aavenir-cream/10 ring-1 ring-aavenir-cream/15 text-aavenir-orange">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l2.5 5 5.5.8-4 3.9.9 5.5L12 15.7 7.1 18.2l.9-5.5-4-3.9L9.5 8 12 3Z"/></svg>
+              </div>
+              <span class="chip chip-orange">The Front Door</span>
+            </div>
+            <h3 class="display text-[28px] sm:text-[32px] font-bold text-aavenir-cream leading-tight">AVY — Aavenir Universal Assistant</h3>
+            <p class="text-[16px] text-aavenir-cream/75 mt-3 leading-[1.6] max-w-2xl">
+              The single AI front door across Contractflow, Obligationflow, RFPflow, Onboardingflow, and Invoiceflow. Users don't need to know which module owns their question. They ask in natural language — AVY routes, synthesizes across domains, and returns an auditable answer with a structured action log.
+            </p>
+            <ul class="mt-5 grid sm:grid-cols-2 gap-x-6 gap-y-2 ui text-[13.5px] text-aavenir-cream/90">
+              <li class="flex items-center gap-2"><span class="text-aavenir-orange">✓</span>Intent classification &amp; routing</li>
+              <li class="flex items-center gap-2"><span class="text-aavenir-teal">✓</span>Multi-domain composition</li>
+              <li class="flex items-center gap-2"><span class="text-aavenir-orange">✓</span>Audit log on every response</li>
+              <li class="flex items-center gap-2"><span class="text-aavenir-teal">✓</span>Privacy-aware (PII redaction)</li>
+              <li class="flex items-center gap-2"><span class="text-aavenir-orange">✓</span>Always suggests the next move</li>
+              <li class="flex items-center gap-2"><span class="text-aavenir-teal">✓</span>Refuses out-of-scope cleanly</li>
+            </ul>
+          </div>
+          <div class="hidden md:block">
+            <div class="bg-aavenir-cream/5 ring-1 ring-aavenir-cream/15 rounded-2xl p-5 w-[320px]">
+              <div class="ui text-[11px] uppercase tracking-[0.18em] text-aavenir-cream/55 mb-2">Sample query</div>
+              <div class="font-display text-[15px] text-aavenir-cream/95 leading-snug">"Which high-risk vendors have contracts auto-renewing in Q3?"</div>
+              <div class="hairline opacity-30 my-4"></div>
+              <div class="ui text-[11px] uppercase tracking-[0.18em] text-aavenir-cream/55 mb-2">AVY routes to</div>
+              <div class="flex flex-wrap gap-1.5">
+                <span class="chip chip-teal !text-aavenir-teal !border-aavenir-teal/40">procurement-intelligence</span>
+                <span class="chip chip-orange !text-aavenir-orange !border-aavenir-orange/40">obligation-monitor</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="relative mt-7 pt-5 border-t border-aavenir-cream/15 flex items-center justify-between">
+          <code class="mono text-[12px] text-aavenir-cream/55">aavenir-avy</code>
+          <a href="https://github.com/growthgpt/aavenir-ai-skills/tree/main/skills/avy" target="_blank" rel="noopener" class="ui text-[13px] font-semibold text-aavenir-orange hover:text-aavenir-cream inline-flex items-center gap-1.5 cursor-pointer">
+            See on GitHub
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+          </a>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ───────── Portability layer narrative ───────── -->
+<section class="relative py-24 sm:py-32 bg-aavenir-cream2/60 border-y border-aavenir-line/70">
+  <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <div class="max-w-3xl">
+      <div class="eyebrow text-aavenir-teal mb-3">The Portability Layer</div>
+      <h2 class="display text-aavenir-navy text-[36px] sm:text-[52px] leading-[1.05] font-extrabold">
+        One skill.<br />Every AI. <span class="accent-teal">Same Aavenir output.</span>
+      </h2>
+      <p class="mt-5 text-[17px] leading-[1.6] text-aavenir-navy/75 max-w-2xl">
+        Contract &amp; procurement work is fragmenting across surfaces — legal pastes clauses into ChatGPT, sales ops asks Cursor to draft an MSA, procurement runs RFP analysis in Claude. Without a shared spine, every team gets a different answer.
+      </p>
+    </div>
+
+    <div class="mt-14 grid lg:grid-cols-[1fr_auto_1fr] gap-8 items-center">
+      <!-- Left: AI surfaces -->
+      <div class="bg-white rounded-3xl border border-aavenir-line/80 shadow-card p-7">
+        <div class="ui text-[11px] uppercase tracking-[0.18em] text-aavenir-navy/55 mb-4">The assistants your teams use</div>
+        <div class="grid grid-cols-2 gap-2.5">
+          <div class="flex items-center gap-2.5 p-3 rounded-xl border border-aavenir-line/60 bg-aavenir-cream"><span class="w-2 h-2 rounded-full bg-aavenir-orange"></span><span class="ui text-[14px] font-semibold text-aavenir-navy">Claude Code</span></div>
+          <div class="flex items-center gap-2.5 p-3 rounded-xl border border-aavenir-line/60 bg-aavenir-cream"><span class="w-2 h-2 rounded-full bg-aavenir-teal"></span><span class="ui text-[14px] font-semibold text-aavenir-navy">Codex CLI</span></div>
+          <div class="flex items-center gap-2.5 p-3 rounded-xl border border-aavenir-line/60 bg-aavenir-cream"><span class="w-2 h-2 rounded-full bg-aavenir-teal"></span><span class="ui text-[14px] font-semibold text-aavenir-navy">Cursor</span></div>
+          <div class="flex items-center gap-2.5 p-3 rounded-xl border border-aavenir-line/60 bg-aavenir-cream"><span class="w-2 h-2 rounded-full bg-aavenir-orange"></span><span class="ui text-[14px] font-semibold text-aavenir-navy">OpenAI Agents</span></div>
+          <div class="flex items-center gap-2.5 p-3 rounded-xl border border-aavenir-line/60 bg-aavenir-cream"><span class="w-2 h-2 rounded-full bg-aavenir-teal"></span><span class="ui text-[14px] font-semibold text-aavenir-navy">Cline / Roo</span></div>
+          <div class="flex items-center gap-2.5 p-3 rounded-xl border border-aavenir-line/60 bg-aavenir-cream"><span class="w-2 h-2 rounded-full bg-aavenir-navy"></span><span class="ui text-[14px] font-semibold text-aavenir-navy">MCP Clients</span></div>
+        </div>
+      </div>
+
+      <!-- Center arrow card -->
+      <div class="relative grid place-items-center">
+        <div class="hidden lg:block">
+          <svg width="120" height="40" viewBox="0 0 120 40" fill="none" aria-hidden="true">
+            <path d="M2 20 H110" stroke="#15295A" stroke-width="1.5" stroke-dasharray="4 4"/>
+            <path d="M105 12 L115 20 L105 28" stroke="#F56200" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+          </svg>
+        </div>
+        <div class="lg:hidden h-10 w-px bg-aavenir-navy/30"></div>
+        <div class="absolute lg:relative bg-aavenir-orange text-white ui font-semibold text-[12px] px-3 py-1.5 rounded-full shadow-lg shadow-aavenir-orange/30 lg:mt-2">
+          Aavenir Skill
+        </div>
+      </div>
+
+      <!-- Right: Aavenir Flows -->
+      <div class="bg-aavenir-navy text-aavenir-cream rounded-3xl border border-aavenir-navy p-7 relative overflow-hidden">
+        <div class="absolute -right-12 -bottom-12 w-40 h-40 rounded-full bg-aavenir-orange/20 blur-3xl pointer-events-none" aria-hidden="true"></div>
+        <div class="ui text-[11px] uppercase tracking-[0.18em] text-aavenir-cream/55 mb-4 relative">Same Aavenir output → Flows on ServiceNow</div>
+        <div class="space-y-2 relative">
+          <div class="flex items-center justify-between p-3 rounded-xl bg-aavenir-cream/5 ring-1 ring-aavenir-cream/10"><span class="ui text-[14px] font-semibold">Contractflow</span><span class="mono text-[11px] text-aavenir-teal">schema.json</span></div>
+          <div class="flex items-center justify-between p-3 rounded-xl bg-aavenir-cream/5 ring-1 ring-aavenir-cream/10"><span class="ui text-[14px] font-semibold">Obligationflow</span><span class="mono text-[11px] text-aavenir-teal">schema.json</span></div>
+          <div class="flex items-center justify-between p-3 rounded-xl bg-aavenir-cream/5 ring-1 ring-aavenir-cream/10"><span class="ui text-[14px] font-semibold">RFPflow</span><span class="mono text-[11px] text-aavenir-teal">schema.json</span></div>
+          <div class="flex items-center justify-between p-3 rounded-xl bg-aavenir-cream/5 ring-1 ring-aavenir-cream/10"><span class="ui text-[14px] font-semibold">Onboardingflow</span><span class="mono text-[11px] text-aavenir-teal">schema.json</span></div>
+          <div class="flex items-center justify-between p-3 rounded-xl bg-aavenir-cream/5 ring-1 ring-aavenir-cream/10"><span class="ui text-[14px] font-semibold">Invoiceflow</span><span class="mono text-[11px] text-aavenir-teal">schema.json</span></div>
+        </div>
+      </div>
+    </div>
+
+    <p class="mt-12 ui text-center text-[14px] text-aavenir-navy/65 max-w-2xl mx-auto">
+      The Aavenir taxonomy is the spine. Every skill returns the same JSON envelope — <code class="mono text-[12.5px] text-aavenir-navy">{ skill, version, generated_at, confidence, result }</code> — so downstream Flows deserialize deterministically. No glue code. No prompt-by-prompt parsing.
+    </p>
+  </div>
+</section>
+
+<!-- ───────── Live Demo ───────── -->
+<section id="demo" class="relative py-24 sm:py-32">
+  <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <div class="max-w-3xl">
+      <div class="eyebrow text-aavenir-orange mb-3">Live Output</div>
+      <h2 class="display text-aavenir-navy text-[36px] sm:text-[52px] leading-[1.05] font-extrabold">
+        See the <span class="accent-underline">structured output</span>.
+      </h2>
+      <p class="mt-5 text-[17px] leading-[1.6] text-aavenir-navy/75 max-w-2xl">
+        Real sample output from each skill — the exact JSON shape that flows into Aavenir on ServiceNow. Click a skill, copy the payload, or load the source on GitHub.
+      </p>
+    </div>
+
+    <div class="mt-12 bg-white border border-aavenir-line/80 rounded-3xl shadow-card overflow-hidden">
+      <!-- Tabs -->
+      <div role="tablist" aria-label="Skill demos" class="flex flex-wrap gap-2 p-4 border-b border-aavenir-line/70 bg-aavenir-cream2/50">
+        <button class="tab-btn ui text-[13px] font-semibold px-4 py-2 rounded-xl border border-aavenir-line/80 bg-aavenir-cream" role="tab" aria-selected="true" data-tab="contract">Contract Intelligence</button>
+        <button class="tab-btn ui text-[13px] font-semibold px-4 py-2 rounded-xl border border-aavenir-line/80 bg-aavenir-cream" role="tab" aria-selected="false" data-tab="procurement">Procurement Intelligence</button>
+        <button class="tab-btn ui text-[13px] font-semibold px-4 py-2 rounded-xl border border-aavenir-line/80 bg-aavenir-cream" role="tab" aria-selected="false" data-tab="negotiation">Negotiation Copilot</button>
+        <button class="tab-btn ui text-[13px] font-semibold px-4 py-2 rounded-xl border border-aavenir-line/80 bg-aavenir-cream" role="tab" aria-selected="false" data-tab="obligation">Obligation Monitor</button>
+        <button class="tab-btn ui text-[13px] font-semibold px-4 py-2 rounded-xl border border-aavenir-line/80 bg-aavenir-cream" role="tab" aria-selected="false" data-tab="avy">AVY Assistant</button>
+      </div>
+
+      <div class="grid lg:grid-cols-2 gap-0">
+        <!-- Input -->
+        <div class="p-7 sm:p-8 border-r border-aavenir-line/70">
+          <div class="ui text-[11px] uppercase tracking-[0.18em] text-aavenir-navy/55 mb-3">Input — what the user says</div>
+          <div id="demo-input" class="bg-aavenir-cream2/60 border border-aavenir-line/70 rounded-2xl p-5 min-h-[260px] text-[15px] leading-[1.6] text-aavenir-navy/90 whitespace-pre-wrap"></div>
+          <div class="mt-5 flex items-center gap-3">
+            <span class="chip chip-navy" id="demo-skill-name"></span>
+            <span class="ui text-[12px] text-aavenir-navy/55" id="demo-trigger"></span>
+          </div>
+        </div>
+        <!-- Output -->
+        <div class="bg-aavenir-ink relative">
+          <div class="flex items-center justify-between px-6 py-3 border-b border-white/10">
+            <div class="flex items-center gap-2">
+              <span class="w-2.5 h-2.5 rounded-full bg-[#FF5F57]"></span>
+              <span class="w-2.5 h-2.5 rounded-full bg-[#FEBC2E]"></span>
+              <span class="w-2.5 h-2.5 rounded-full bg-[#28C840]"></span>
+              <span class="ui text-[11px] text-aavenir-cream/55 ml-3">aavenir-skill-output.json</span>
+            </div>
+            <button id="demo-copy" class="copy-btn">Copy JSON</button>
+          </div>
+          <pre id="demo-output" class="code !rounded-none !shadow-none !bg-transparent text-[12.5px] leading-[1.65] min-h-[260px] m-0 overflow-x-auto"></pre>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ───────── Built for Every Role ───────── -->
+<section id="roles" class="relative py-24 sm:py-32 bg-aavenir-cream2/60 border-y border-aavenir-line/70">
+  <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <div class="max-w-3xl">
+      <div class="eyebrow text-aavenir-teal mb-3">Built for Every Role</div>
+      <h2 class="display text-aavenir-navy text-[36px] sm:text-[52px] leading-[1.05] font-extrabold">
+        Same skills.<br />Every <span class="accent-underline">team in the enterprise</span>.
+      </h2>
+    </div>
+
+    <div class="mt-14 grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+      <div class="bg-white rounded-2xl border border-aavenir-line/80 shadow-card p-6">
+        <div class="flex items-center gap-3 mb-3">
+          <span class="grid place-items-center w-9 h-9 rounded-lg bg-aavenir-orange/10 text-aavenir-orange">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2l8 4v6c0 5-3.5 9.7-8 10-4.5-.3-8-5-8-10V6l8-4Z"/></svg>
+          </span>
+          <h3 class="display text-[18px] font-bold text-aavenir-navy">Legal &amp; Contracts</h3>
+        </div>
+        <p class="text-[14.5px] text-aavenir-navy/70 leading-[1.55]">Visibility from draft to signature. Risk flagged with quoted clause text. Three-position rewrites on every redline. Counterparty markup verdicts ready for deal desk.</p>
+      </div>
+
+      <div class="bg-white rounded-2xl border border-aavenir-line/80 shadow-card p-6">
+        <div class="flex items-center gap-3 mb-3">
+          <span class="grid place-items-center w-9 h-9 rounded-lg bg-aavenir-teal/15 text-aavenir-teal2">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 3v18h18"/><path d="M7 14l3-3 3 3 5-6"/></svg>
+          </span>
+          <h3 class="display text-[18px] font-bold text-aavenir-navy">Procurement &amp; Sourcing</h3>
+        </div>
+        <p class="text-[14.5px] text-aavenir-navy/70 leading-[1.55]">RFP scoring with the math shown. 3-year TCO normalized across vendors. Compliance red flags surfaced before BAFO. Cycle times cut, bottlenecks eliminated.</p>
+      </div>
+
+      <div class="bg-white rounded-2xl border border-aavenir-line/80 shadow-card p-6">
+        <div class="flex items-center gap-3 mb-3">
+          <span class="grid place-items-center w-9 h-9 rounded-lg bg-aavenir-orange/10 text-aavenir-orange">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg>
+          </span>
+          <h3 class="display text-[18px] font-bold text-aavenir-navy">Sales &amp; Deal Desk</h3>
+        </div>
+        <p class="text-[14.5px] text-aavenir-navy/70 leading-[1.55]">Contracts that keep pace with your pipeline. Fallback positions for every clause. Plain-English translations so AEs can carry the conversation without legal in the loop.</p>
+      </div>
+
+      <div class="bg-white rounded-2xl border border-aavenir-line/80 shadow-card p-6">
+        <div class="flex items-center gap-3 mb-3">
+          <span class="grid place-items-center w-9 h-9 rounded-lg bg-aavenir-teal/15 text-aavenir-teal2">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="6" width="18" height="14" rx="2"/><path d="M3 10h18M8 14h2"/></svg>
+          </span>
+          <h3 class="display text-[18px] font-bold text-aavenir-navy">Finance &amp; Compliance</h3>
+        </div>
+        <p class="text-[14.5px] text-aavenir-navy/70 leading-[1.55]">Every dollar tracked. Every obligation met. Auto-renewals never slip — T-90, T-30, T-7 lead-time alerts route to the right owner before the deadline lands.</p>
+      </div>
+
+      <div class="bg-white rounded-2xl border border-aavenir-line/80 shadow-card p-6">
+        <div class="flex items-center gap-3 mb-3">
+          <span class="grid place-items-center w-9 h-9 rounded-lg bg-aavenir-orange/10 text-aavenir-orange">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8 20h8M12 16v4"/></svg>
+          </span>
+          <h3 class="display text-[18px] font-bold text-aavenir-navy">IT &amp; Platform</h3>
+        </div>
+        <p class="text-[14.5px] text-aavenir-navy/70 leading-[1.55]">Deploys on ServiceNow — no new infrastructure, no rip-and-replace. Open JSON schemas. Apache-2.0 source. Zero proprietary lock-in to integrate with the rest of your stack.</p>
+      </div>
+
+      <div class="bg-aavenir-navy text-aavenir-cream rounded-2xl border border-aavenir-navy p-6 relative overflow-hidden">
+        <div class="absolute -right-10 -bottom-10 w-32 h-32 rounded-full bg-aavenir-orange/30 blur-3xl pointer-events-none"></div>
+        <div class="flex items-center gap-3 mb-3 relative">
+          <span class="grid place-items-center w-9 h-9 rounded-lg bg-aavenir-cream/10 ring-1 ring-aavenir-cream/15 text-aavenir-orange">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v18M3 12h18"/></svg>
+          </span>
+          <h3 class="display text-[18px] font-bold text-aavenir-cream">Everyone Else</h3>
+        </div>
+        <p class="text-[14.5px] text-aavenir-cream/85 leading-[1.55] relative">AVY routes natural-language questions across every domain. No one has to learn which Aavenir module owns their question. They just ask.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ───────── Why Aavenir ───────── -->
+<section class="relative py-24 sm:py-32">
+  <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <div class="max-w-3xl">
+      <div class="eyebrow text-aavenir-orange mb-3">Why Aavenir Skills</div>
+      <h2 class="display text-aavenir-navy text-[36px] sm:text-[52px] leading-[1.05] font-extrabold">
+        The reasons we're the <span class="accent-underline">only ecosystem</span> built this way.
+      </h2>
+    </div>
+
+    <div class="mt-14 grid lg:grid-cols-5 gap-5">
+      <div class="lg:col-span-2 bg-white rounded-3xl border border-aavenir-line/80 shadow-card p-7">
+        <div class="ui text-[11px] uppercase tracking-[0.18em] text-aavenir-navy/55">01</div>
+        <h3 class="display text-[22px] font-bold text-aavenir-navy mt-2">Native ServiceNow Integration</h3>
+        <p class="text-[15px] text-aavenir-navy/70 mt-3 leading-[1.6]">Every output schema deserializes directly into Aavenir Flows on ServiceNow. No glue code. No translation layer. The data that comes out of Claude lands in your CMDB the same way it lands from AVY.</p>
+      </div>
+      <div class="lg:col-span-3 bg-white rounded-3xl border border-aavenir-line/80 shadow-card p-7">
+        <div class="ui text-[11px] uppercase tracking-[0.18em] text-aavenir-navy/55">02</div>
+        <h3 class="display text-[22px] font-bold text-aavenir-navy mt-2">Open Schema. No Lock-in.</h3>
+        <p class="text-[15px] text-aavenir-navy/70 mt-3 leading-[1.6]">Apache-2.0 license. Five published JSON Schemas. Three host integrations documented out of the box. You can run our skills inside Claude, OpenAI, Cursor — or build your own surface. Aavenir is the spine, not the silo.</p>
+      </div>
+      <div class="lg:col-span-3 bg-aavenir-navy text-aavenir-cream rounded-3xl border border-aavenir-navy p-7 relative overflow-hidden">
+        <div class="absolute -right-12 -bottom-12 w-40 h-40 rounded-full bg-aavenir-orange/20 blur-3xl pointer-events-none"></div>
+        <div class="ui text-[11px] uppercase tracking-[0.18em] text-aavenir-cream/55 relative">03</div>
+        <h3 class="display text-[22px] font-bold text-aavenir-cream mt-2 relative">AI Agents, Not AI Demos</h3>
+        <p class="text-[15px] text-aavenir-cream/85 mt-3 leading-[1.6] relative">Each skill auto-triggers on the right tasks, returns evidence-cited output, and surfaces confidence levels per field. Not chat. Not vibes. Structured AI that integrates with your workflow engine.</p>
+      </div>
+      <div class="lg:col-span-2 bg-white rounded-3xl border border-aavenir-line/80 shadow-card p-7">
+        <div class="ui text-[11px] uppercase tracking-[0.18em] text-aavenir-navy/55">04</div>
+        <h3 class="display text-[22px] font-bold text-aavenir-navy mt-2">Industry-Wide Coverage</h3>
+        <p class="text-[15px] text-aavenir-navy/70 mt-3 leading-[1.6]">Deployed across BFSI, Healthcare &amp; Life Sciences, Manufacturing, Energy, Public Sector, Telecom, and Education. The taxonomy holds wherever contracts and procurement do.</p>
+      </div>
+      <div class="lg:col-span-5 bg-aavenir-cream2/60 rounded-3xl border border-aavenir-line/80 p-7 grid md:grid-cols-[1fr_auto] items-center gap-6">
+        <div>
+          <div class="ui text-[11px] uppercase tracking-[0.18em] text-aavenir-navy/55">05</div>
+          <h3 class="display text-[22px] font-bold text-aavenir-navy mt-2">Beyond Signatures. Maximize Contract Value.</h3>
+          <p class="text-[15px] text-aavenir-navy/70 mt-3 leading-[1.6] max-w-2xl">Complementary applications beyond CLM — Sourcing, Vendor Onboarding, Obligation Management, AP Automation, Vendor Compliance Screening — stand-alone or pre-integrated. For both ServiceNow and non-ServiceNow customers.</p>
+        </div>
+        <a href="https://aavenir.com/about/" target="_blank" rel="noopener" class="ui inline-flex items-center gap-2 bg-aavenir-navy hover:bg-aavenir-navy2 text-aavenir-cream font-semibold text-[14px] px-5 py-3 rounded-xl transition-colors cursor-pointer whitespace-nowrap">
+          Explore Aavenir
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ───────── Trust / Customers ───────── -->
+<section class="relative py-16 bg-aavenir-cream2/60 border-y border-aavenir-line/70 overflow-hidden">
+  <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-8">
+      <div class="ui text-[11px] uppercase tracking-[0.18em] text-aavenir-navy/55">Aavenir trusted by enterprises across BFSI, Healthcare, Manufacturing &amp; more</div>
+    </div>
+    <div class="relative">
+      <div class="absolute inset-y-0 left-0 w-16 bg-gradient-to-r from-aavenir-cream2 to-transparent z-10 pointer-events-none"></div>
+      <div class="absolute inset-y-0 right-0 w-16 bg-gradient-to-l from-aavenir-cream2 to-transparent z-10 pointer-events-none"></div>
+      <div class="flex overflow-hidden">
+        <div class="marquee-track flex shrink-0 items-center gap-14 pr-14 font-display font-bold text-aavenir-navy/40 text-[22px] whitespace-nowrap">
+          <span>Guardian</span>
+          <span>Kettering Health</span>
+          <span>Grant Thornton</span>
+          <span>AGIO</span>
+          <span>American Seafoods Group</span>
+          <span>Guardian</span>
+          <span>Kettering Health</span>
+          <span>Grant Thornton</span>
+          <span>AGIO</span>
+          <span>American Seafoods Group</span>
+        </div>
+        <div class="marquee-track flex shrink-0 items-center gap-14 pr-14 font-display font-bold text-aavenir-navy/40 text-[22px] whitespace-nowrap" aria-hidden="true">
+          <span>Guardian</span>
+          <span>Kettering Health</span>
+          <span>Grant Thornton</span>
+          <span>AGIO</span>
+          <span>American Seafoods Group</span>
+          <span>Guardian</span>
+          <span>Kettering Health</span>
+          <span>Grant Thornton</span>
+          <span>AGIO</span>
+          <span>American Seafoods Group</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ───────── Install ───────── -->
+<section id="install" class="relative py-24 sm:py-32">
+  <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <div class="max-w-3xl">
+      <div class="eyebrow text-aavenir-teal mb-3">Get Started</div>
+      <h2 class="display text-aavenir-navy text-[36px] sm:text-[52px] leading-[1.05] font-extrabold">
+        Install in <span class="accent-teal">under a minute</span>.
+      </h2>
+      <p class="mt-5 text-[17px] leading-[1.6] text-aavenir-navy/75 max-w-2xl">
+        Same skills, every AI surface. Pick yours.
+      </p>
+    </div>
+
+    <div class="mt-14 grid lg:grid-cols-2 gap-6">
+      <!-- Claude -->
+      <div class="rounded-3xl border border-aavenir-line/80 shadow-card overflow-hidden bg-white">
+        <div class="px-7 py-5 flex items-center justify-between border-b border-aavenir-line/70">
+          <div class="flex items-center gap-3">
+            <span class="grid place-items-center w-9 h-9 rounded-lg bg-aavenir-orange/10 text-aavenir-orange font-display font-bold">C</span>
+            <h3 class="display text-[18px] font-bold text-aavenir-navy">Claude Code · Desktop · claude.ai</h3>
+          </div>
+          <span class="chip chip-orange">Native</span>
+        </div>
+        <div class="p-5 bg-aavenir-ink relative">
+          <div class="flex items-center justify-between mb-3">
+            <span class="ui text-[11px] uppercase tracking-[0.18em] text-aavenir-cream/55">terminal</span>
+            <button class="copy-btn" data-copy="install-claude">Copy</button>
+          </div>
+          <pre id="install-claude" class="code !rounded-lg !shadow-none m-0"><span class="c-comment"># Clone as a Claude Code plugin</span>
+<span class="c-cmd">git clone</span> <span class="c-str">https://github.com/growthgpt/aavenir-ai-skills.git</span> \
+  <span class="c-str">~/.claude/plugins/aavenir-ai-skills</span>
+
+<span class="c-comment"># Or copy individual skills</span>
+<span class="c-cmd">cp -r</span> <span class="c-str">skills/contract-intelligence</span> \
+  <span class="c-str">~/.claude/skills/aavenir-contract-intelligence</span></pre>
+        </div>
+      </div>
+
+      <!-- OpenAI Agents -->
+      <div class="rounded-3xl border border-aavenir-line/80 shadow-card overflow-hidden bg-white">
+        <div class="px-7 py-5 flex items-center justify-between border-b border-aavenir-line/70">
+          <div class="flex items-center gap-3">
+            <span class="grid place-items-center w-9 h-9 rounded-lg bg-aavenir-teal/15 text-aavenir-teal2 font-display font-bold">O</span>
+            <h3 class="display text-[18px] font-bold text-aavenir-navy">OpenAI Agents / Responses</h3>
+          </div>
+          <span class="chip chip-teal">via prompt.md</span>
+        </div>
+        <div class="p-5 bg-aavenir-ink">
+          <div class="flex items-center justify-between mb-3">
+            <span class="ui text-[11px] uppercase tracking-[0.18em] text-aavenir-cream/55">python</span>
+            <button class="copy-btn" data-copy="install-openai">Copy</button>
+          </div>
+          <pre id="install-openai" class="code !rounded-lg !shadow-none m-0"><span class="c-cmd">from</span> openai <span class="c-cmd">import</span> OpenAI
+<span class="c-cmd">import</span> json, pathlib
+
+skill = pathlib.Path(<span class="c-str">"skills/contract-intelligence"</span>)
+prompt = (skill / <span class="c-str">"prompt.md"</span>).read_text()
+schema = json.loads((skill / <span class="c-str">"schema.json"</span>).read_text())
+
+resp = OpenAI().responses.create(
+  model=<span class="c-str">"gpt-4.1"</span>,
+  instructions=prompt,
+  input=user_message,
+  response_format={<span class="c-key">"type"</span>: <span class="c-str">"json_schema"</span>,
+                   <span class="c-key">"json_schema"</span>: schema}
+)</pre>
+        </div>
+      </div>
+
+      <!-- Cursor -->
+      <div class="rounded-3xl border border-aavenir-line/80 shadow-card overflow-hidden bg-white">
+        <div class="px-7 py-5 flex items-center justify-between border-b border-aavenir-line/70">
+          <div class="flex items-center gap-3">
+            <span class="grid place-items-center w-9 h-9 rounded-lg bg-aavenir-navy/10 text-aavenir-navy font-display font-bold">▸</span>
+            <h3 class="display text-[18px] font-bold text-aavenir-navy">Cursor</h3>
+          </div>
+          <span class="chip chip-navy">via .cursorrules</span>
+        </div>
+        <div class="p-5 bg-aavenir-ink">
+          <div class="flex items-center justify-between mb-3">
+            <span class="ui text-[11px] uppercase tracking-[0.18em] text-aavenir-cream/55">.cursorrules</span>
+            <button class="copy-btn" data-copy="install-cursor">Copy</button>
+          </div>
+          <pre id="install-cursor" class="code !rounded-lg !shadow-none m-0"><span class="c-comment"># Drop the skill prompts into Cursor rules</span>
+<span class="c-cmd">cat</span> skills/contract-intelligence/prompt.md \
+  >> .cursorrules
+
+<span class="c-comment"># Or per-project mode</span>
+<span class="c-cmd">cp</span> skills/contract-intelligence/prompt.md \
+  .cursor/rules/aavenir-contract.mdc</pre>
+        </div>
+      </div>
+
+      <!-- MCP -->
+      <div class="rounded-3xl border border-aavenir-line/80 shadow-card overflow-hidden bg-white">
+        <div class="px-7 py-5 flex items-center justify-between border-b border-aavenir-line/70">
+          <div class="flex items-center gap-3">
+            <span class="grid place-items-center w-9 h-9 rounded-lg bg-aavenir-orange/10 text-aavenir-orange font-display font-bold">⌬</span>
+            <h3 class="display text-[18px] font-bold text-aavenir-navy">MCP Clients (Cline, Roo, …)</h3>
+          </div>
+          <span class="chip chip-orange">Native</span>
+        </div>
+        <div class="p-5 bg-aavenir-ink">
+          <div class="flex items-center justify-between mb-3">
+            <span class="ui text-[11px] uppercase tracking-[0.18em] text-aavenir-cream/55">.mcp.json</span>
+            <button class="copy-btn" data-copy="install-mcp">Copy</button>
+          </div>
+          <pre id="install-mcp" class="code !rounded-lg !shadow-none m-0">{
+  <span class="c-key">"servers"</span>: {
+    <span class="c-key">"aavenir-skills"</span>: {
+      <span class="c-key">"command"</span>: <span class="c-str">"node"</span>,
+      <span class="c-key">"args"</span>: [<span class="c-str">"./mcp/aavenir-skills.mjs"</span>],
+      <span class="c-key">"env"</span>: {
+        <span class="c-key">"AAVENIR_SCHEMA_DIR"</span>: <span class="c-str">"./skills"</span>
+      }
+    }
+  }
+}</pre>
+        </div>
+      </div>
+    </div>
+
+    <div class="mt-10 flex flex-col sm:flex-row items-start sm:items-center gap-4 justify-between bg-aavenir-cream2/60 border border-aavenir-line/70 rounded-2xl p-6">
+      <div>
+        <div class="display font-bold text-aavenir-navy text-[18px]">Need an Aavenir-native deployment on ServiceNow?</div>
+        <p class="text-[14.5px] text-aavenir-navy/70 mt-1">Talk to the team behind Contractflow, Obligationflow, RFPflow, Onboardingflow, Invoiceflow, and AVY.</p>
+      </div>
+      <a href="https://aavenir.com/demo/" target="_blank" rel="noopener" class="ui inline-flex items-center gap-2 bg-aavenir-orange hover:bg-aavenir-orange2 text-white font-semibold text-[14px] px-5 py-3 rounded-xl transition-colors cursor-pointer whitespace-nowrap">
+        See it in Action
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ───────── Final CTA ───────── -->
+<section class="relative py-24 sm:py-28 bg-aavenir-navy text-aavenir-cream overflow-hidden">
+  <div class="absolute -top-20 -left-20 w-96 h-96 rounded-full bg-aavenir-orange/15 blur-3xl pointer-events-none"></div>
+  <div class="absolute -bottom-20 -right-20 w-96 h-96 rounded-full bg-aavenir-teal/15 blur-3xl pointer-events-none"></div>
+  <div class="absolute inset-0 grid-dots opacity-20 pointer-events-none"></div>
+
+  <div class="relative mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 text-center">
+    <h2 class="display text-aavenir-cream text-[40px] sm:text-[60px] leading-[1.05] font-extrabold">
+      Your contract data is your superpower.<br />
+      <span class="accent-underline">Realize it with AI.</span>
+    </h2>
+    <p class="mt-6 max-w-2xl mx-auto text-[18px] text-aavenir-cream/80 leading-[1.6]">
+      Install the Aavenir AI Skills today. Same five capabilities, every AI assistant your team uses, one Aavenir-defined contract output.
+    </p>
+    <div class="mt-10 flex flex-col sm:flex-row items-center justify-center gap-3">
+      <a href="#install" class="ui inline-flex items-center gap-2 bg-aavenir-orange hover:bg-aavenir-orange2 text-white text-[15px] font-semibold px-7 py-4 rounded-xl transition-colors cursor-pointer shadow-lg shadow-aavenir-orange/30">
+        Install on Claude Code
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+      </a>
+      <a href="https://aavenir.com/demo/" target="_blank" rel="noopener" class="ui inline-flex items-center gap-2 bg-aavenir-cream/10 hover:bg-aavenir-cream/15 ring-1 ring-aavenir-cream/25 text-aavenir-cream text-[15px] font-semibold px-7 py-4 rounded-xl transition-colors cursor-pointer">
+        Book a Demo of Aavenir
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ───────── Footer ───────── -->
+<footer class="bg-aavenir-cream2/40 border-t border-aavenir-line/70 py-14">
+  <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <div class="grid md:grid-cols-4 gap-10">
+      <div class="md:col-span-1">
+        <div class="flex items-center gap-2.5 mb-3">
+          <span class="grid place-items-center w-9 h-9 rounded-xl bg-aavenir-navy text-aavenir-cream font-display font-bold text-base">A</span>
+          <span class="leading-tight">
+            <span class="block font-display font-bold text-aavenir-navy text-[15px]">Aavenir</span>
+            <span class="block ui text-[10.5px] uppercase tracking-[0.16em] text-aavenir-navy/60">Skills Hub</span>
+          </span>
+        </div>
+        <p class="text-[14px] text-aavenir-navy/65 leading-[1.55] max-w-xs">Delivering the Future of Work — through AI-native contract lifecycle management, built natively on ServiceNow.</p>
+      </div>
+      <div>
+        <div class="ui text-[11px] uppercase tracking-[0.18em] text-aavenir-navy/55 mb-3">Skills</div>
+        <ul class="space-y-2 text-[14px]">
+          <li><a class="text-aavenir-navy/80 hover:text-aavenir-orange transition-colors cursor-pointer" href="https://github.com/growthgpt/aavenir-ai-skills/tree/main/skills/contract-intelligence">Contract Intelligence</a></li>
+          <li><a class="text-aavenir-navy/80 hover:text-aavenir-orange transition-colors cursor-pointer" href="https://github.com/growthgpt/aavenir-ai-skills/tree/main/skills/procurement-intelligence">Procurement Intelligence</a></li>
+          <li><a class="text-aavenir-navy/80 hover:text-aavenir-orange transition-colors cursor-pointer" href="https://github.com/growthgpt/aavenir-ai-skills/tree/main/skills/negotiation-copilot">Negotiation Copilot</a></li>
+          <li><a class="text-aavenir-navy/80 hover:text-aavenir-orange transition-colors cursor-pointer" href="https://github.com/growthgpt/aavenir-ai-skills/tree/main/skills/obligation-monitor">Obligation Monitor</a></li>
+          <li><a class="text-aavenir-navy/80 hover:text-aavenir-orange transition-colors cursor-pointer" href="https://github.com/growthgpt/aavenir-ai-skills/tree/main/skills/avy">AVY Universal Assistant</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="ui text-[11px] uppercase tracking-[0.18em] text-aavenir-navy/55 mb-3">Aavenir Platform</div>
+        <ul class="space-y-2 text-[14px]">
+          <li><a class="text-aavenir-navy/80 hover:text-aavenir-orange transition-colors cursor-pointer" href="https://aavenir.com/solutions/enterprise-contract-management-software/">Contractflow</a></li>
+          <li><a class="text-aavenir-navy/80 hover:text-aavenir-orange transition-colors cursor-pointer" href="https://aavenir.com/solutions/contract-obligation-management-software/">Obligationflow</a></li>
+          <li><a class="text-aavenir-navy/80 hover:text-aavenir-orange transition-colors cursor-pointer" href="https://aavenir.com/solutions/rfp-management-software/">RFPflow</a></li>
+          <li><a class="text-aavenir-navy/80 hover:text-aavenir-orange transition-colors cursor-pointer" href="https://aavenir.com/solutions/vendor-onboarding-software/">Onboardingflow</a></li>
+          <li><a class="text-aavenir-navy/80 hover:text-aavenir-orange transition-colors cursor-pointer" href="https://aavenir.com/solutions/accounts-payable-automation/">Invoiceflow</a></li>
+          <li><a class="text-aavenir-navy/80 hover:text-aavenir-orange transition-colors cursor-pointer" href="https://aavenir.com/solutions/aavenir-intelligence-platform/">AVY · Intelligence Platform</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="ui text-[11px] uppercase tracking-[0.18em] text-aavenir-navy/55 mb-3">Resources</div>
+        <ul class="space-y-2 text-[14px]">
+          <li><a class="text-aavenir-navy/80 hover:text-aavenir-orange transition-colors cursor-pointer" href="https://aavenir.com/case-studies/">Customers</a></li>
+          <li><a class="text-aavenir-navy/80 hover:text-aavenir-orange transition-colors cursor-pointer" href="https://aavenir.com/integrations/">Integrations</a></li>
+          <li><a class="text-aavenir-navy/80 hover:text-aavenir-orange transition-colors cursor-pointer" href="https://aavenir.com/why-servicenow/">Why ServiceNow</a></li>
+          <li><a class="text-aavenir-navy/80 hover:text-aavenir-orange transition-colors cursor-pointer" href="https://aavenir.com/blogs/">Blog</a></li>
+          <li><a class="text-aavenir-navy/80 hover:text-aavenir-orange transition-colors cursor-pointer" href="https://aavenir.com/about/">About Aavenir</a></li>
+          <li><a class="text-aavenir-navy/80 hover:text-aavenir-orange transition-colors cursor-pointer" href="https://aavenir.com/demo/">Book a Demo</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="hairline mt-12 mb-6"></div>
+
+    <div class="flex flex-col sm:flex-row items-center justify-between gap-4">
+      <div class="ui text-[12.5px] text-aavenir-navy/55">
+        © 2026 Aavenir. Skills released under Apache-2.0. Aavenir, Contractflow, Obligationflow, RFPflow, Onboardingflow, Invoiceflow, and AVY are trademarks of Aavenir Inc.
+      </div>
+      <ul class="flex items-center gap-4 ui">
+        <li><a href="https://www.linkedin.com/company/aavenirinfo/" target="_blank" rel="noopener" aria-label="LinkedIn" class="text-aavenir-navy/55 hover:text-aavenir-orange transition-colors cursor-pointer"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5ZM2.5 9h5V21h-5V9Zm7.5 0h4.78v1.64h.07c.67-1.27 2.3-2.61 4.73-2.61 5.06 0 6 3.33 6 7.66V21h-5v-5.36c0-1.28-.02-2.93-1.78-2.93-1.78 0-2.05 1.39-2.05 2.83V21h-5V9Z"/></svg></a></li>
+        <li><a href="https://x.com/aavenirinfo" target="_blank" rel="noopener" aria-label="X" class="text-aavenir-navy/55 hover:text-aavenir-orange transition-colors cursor-pointer"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.244 2H21l-6.522 7.452L22 22h-6.797l-4.65-6.082L4.997 22H2.243l6.978-7.973L2 2h6.937l4.207 5.567L18.244 2Zm-1.19 18.385h1.83L7.05 3.51H5.084l11.97 16.875Z"/></svg></a></li>
+        <li><a href="https://www.facebook.com/AavenirInfo" target="_blank" rel="noopener" aria-label="Facebook" class="text-aavenir-navy/55 hover:text-aavenir-orange transition-colors cursor-pointer"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M22 12a10 10 0 1 0-11.56 9.88V14.9H7.9V12h2.54V9.8c0-2.51 1.49-3.89 3.77-3.89 1.09 0 2.24.2 2.24.2v2.46h-1.26c-1.24 0-1.63.77-1.63 1.56V12h2.77l-.44 2.9h-2.33v6.98A10 10 0 0 0 22 12Z"/></svg></a></li>
+        <li><a href="https://github.com/growthgpt/aavenir-ai-skills" target="_blank" rel="noopener" aria-label="GitHub" class="text-aavenir-navy/55 hover:text-aavenir-orange transition-colors cursor-pointer"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.36-3.88-1.36-.52-1.33-1.28-1.68-1.28-1.68-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.36.96.11-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.69 0-1.26.45-2.29 1.19-3.1-.12-.29-.52-1.47.11-3.06 0 0 .97-.31 3.18 1.18a11 11 0 0 1 5.78 0c2.21-1.49 3.18-1.18 3.18-1.18.63 1.59.23 2.77.11 3.06.74.81 1.18 1.84 1.18 3.1 0 4.42-2.69 5.39-5.25 5.68.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.79.56C20.21 21.38 23.5 17.07 23.5 12 23.5 5.65 18.35.5 12 .5Z"/></svg></a></li>
+      </ul>
+    </div>
+  </div>
+</footer>
+
+<!-- ───────── Demo data + interactions ───────── -->
+<script>
+  const DEMOS = {
+    contract: {
+      skillName: 'aavenir-contract-intelligence',
+      trigger: "Auto-triggers on: contract text, 'indemnify', 'governing law', 'termination'",
+      input: `Please review this clause from a SaaS MSA:
+
+"Provider's aggregate liability under this Agreement shall not exceed the fees paid by Customer in the twelve (12) months immediately preceding the event giving rise to the claim, except in cases of gross negligence or willful misconduct, for which liability shall be uncapped. Customer's payment obligations are excluded from this cap."`,
+      output: {
+        skill: "aavenir-contract-intelligence",
+        version: "1.0.0",
+        generated_at: "2026-05-21T10:53:00Z",
+        confidence: "high",
+        result: {
+          contract_type: "SaaS",
+          risks: [
+            {
+              category: "liability",
+              risk_level: "medium",
+              clause_id: "liability-cap-1",
+              quoted_text: "Provider's aggregate liability ... shall not exceed the fees paid ... in the twelve (12) months",
+              reason: "12-month cap is market-standard for SaaS; super-cap carve-out for gross negligence is appropriate. Carve-out for Customer's payment obligations is one-sided in Provider's favor — consider whether reciprocal scope is warranted.",
+              recommendation: "Accept the 12-month cap. Consider negotiating a mutual carve-out structure."
+            }
+          ],
+          missing_clauses: ["data_processing_addendum", "audit_rights"],
+          obligations: [
+            { party: "Customer", obligation_text: "Pay fees per payment terms", category: "commercial", confidence: "high" }
+          ],
+          executive_summary: [
+            "Liability cap is market-standard (12 months fees)",
+            "Super-cap carve-out for gross negligence/willful misconduct is appropriate",
+            "Payment-obligation exclusion is one-sided — flag for legal",
+            "No DPA detected — required if EU data is processed",
+            "Recommended action: negotiate"
+          ]
+        }
+      }
+    },
+    procurement: {
+      skillName: 'aavenir-procurement-intelligence',
+      trigger: "Auto-triggers on: 'compare vendors', RFP responses, 'TCO', 'evaluate proposals'",
+      input: `Three vendors responded to our CLM RFP. Score them across cost, capability, risk, compliance, delivery, and strategic fit. 3-year TCO normalized to USD.
+
+Vendor A: $480K total, SOC 2 Type 2, ServiceNow-native, 14-week implementation
+Vendor B: $310K total, ISO 27001 only, custom platform, 22-week implementation
+Vendor C: $620K total, SOC 2 + ISO + HIPAA, ServiceNow-native, 10-week implementation`,
+      output: {
+        skill: "aavenir-procurement-intelligence",
+        version: "1.0.0",
+        generated_at: "2026-05-21T10:53:00Z",
+        confidence: "high",
+        result: {
+          vendors_scored: 3,
+          recommendation: {
+            primary: "Vendor A",
+            fallback: "Vendor C",
+            not_recommended: "Vendor B",
+            reason_not_recommended: "Compliance gap (no SOC 2 Type 2); longest implementation timeline materially increases risk and total cost."
+          },
+          scoring: [
+            { vendor: "Vendor A", weighted_total: 4.15, cost: 4, capability: 4, risk: 4, compliance: 4, delivery: 4, strategic_fit: 5 },
+            { vendor: "Vendor B", weighted_total: 3.10, cost: 5, capability: 3, risk: 3, compliance: 2, delivery: 3, strategic_fit: 3 },
+            { vendor: "Vendor C", weighted_total: 4.05, cost: 3, capability: 5, risk: 4, compliance: 5, delivery: 5, strategic_fit: 4 }
+          ],
+          tco_3yr_usd: { vendor_a: 480000, vendor_b: 310000, vendor_c: 620000 },
+          red_flags: [{ vendor: "Vendor B", category: "compliance", note: "No SOC 2 Type 2 — required by InfoSec policy" }]
+        }
+      }
+    },
+    negotiation: {
+      skillName: 'aavenir-negotiation-copilot',
+      trigger: "Auto-triggers on: 'rewrite this clause', 'redline', 'soften', 'push back', 'fallback'",
+      input: `Counterparty (supplier) wants this auto-renewal clause:
+
+"This Agreement shall automatically renew for successive 1-year terms unless either party provides written notice of non-renewal at least 90 days prior to the end of the then-current term."
+
+We're the customer. Give me three positions.`,
+      output: {
+        skill: "aavenir-negotiation-copilot",
+        version: "1.0.0",
+        generated_at: "2026-05-21T10:53:00Z",
+        confidence: "high",
+        result: {
+          mode: "rewrite",
+          clause_category: "termination",
+          user_side: "customer",
+          alternatives: [
+            {
+              posture: "aggressive",
+              rewrite: "This Agreement shall not renew automatically. Renewal requires the parties' mutual written agreement no later than 30 days prior to the end of the then-current term.",
+              rationale: "Opt-in renewal eliminates risk of unintended auto-renewal; max-leverage opening position."
+            },
+            {
+              posture: "balanced",
+              rewrite: "This Agreement shall automatically renew for successive 1-year terms unless Customer provides written notice of non-renewal at least 30 days prior to the end of the then-current term. Pricing for any renewal term shall not exceed CPI + 3% over the prior term's pricing.",
+              rationale: "Standard SaaS structure: keeps auto-renewal but shortens Customer notice obligation and caps price escalator."
+            },
+            {
+              posture: "fallback",
+              rewrite: "This Agreement shall automatically renew for successive 1-year terms unless either party provides written notice of non-renewal at least 60 days prior to the end of the then-current term.",
+              rationale: "Floor position: accept auto-renewal and mutual notice, but cut 90 days to 60 — gives Customer meaningfully more flexibility."
+            }
+          ],
+          negotiator_notes: [
+            "Lead with aggressive; expect supplier to anchor on their 90-day notice.",
+            "If they reject the cap on price escalation, ask for a one-time exit right after Year 1.",
+            "60-day notice is the floor — anything longer is a process risk for Procurement."
+          ]
+        }
+      }
+    },
+    obligation: {
+      skillName: 'aavenir-obligation-monitor',
+      trigger: "Auto-triggers on: 'obligations', 'what do we owe', 'track this contract', 'renewal alerts'",
+      input: `We just signed a 3-year SaaS agreement with Acme Corp. Effective 2026-06-01, ends 2029-05-31. They send quarterly usage reports. Annual security audit (SOC 2). 90-day notice for non-renewal. Build the tracking plan.`,
+      output: {
+        skill: "aavenir-obligation-monitor",
+        version: "1.0.0",
+        generated_at: "2026-05-21T10:53:00Z",
+        confidence: "high",
+        result: {
+          counterparty: "Acme Corp",
+          contract_metadata: { effective_date: "2026-06-01", term_end: "2029-05-31" },
+          obligations: [
+            {
+              owed_by: "Acme Corp", category: "reporting", type: "recurring",
+              text: "Quarterly usage reports", frequency: "quarterly", owner: "operations",
+              lead_time_alerts_days: [14], action_type: "create_recurring_task"
+            },
+            {
+              owed_by: "Acme Corp", category: "audit", type: "recurring",
+              text: "Annual SOC 2 audit results", frequency: "yearly", owner: "infosec",
+              lead_time_alerts_days: [30], action_type: "create_recurring_task"
+            },
+            {
+              owed_by: "Customer", category: "renewal", type: "one_time",
+              text: "Non-renewal notice deadline", trigger_date: "2029-03-02",
+              owner: "procurement", lead_time_alerts_days: [90, 60, 30], action_type: "schedule_alert"
+            }
+          ],
+          summary: [
+            "3-year term ends 2029-05-31",
+            "2 recurring obligations from counterparty, 1 one-time on Customer",
+            "Renewal notice deadline 2029-03-02 — alerts at T-90/60/30",
+            "Highest-risk: missing SOC 2 if Acme falls out of compliance",
+            "Routing: InfoSec, Operations, Procurement"
+          ]
+        }
+      }
+    },
+    avy: {
+      skillName: 'aavenir-avy',
+      trigger: "Auto-triggers on: open-ended Aavenir-domain questions",
+      input: `Which high-risk vendors have contracts auto-renewing in Q3 2026?`,
+      output: {
+        skill: "aavenir-avy",
+        version: "1.0.0",
+        generated_at: "2026-05-21T10:53:00Z",
+        confidence: "high",
+        result: {
+          primary_skill: "aavenir-procurement-intelligence",
+          composed_with: ["aavenir-obligation-monitor"],
+          actions_taken: [
+            { skill: "aavenir-procurement-intelligence", input_summary: "vendors with compliance score < 3.5", output_summary: "12 vendors flagged high-risk" },
+            { skill: "aavenir-obligation-monitor", input_summary: "renewal_date in [2026-07-01, 2026-09-30]", output_summary: "23 contracts auto-renewing in Q3" }
+          ],
+          conversational_answer: "I found 4 high-risk vendors with contracts auto-renewing in Q3 2026: Acme Corp (renewal 2026-07-12), Beta Systems (2026-08-04), Cordova Cloud (2026-09-01), and Delta Logistics (2026-09-22). Compliance flags: 2 are missing SOC 2 renewal, 1 has open regulatory action. Recommended next step: trigger non-renewal review for each before T-30 day window.",
+          next_step: { suggestion: "Run aavenir-contract-intelligence on the 4 flagged contracts to identify any non-renewal blockers.", skill: "aavenir-contract-intelligence" }
+        }
+      }
+    }
+  };
+
+  function syntaxHighlight(json) {
+    const escaped = JSON.stringify(json, null, 2)
+      .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+    return escaped
+      .replace(/(&quot;[^&]*?&quot;)(?=\s*:)/g, '<span class="c-key">$1</span>')
+      .replace(/:\s(&quot;[^&]*?&quot;)/g, ': <span class="c-str">$1</span>')
+      .replace(/:\s(true|false|null|-?\d+\.?\d*)/g, ': <span class="c-str">$1</span>');
+  }
+
+  const tabBtns = document.querySelectorAll('.tab-btn');
+  const inputBox = document.getElementById('demo-input');
+  const outputBox = document.getElementById('demo-output');
+  const skillNameChip = document.getElementById('demo-skill-name');
+  const triggerNote = document.getElementById('demo-trigger');
+  const copyBtn = document.getElementById('demo-copy');
+
+  function loadTab(key) {
+    const d = DEMOS[key];
+    if (!d) return;
+    tabBtns.forEach(b => b.setAttribute('aria-selected', b.dataset.tab === key ? 'true' : 'false'));
+    inputBox.textContent = d.input;
+    outputBox.innerHTML = syntaxHighlight(d.output);
+    skillNameChip.textContent = d.skillName;
+    triggerNote.textContent = d.trigger;
+    copyBtn.textContent = 'Copy JSON';
+    copyBtn.classList.remove('copied');
+    copyBtn.dataset.payload = JSON.stringify(d.output, null, 2);
+  }
+
+  tabBtns.forEach(btn => btn.addEventListener('click', () => loadTab(btn.dataset.tab)));
+
+  copyBtn.addEventListener('click', async () => {
+    try {
+      await navigator.clipboard.writeText(copyBtn.dataset.payload);
+      copyBtn.textContent = 'Copied';
+      copyBtn.classList.add('copied');
+      setTimeout(() => { copyBtn.textContent = 'Copy JSON'; copyBtn.classList.remove('copied'); }, 1800);
+    } catch (e) { /* clipboard not available — silent */ }
+  });
+
+  // Install code copy buttons
+  document.querySelectorAll('[data-copy]').forEach(btn => {
+    if (btn.id === 'demo-copy') return;
+    btn.addEventListener('click', async () => {
+      const target = document.getElementById(btn.dataset.copy);
+      if (!target) return;
+      try {
+        await navigator.clipboard.writeText(target.textContent);
+        const orig = btn.textContent;
+        btn.textContent = 'Copied';
+        btn.classList.add('copied');
+        setTimeout(() => { btn.textContent = orig; btn.classList.remove('copied'); }, 1800);
+      } catch (e) {}
+    });
+  });
+
+  loadTab('contract');
+</script>
+
+</body>
+</html>
