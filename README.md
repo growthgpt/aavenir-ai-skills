@@ -68,7 +68,26 @@ To switch later: `/plugin uninstall aavenir-ai-skills@aavenir`, then `/plugin in
 
 ### Picking up updates
 
-When the marketplace publishes a new version, run `/reload-plugins` to apply changes without restarting. Auto-update is on by default for third-party marketplaces — check the **Marketplaces** tab in `/plugin` to toggle.
+Claude Code disables auto-update for third-party marketplaces by default ([docs](https://code.claude.com/docs/en/discover-plugins)), so installed users do **not** pick up new releases automatically. Two ways to update:
+
+**One-time, on demand:**
+
+```
+claude plugin marketplace update aavenir
+claude plugin update aavenir-ai-skills@aavenir
+```
+
+Then run `/reload-plugins` (or restart the session) to load the new version.
+
+**Always auto-update:** opt in once with the env var, then every session start refreshes the marketplace and any installed plugins:
+
+```bash
+export FORCE_AUTOUPDATE_PLUGINS=1
+```
+
+Or, in-session, open `/plugin` → **Marketplaces** tab → toggle auto-update for `aavenir`.
+
+Every release bumps `version` in `.claude-plugin/plugin.json` — that's the single source of truth Claude Code checks. Current version: `1.1.0`.
 
 ## Install (other surfaces)
 
