@@ -52,6 +52,8 @@ The repo is a [Claude Code plugin marketplace](https://code.claude.com/docs/en/p
 
 That's it. Use the plugin in any Claude Code session — mention a contract, RFP, vendor, or obligation and the matching skill auto-triggers.
 
+Want a quick smoke test after install? Paste any file from [`examples/contracts/`](examples/contracts/) into Claude and watch the skill take over.
+
 ### Choose **user scope** when prompted
 
 Claude Code offers three install scopes:
