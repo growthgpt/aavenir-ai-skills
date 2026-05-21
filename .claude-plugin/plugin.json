@@ -4,14 +4,11 @@
   "description": "Aavenir AI Skill Ecosystem — enterprise contract, procurement, negotiation, and obligation intelligence skills. Auto-triggers on contracts, RFPs, vendor evaluations, clause rewrites, and post-signature obligation tracking.",
   "author": {
     "name": "Aavenir",
-    "url": "https://aavenir.com"
+    "email": "support@aavenir.com"
   },
   "license": "Apache-2.0",
   "homepage": "https://aavenir.com",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/growthgpt/aavenir-ai-skills.git"
-  },
+  "repository": "https://github.com/growthgpt/aavenir-ai-skills",
   "keywords": [
     "aavenir",
     "clm",
@@ -23,12 +20,5 @@
     "rfp",
     "negotiation",
     "servicenow"
-  ],
-  "skills": [
-    "./skills/contract-intelligence",
-    "./skills/procurement-intelligence",
-    "./skills/negotiation-copilot",
-    "./skills/obligation-monitor",
-    "./skills/avy"
   ]
 }

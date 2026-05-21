@@ -1,19 +1,37 @@
 {
-  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "$schema": "https://code.claude.com/schemas/marketplace.schema.json",
   "name": "aavenir",
   "description": "Aavenir AI Skill Ecosystem — enterprise contract, procurement, negotiation, and obligation intelligence skills for Claude Code. Auto-triggers on contracts, RFPs, vendor evaluations, clause rewrites, and post-signature obligation tracking.",
   "owner": {
     "name": "Aavenir",
-    "url": "https://aavenir.com"
+    "email": "support@aavenir.com"
   },
   "plugins": [
     {
       "name": "aavenir-ai-skills",
-      "source": ".",
+      "source": {
+        "source": "github",
+        "repo": "growthgpt/aavenir-ai-skills"
+      },
       "description": "Five enterprise CLM and Source-to-Pay skills — contract intelligence, procurement intelligence, negotiation copilot, obligation monitor, and the Avy router. Outputs Aavenir-grade structured JSON that flows back into Contractflow, Obligationflow, RFPflow, Invoiceflow, and AVY without translation.",
+      "homepage": "https://aavenir.com",
+      "repository": "https://github.com/growthgpt/aavenir-ai-skills",
+      "license": "Apache-2.0",
+      "category": "enterprise",
+      "keywords": [
+        "clm",
+        "contract-lifecycle-management",
+        "procurement",
+        "source-to-pay",
+        "legal-ops",
+        "obligation-management",
+        "rfp",
+        "negotiation",
+        "servicenow"
+      ],
       "author": {
         "name": "Aavenir",
-        "url": "https://aavenir.com"
+        "email": "support@aavenir.com"
       }
     }
   ]
