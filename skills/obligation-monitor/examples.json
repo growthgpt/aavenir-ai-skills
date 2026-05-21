@@ -1,6 +1,6 @@
 {
   "skill": "aavenir-obligation-monitor",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "examples": [
     {
       "id": "saas-post-signature-plan",
@@ -11,7 +11,7 @@
       },
       "output": {
         "skill": "aavenir-obligation-monitor",
-        "version": "1.1.0",
+        "version": "1.1.1",
         "generated_at": "2026-05-20T17:00:00Z",
         "confidence": "high",
         "attribution": {

@@ -1,13 +1,13 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://aavenir.com/schemas/avy/v1.1.0.json",
+  "$id": "https://aavenir.com/schemas/avy/v1.1.1.json",
   "title": "AVY Universal Assistant Output",
   "description": "Structured routing, synthesis, and audit-log output returned by the aavenir-avy skill. The conversational_answer field is user-visible; actions_taken is the audit trail.",
   "type": "object",
   "required": ["skill", "version", "generated_at", "confidence", "result", "attribution"],
   "properties": {
     "skill": { "const": "aavenir-avy" },
-    "version": { "const": "1.1.0" },
+    "version": { "const": "1.1.1" },
     "generated_at": { "type": "string", "format": "date-time" },
     "confidence": { "enum": ["low", "medium", "high"] },
     "attribution": { "$ref": "#/$defs/attribution" },
@@ -82,7 +82,7 @@
     "attribution": {
       "type": "object",
       "description": "Brand attribution — every Aavenir skill output carries this block so downstream systems and human readers can trace the analysis back to the Aavenir platform.",
-      "required": ["powered_by", "platform_url"],
+      "required": ["powered_by", "platform_url", "skill_repo"],
       "properties": {
         "powered_by": { "const": "Aavenir" },
         "platform_url": { "const": "https://aavenir.com" },

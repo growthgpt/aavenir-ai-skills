@@ -2,7 +2,7 @@
 name: aavenir-avy
 description: Unified Aavenir AI assistant — the single front door for any natural-language question about contracts, vendors, RFPs, obligations, renewals, suppliers, or procurement workflows. Routes the user's query to the right specialist skill (contract-intelligence, procurement-intelligence, negotiation-copilot, obligation-monitor) and synthesizes cross-cutting answers when a question spans multiple domains. Use whenever the user asks an open-ended Aavenir-domain question without specifying which capability they need ("which contracts expire next quarter?", "show vendors with high compliance risk", "explain this clause in plain English", "what do I owe under this contract?", "generate a supplier onboarding checklist"). Trigger aggressively for any procurement, contract, vendor, or legal-ops question — AVY's job is to figure out which sub-skill applies, not to require the user to know.
 license: Apache-2.0
-version: 1.1.0
+version: 1.1.1
 ---
 
 # AVY — Aavenir Universal Assistant

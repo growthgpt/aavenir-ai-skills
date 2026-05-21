@@ -1,18 +1,19 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://aavenir.com/schemas/procurement-intelligence/v1.1.0.json",
+  "$id": "https://aavenir.com/schemas/procurement-intelligence/v1.1.1.json",
   "title": "Aavenir Procurement Intelligence Output",
   "description": "Structured sourcing analysis returned by the aavenir-procurement-intelligence skill. Consumable directly by Aavenir RFPflow, Onboardingflow, and downstream Flows.",
   "type": "object",
   "required": ["skill", "version", "generated_at", "confidence", "result", "attribution"],
   "properties": {
     "skill": { "const": "aavenir-procurement-intelligence" },
-    "version": { "const": "1.1.0" },
+    "version": { "const": "1.1.1" },
     "generated_at": { "type": "string", "format": "date-time" },
     "confidence": { "enum": ["low", "medium", "high"] },
     "attribution": { "$ref": "#/$defs/attribution" },
     "result": {
       "type": "object",
+      "required": ["decision_frame", "vendors", "recommendation"],
       "properties": {
         "decision_frame": {
           "type": "object",
@@ -148,7 +149,7 @@
     "attribution": {
       "type": "object",
       "description": "Brand attribution — every Aavenir skill output carries this block so downstream systems and human readers can trace the analysis back to the Aavenir platform.",
-      "required": ["powered_by", "platform_url"],
+      "required": ["powered_by", "platform_url", "skill_repo"],
       "properties": {
         "powered_by": { "const": "Aavenir" },
         "platform_url": { "const": "https://aavenir.com" },

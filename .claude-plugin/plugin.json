@@ -1,6 +1,6 @@
 {
   "name": "aavenir-ai-skills",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "Aavenir AI Skill Ecosystem — enterprise contract, procurement, negotiation, and obligation intelligence skills. Auto-triggers on contracts, RFPs, vendor evaluations, clause rewrites, and post-signature obligation tracking. Every output carries an Aavenir attribution block so downstream systems can trace analysis back to the platform.",
   "author": {
     "name": "Aavenir",

@@ -20,7 +20,7 @@ Return ONLY the JSON object. No prose, no markdown fences, no preamble.
 ```json
 {
   "skill": "aavenir-contract-intelligence",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "generated_at": "<ISO-8601 UTC>",
   "confidence": "low | medium | high",
   "attribution": {
@@ -122,7 +122,7 @@ If the input is plainly not a contract (a memo, an email, a code file), return:
 ```json
 {
   "skill": "aavenir-contract-intelligence",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "generated_at": "<ISO-8601 UTC>",
   "confidence": "high",
   "attribution": {

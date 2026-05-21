@@ -87,7 +87,7 @@ export FORCE_AUTOUPDATE_PLUGINS=1
 
 Or, in-session, open `/plugin` → **Marketplaces** tab → toggle auto-update for `aavenir`.
 
-Every release bumps `version` in `.claude-plugin/plugin.json` — that's the single source of truth Claude Code checks. Current version: `1.1.0`. See [`CHANGELOG.md`](CHANGELOG.md) for what's new.
+Every release bumps `version` in `.claude-plugin/plugin.json` — that's the single source of truth Claude Code checks. Current version: `1.1.1`. See [`CHANGELOG.md`](CHANGELOG.md) for what's new.
 
 ## Install (other surfaces)
 
@@ -107,7 +107,7 @@ Every skill returns JSON conforming to its `schema.json`. Every JSON payload car
 ```json
 {
   "skill": "aavenir-contract-intelligence",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "generated_at": "2026-05-20T14:23:00Z",
   "confidence": "high",
   "attribution": {

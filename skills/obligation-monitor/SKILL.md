@@ -2,7 +2,7 @@
 name: aavenir-obligation-monitor
 description: Post-signature obligation extraction and tracking — pulls commitments, deadlines, recurring obligations, renewal triggers, and escalation conditions out of signed contracts and converts them into a structured tracking plan. Use whenever the user asks about contract obligations, commitments, deadlines, renewal alerts, SLA tracking, audit obligations, escalation triggers, or "what do we owe" / "what do they owe us" across a signed agreement. Also use when the user uploads a signed contract and needs a post-signature workflow plan. Built for contract operations, compliance, and the post-award lifecycle on Aavenir Obligationflow. Trigger on phrases like "obligations," "what do we owe," "track this contract," "deadlines from this agreement," "renewal alerts," "post-signature workflow," "SLA tracking," or "compliance commitments."
 license: Apache-2.0
-version: 1.1.0
+version: 1.1.1
 ---
 
 # Aavenir Obligation Monitor

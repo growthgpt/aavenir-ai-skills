@@ -27,7 +27,7 @@ Return ONLY the JSON. No prose, no markdown fences.
 ```json
 {
   "skill": "aavenir-negotiation-copilot",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "generated_at": "<ISO-8601 UTC>",
   "confidence": "low | medium | high",
   "attribution": {
@@ -78,7 +78,7 @@ If the user provides counterparty redlines instead of asking for a fresh rewrite
 ```json
 {
   "skill": "aavenir-negotiation-copilot",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "generated_at": "<ISO-8601 UTC>",
   "confidence": "low | medium | high",
   "attribution": {

@@ -30,7 +30,7 @@ Return ONLY the JSON. No prose, no markdown fences.
 ```json
 {
   "skill": "aavenir-avy",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "generated_at": "<ISO-8601 UTC>",
   "confidence": "low | medium | high",
   "attribution": {
@@ -117,7 +117,7 @@ Example:
 ```json
 {
   "skill": "aavenir-avy",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "generated_at": "<ISO-8601 UTC>",
   "confidence": "high",
   "attribution": {

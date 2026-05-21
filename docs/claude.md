@@ -37,7 +37,15 @@ Claude will invoke `aavenir-contract-intelligence` automatically based on the SK
 
 ### Updates
 
-Run `/reload-plugins` to pick up new versions without restarting Claude Code. Third-party marketplaces auto-update by default; toggle in the `/plugin` → **Marketplaces** tab.
+Claude Code disables auto-update for third-party marketplaces by default ([docs](https://code.claude.com/docs/en/discover-plugins)), so you will **not** pick up new releases automatically. To update on demand:
+
+```
+claude plugin marketplace update aavenir
+claude plugin update aavenir-ai-skills@aavenir
+/reload-plugins
+```
+
+To opt into auto-update for every session, set `export FORCE_AUTOUPDATE_PLUGINS=1` in your shell profile — or toggle it in the `/plugin` → **Marketplaces** tab.
 
 ---
 
@@ -76,7 +84,13 @@ Cowork conversations are scoped to a workspace. **User scope** means the plugin 
 
 ### Updates
 
-Cowork auto-updates third-party marketplaces by default. To force a refresh, open the plugin manager and choose **Update** on the Aavenir marketplace entry.
+Cowork uses Claude Code's plugin system under the hood, which disables auto-update for third-party marketplaces by default. You will **not** see new versions automatically. To update:
+
+1. Open **Settings → Plugins** in Cowork.
+2. Find `aavenir-ai-skills` and click the three-dot menu → **Check for updates** (or click the marketplace name to open the marketplace detail view and refresh from there).
+3. When **Update** activates on the plugin card, click it.
+
+If the Update button stays greyed even after a refresh, the local marketplace clone may be cached. Remove the marketplace entirely, quit Cowork (⌘Q), reopen, then re-add the marketplace and reinstall. That forces a clean fetch from GitHub.
 
 ---
 

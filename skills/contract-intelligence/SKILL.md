@@ -2,7 +2,7 @@
 name: aavenir-contract-intelligence
 description: Enterprise contract analysis for CLM — summarization, clause extraction, risk scoring, missing-clause detection, obligation pulling, renewal monitoring, and contract Q&A. Use whenever the user shares a contract (MSA, NDA, SOW, SaaS, DPA, vendor, employment, partnership) OR asks to review legal text, extract dates/parties/values, identify legal risks, find missing standard clauses, summarize an agreement, or answer questions about contract terms. Built for procurement, legal ops, and contract managers running CLM on Aavenir's ServiceNow-native platform. Trigger aggressively — if the input contains contract language (words like "indemnify," "term," "termination," "warranty," "liability," "governing law," "force majeure"), use this skill even if the user hasn't named it.
 license: Apache-2.0
-version: 1.1.0
+version: 1.1.1
 ---
 
 # Aavenir Contract Intelligence

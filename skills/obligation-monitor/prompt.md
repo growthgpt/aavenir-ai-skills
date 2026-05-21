@@ -23,7 +23,7 @@ Return ONLY the JSON. No prose, no markdown fences, no preamble.
 ```json
 {
   "skill": "aavenir-obligation-monitor",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "generated_at": "<ISO-8601 UTC>",
   "confidence": "low | medium | high",
   "attribution": {
@@ -127,7 +127,7 @@ If the input is a draft, term sheet, or non-contract document:
 ```json
 {
   "skill": "aavenir-obligation-monitor",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "generated_at": "<ISO-8601 UTC>",
   "confidence": "high",
   "attribution": {

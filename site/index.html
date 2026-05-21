@@ -92,7 +92,7 @@
       "license": "https://www.apache.org/licenses/LICENSE-2.0",
       "author": { "@id": "https://aavenir.com/#organization" },
       "url": "https://growthgpt.github.io/aavenir-ai-skills/",
-      "softwareVersion": "1.1.0",
+      "softwareVersion": "1.1.1",
       "applicationCategory": "BusinessApplication",
       "operatingSystem": "Cross-platform (Claude Code, Claude Desktop, claude.ai, OpenAI Agents, Codex CLI, Cursor, Cline, MCP clients, ServiceNow + Aavenir AVY)"
     },
@@ -105,7 +105,7 @@
       "applicationSubCategory": "Contract Lifecycle Management",
       "operatingSystem": "Claude, OpenAI, Cursor, MCP",
       "description": "Enterprise contract analysis — summarization, clause extraction, risk scoring, missing-clause detection, obligation pulling, renewal monitoring, contract Q&A.",
-      "softwareVersion": "1.1.0",
+      "softwareVersion": "1.1.1",
       "license": "https://www.apache.org/licenses/LICENSE-2.0",
       "publisher": { "@id": "https://aavenir.com/#organization" },
       "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
@@ -119,7 +119,7 @@
       "applicationSubCategory": "Strategic Sourcing",
       "operatingSystem": "Claude, OpenAI, Cursor, MCP",
       "description": "Strategic sourcing intelligence — RFx analysis, vendor scoring, 3-year TCO modeling, supplier comparison, compliance evaluation, sourcing recommendations.",
-      "softwareVersion": "1.1.0",
+      "softwareVersion": "1.1.1",
       "license": "https://www.apache.org/licenses/LICENSE-2.0",
       "publisher": { "@id": "https://aavenir.com/#organization" },
       "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
@@ -133,7 +133,7 @@
       "applicationSubCategory": "Contract Negotiation",
       "operatingSystem": "Claude, OpenAI, Cursor, MCP",
       "description": "Contract negotiation assistant — produces three calibrated rewrites per clause (aggressive, balanced, fallback), counterparty markup review, plain-English translation.",
-      "softwareVersion": "1.1.0",
+      "softwareVersion": "1.1.1",
       "license": "https://www.apache.org/licenses/LICENSE-2.0",
       "publisher": { "@id": "https://aavenir.com/#organization" },
       "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
@@ -147,7 +147,7 @@
       "applicationSubCategory": "Obligation Management",
       "operatingSystem": "Claude, OpenAI, Cursor, MCP",
       "description": "Post-signature obligation tracking — extracts commitments, deadlines, recurring obligations, renewal triggers, escalation conditions into a structured tracking plan.",
-      "softwareVersion": "1.1.0",
+      "softwareVersion": "1.1.1",
       "license": "https://www.apache.org/licenses/LICENSE-2.0",
       "publisher": { "@id": "https://aavenir.com/#organization" },
       "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
@@ -161,7 +161,7 @@
       "applicationSubCategory": "AI Routing & Orchestration",
       "operatingSystem": "Claude, OpenAI, Cursor, MCP",
       "description": "Unified Aavenir AI assistant — routes natural-language questions across all four specialist skills, synthesizes cross-domain answers, returns an auditable action log.",
-      "softwareVersion": "1.1.0",
+      "softwareVersion": "1.1.1",
       "license": "https://www.apache.org/licenses/LICENSE-2.0",
       "publisher": { "@id": "https://aavenir.com/#organization" },
       "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
@@ -337,7 +337,7 @@
         <span class="w-1.5 h-1.5 rounded-full bg-aavenir-orange pulse-dot"></span>
         Now available
       </span>
-      <span class="ui text-[12px] text-aavenir-navy/60">v1.1.0 · Apache-2.0 · Open source</span>
+      <span class="ui text-[12px] text-aavenir-navy/60">v1.1.1 · Apache-2.0 · Open source</span>
     </div>
 
     <h1 class="display text-aavenir-navy text-[44px] sm:text-[64px] lg:text-[80px] leading-[0.98] font-extrabold max-w-5xl">
@@ -1180,46 +1180,79 @@ result = Runner.run_sync(agent, <span class="c-str">"…"</span>)</pre>
 
 <!-- ───────── Demo data + interactions ───────── -->
 <script>
+  // Demo payloads are the canonical first example from each skill's examples.json,
+  // unchanged. They are guaranteed to validate against the matching schema.json.
   const DEMOS = {
     contract: {
       skillName: 'aavenir-contract-intelligence',
       trigger: "Auto-triggers on: contract text, 'indemnify', 'governing law', 'termination'",
-      input: `Please review this clause from a SaaS MSA:
+      input: `Review this MSA and identify legal risks.
 
-"Provider's aggregate liability under this Agreement shall not exceed the fees paid by Customer in the twelve (12) months immediately preceding the event giving rise to the claim, except in cases of gross negligence or willful misconduct, for which liability shall be uncapped. Customer's payment obligations are excluded from this cap."`,
+MASTER SERVICES AGREEMENT between Acme Corp ('Customer') and Vendor Inc ('Supplier'). Effective Date: March 15, 2026. Term: Three (3) years, auto-renewing for successive 1-year terms unless either party provides written notice.
+
+Section 7. INDEMNIFICATION. Supplier shall indemnify, defend, and hold harmless Customer from any and all claims, damages, losses, costs, and expenses arising out of or related to the Services, without limitation.
+
+Section 8. PAYMENT. Customer shall pay all invoices within thirty (30) days of receipt.
+
+Section 12. GOVERNING LAW. This Agreement shall be governed by the laws of the State of Delaware.`,
       output: {
         skill: "aavenir-contract-intelligence",
-        version: "1.1.0",
-        generated_at: "2026-05-21T10:53:00Z",
+        version: "1.1.1",
+        generated_at: "2026-05-20T14:00:00Z",
         confidence: "high",
         attribution: {
           powered_by: "Aavenir",
           platform_url: "https://aavenir.com",
           skill_repo: "https://github.com/growthgpt/aavenir-ai-skills",
-          cta: "Run this analysis in Aavenir Contractflow"
+          cta: "Push these risks and missing clauses into Aavenir Contractflow for review"
         },
         result: {
-          contract_type: "SaaS",
+          contract_type: "MSA",
+          metadata: {
+            parties: [
+              { name: "Acme Corp", role: "Customer", confidence: "high" },
+              { name: "Vendor Inc", role: "Supplier", confidence: "high" }
+            ],
+            effective_date: { value: "2026-03-15", confidence: "high" },
+            term: { length: "3 years", auto_renew: true, notice_period_days: null },
+            governing_law: { jurisdiction: "Delaware, USA", venue: null },
+            contract_value: { amount: null, currency: null, billing: null }
+          },
           risks: [
             {
-              category: "liability",
-              risk_level: "medium",
-              clause_id: "liability-cap-1",
-              quoted_text: "Provider's aggregate liability ... shall not exceed the fees paid ... in the twelve (12) months",
-              reason: "12-month cap is market-standard for SaaS; super-cap carve-out for gross negligence is appropriate. Carve-out for Customer's payment obligations is one-sided in Provider's favor — consider whether reciprocal scope is warranted.",
-              recommendation: "Accept the 12-month cap. Consider negotiating a mutual carve-out structure."
+              category: "indemnity",
+              risk_level: "critical",
+              reason: "Uncapped indemnification with no exclusions creates unlimited financial exposure for Supplier. Customer-favorable but materially non-market.",
+              quoted_text: "Supplier shall indemnify, defend, and hold harmless Customer from any and all claims, damages, losses, costs, and expenses arising out of or related to the Services, without limitation.",
+              section_reference: "Section 7",
+              suggested_action: "Negotiate carve-outs (gross negligence, willful misconduct) and a cap tied to fees paid in the prior 12 months."
+            },
+            {
+              category: "termination",
+              risk_level: "high",
+              reason: "Auto-renewal is present but no notice period is specified, creating a perpetual rollover risk.",
+              quoted_text: "auto-renewing for successive 1-year terms unless either party provides written notice",
+              section_reference: "Recitals",
+              suggested_action: "Require 60-day or 90-day written notice prior to renewal date."
             }
           ],
-          missing_clauses: ["data_processing_addendum", "audit_rights"],
-          obligations: [
-            { party: "Customer", obligation_text: "Pay fees per payment terms", category: "commercial", confidence: "high" }
+          missing_clauses: [
+            { clause_name: "Limitation of Liability", category: "liability", why_expected: "Standard in every MSA — caps exposure and excludes consequential damages.", severity: "critical" },
+            { clause_name: "Confidentiality", category: "confidentiality", why_expected: "Standard in MSAs governing services that involve information exchange.", severity: "high" },
+            { clause_name: "IP Ownership", category: "ip", why_expected: "MSAs governing services must allocate IP in work product.", severity: "high" },
+            { clause_name: "Termination for Cause", category: "termination", why_expected: "Provides remedy for material breach.", severity: "high" },
+            { clause_name: "Force Majeure", category: "force_majeure", why_expected: "Standard market.", severity: "medium" }
           ],
+          obligations: [
+            { party: "Acme Corp", obligation_text: "Pay all invoices within 30 days of receipt", trigger: "Receipt of invoice", deadline: "30 days from invoice receipt", frequency: "event-based", category: "payment" }
+          ],
+          renewal: { auto_renew: true, renewal_term: "1 year", notice_window_days: null, notice_deadline: null },
           executive_summary: [
-            "Liability cap is market-standard (12 months fees)",
-            "Super-cap carve-out for gross negligence/willful misconduct is appropriate",
-            "Payment-obligation exclusion is one-sided — flag for legal",
-            "No DPA detected — required if EU data is processed",
-            "Recommended action: negotiate"
+            "MSA between Acme Corp (Customer) and Vendor Inc (Supplier), effective March 15, 2026, 3-year term with auto-renewal.",
+            "1 critical risk: uncapped indemnity creates unlimited Supplier exposure.",
+            "5 standard clauses missing: Limitation of Liability (critical), Confidentiality, IP Ownership, Termination for Cause, Force Majeure.",
+            "Only payment-side obligation visible: Customer to pay invoices within 30 days.",
+            "Recommended action: do not sign. Escalate to legal — negotiate liability cap, indemnity carve-outs, and missing clauses before signature."
           ]
         }
       }
@@ -1227,52 +1260,135 @@ result = Runner.run_sync(agent, <span class="c-str">"…"</span>)</pre>
     procurement: {
       skillName: 'aavenir-procurement-intelligence',
       trigger: "Auto-triggers on: 'compare vendors', RFP responses, 'TCO', 'evaluate proposals'",
-      input: `Three vendors responded to our CLM RFP. Score them across cost, capability, risk, compliance, delivery, and strategic fit. 3-year TCO normalized to USD.
+      input: `We ran an RFP for an enterprise observability platform. Here are the three responses. Score them and tell me who to pick.
 
-Vendor A: $480K total, SOC 2 Type 2, ServiceNow-native, 14-week implementation
-Vendor B: $310K total, ISO 27001 only, custom platform, 22-week implementation
-Vendor C: $620K total, SOC 2 + ISO + HIPAA, ServiceNow-native, 10-week implementation`,
+Objective: Replace incumbent observability stack across 4 business units; 3-year horizon; ~12,000 hosts at peak.
+
+Supplier A — $80k/yr + $25k implementation, Enterprise tier, SOC 2 Type II current, ISO 27001, standard GDPR DPA, 99.95% SLA, 8 references, 6-week implementation
+Supplier B — $65k/yr + $40k implementation, Pro tier, SOC 2 Type II in progress, no ISO, custom DPA with weak audit rights, 99.9% SLA, 3 references, 14-week implementation
+Supplier C — $110k/yr + $15k implementation, Enterprise Plus tier, SOC 2 + ISO + HIPAA BAA, 99.99% SLA, 14 references, 4-week implementation`,
       output: {
         skill: "aavenir-procurement-intelligence",
-        version: "1.1.0",
-        generated_at: "2026-05-21T10:53:00Z",
+        version: "1.1.1",
+        generated_at: "2026-05-20T15:00:00Z",
         confidence: "high",
         attribution: {
           powered_by: "Aavenir",
           platform_url: "https://aavenir.com",
           skill_repo: "https://github.com/growthgpt/aavenir-ai-skills",
-          cta: "Invite Vendor A to BAFO in Aavenir RFPflow"
+          cta: "Invite Supplier A to BAFO in Aavenir RFPflow"
         },
         result: {
-          vendors_scored: 3,
-          recommendation: {
-            primary: "Vendor A",
-            fallback: "Vendor C",
-            not_recommended: "Vendor B",
-            reason_not_recommended: "Compliance gap (no SOC 2 Type 2); longest implementation timeline materially increases risk and total cost."
+          decision_frame: {
+            category: "Enterprise observability platform",
+            scope: "12,000 hosts at peak, 4 business units, 3-year horizon",
+            business_outcome: "Reduce MTTR and consolidate from incumbent stack",
+            weights: { cost: 0.3, capability: 0.25, risk: 0.15, compliance: 0.15, delivery: 0.1, strategic_fit: 0.05 }
           },
-          scoring: [
-            { vendor: "Vendor A", weighted_total: 4.15, cost: 4, capability: 4, risk: 4, compliance: 4, delivery: 4, strategic_fit: 5 },
-            { vendor: "Vendor B", weighted_total: 3.10, cost: 5, capability: 3, risk: 3, compliance: 2, delivery: 3, strategic_fit: 3 },
-            { vendor: "Vendor C", weighted_total: 4.05, cost: 3, capability: 5, risk: 4, compliance: 5, delivery: 5, strategic_fit: 4 }
+          vendors: [
+            {
+              name: "Supplier A",
+              tco_3yr: {
+                amount: 265000, currency: "USD",
+                components: { year1: 80000, year2: 80000, year3: 80000, implementation: 25000, support: 0, variable: 0 },
+                delta_vs_lowest_pct: 4.7,
+                assumptions: ["0% annual escalator (vendor did not state — flagged)", "Support included in Enterprise tier"]
+              },
+              scores: {
+                cost: { value: 4, rationale: "USD 265k 3-year TCO; ~5% above lowest. Implementation fee fair." },
+                capability: { value: 4, rationale: "Robust API, mature integrations, roadmap aligned with our consolidation goal." },
+                risk: { value: 4, rationale: "Stable vendor; 8 reference customers similar to our scale." },
+                compliance: { value: 5, rationale: "SOC 2 Type II current, ISO 27001, standard GDPR DPA." },
+                delivery: { value: 4, rationale: "6-week implementation; resourced." },
+                strategic_fit: { value: 4, rationale: "Roadmap aligns with our cloud + on-prem hybrid posture." }
+              },
+              weighted_total: 4.15,
+              red_flags: [
+                { category: "lock_in", severity: "low", description: "Annual escalator not stated — exposes us to first-renewal surprise.", evidence: "No escalator clause in submitted pricing exhibit." }
+              ],
+              strengths: ["Balanced cost-capability tradeoff", "Strong compliance posture", "Reference fit at our scale"],
+              gaps: ["No stated annual escalator"]
+            },
+            {
+              name: "Supplier B",
+              tco_3yr: {
+                amount: 235000, currency: "USD",
+                components: { year1: 65000, year2: 65000, year3: 65000, implementation: 40000, support: 0, variable: 0 },
+                delta_vs_lowest_pct: 0,
+                assumptions: ["0% annual escalator (unstated)", "Heavier implementation reflected in 14-week schedule"]
+              },
+              scores: {
+                cost: { value: 5, rationale: "Lowest TCO at USD 235k 3-year." },
+                capability: { value: 3, rationale: "Functional but only 3 reference customers; Pro tier capability gaps surfaced in technical scoring." },
+                risk: { value: 2, rationale: "SOC 2 Type II in progress (not yet issued); shorter customer list; weaker audit rights in DPA." },
+                compliance: { value: 2, rationale: "No ISO 27001, SOC 2 not issued, custom DPA with weak audit rights." },
+                delivery: { value: 2, rationale: "14-week implementation vs 6 weeks for Supplier A — material business cost." },
+                strategic_fit: { value: 3, rationale: "Capable but no public roadmap commitment in our key area." }
+              },
+              weighted_total: 3.05,
+              red_flags: [
+                { category: "security", severity: "high", description: "SOC 2 Type II not yet issued — vendor cannot meet our minimum infosec floor.", evidence: "RFP response Section 8: 'Type II in progress, expected Q4'." },
+                { category: "delivery", severity: "medium", description: "14-week implementation more than 2x Supplier A — delay cost to consolidation program.", evidence: "RFP response Section 4: 'Implementation Schedule'." }
+              ],
+              strengths: ["Lowest headline cost"],
+              gaps: ["SOC 2 not issued", "No ISO 27001", "Weak DPA audit rights", "Long implementation"]
+            },
+            {
+              name: "Supplier C",
+              tco_3yr: {
+                amount: 345000, currency: "USD",
+                components: { year1: 110000, year2: 110000, year3: 110000, implementation: 15000, support: 0, variable: 0 },
+                delta_vs_lowest_pct: 46.8,
+                assumptions: ["Enterprise Plus tier includes premium support"]
+              },
+              scores: {
+                cost: { value: 2, rationale: "Highest TCO; +47% vs lowest." },
+                capability: { value: 5, rationale: "Deepest feature set; 99.99% uptime SLA; HIPAA BAA included." },
+                risk: { value: 5, rationale: "Market leader; 14 reference customers; financially stable." },
+                compliance: { value: 5, rationale: "SOC 2 + ISO 27001 + HIPAA BAA." },
+                delivery: { value: 5, rationale: "4-week implementation; dedicated CSM." },
+                strategic_fit: { value: 4, rationale: "Strong roadmap but heavier than our hybrid posture needs." }
+              },
+              weighted_total: 3.8,
+              red_flags: [],
+              strengths: ["Best-in-class capability and compliance", "Fastest implementation"],
+              gaps: ["Highest cost — premium not justified vs Supplier A for our use case"]
+            }
           ],
-          tco_3yr_usd: { vendor_a: 480000, vendor_b: 310000, vendor_c: 620000 },
-          red_flags: [{ vendor: "Vendor B", category: "compliance", note: "No SOC 2 Type 2 — required by InfoSec policy" }]
+          recommendation: {
+            primary: {
+              vendor: "Supplier A",
+              rationale: "Best weighted score (4.15). Balanced cost/capability/compliance fit. Implementation timeline aligned with consolidation deadline.",
+              conditions: ["Negotiate explicit annual escalator cap (e.g., CPI or 5% max)", "Confirm support response times in MSA"]
+            },
+            fallback: {
+              vendor: "Supplier C",
+              rationale: "If budget expands or HIPAA scope is added, Supplier C becomes justifiable at premium. Score 3.80, no red flags."
+            },
+            not_recommended: [
+              { vendor: "Supplier B", reason: "Score 3.05 below 'qualified yes' threshold. Two high/medium red flags: SOC 2 not issued (infosec floor) and 14-week implementation (delivery risk)." }
+            ],
+            executive_summary: [
+              "Recommend Supplier A — best weighted score (4.15) and best cost-capability-compliance balance.",
+              "Decisive factors: full SOC 2 + ISO, roadmap fit, 6-week implementation, ~$80k delta vs the premium incumbent.",
+              "Top trade-off: capability ceiling lower than Supplier C; acceptable for our hybrid scope.",
+              "Condition: negotiate annual escalator cap before signature (currently unstated).",
+              "Next step: invite Supplier A to BAFO with two negotiation asks (escalator cap, support SLAs); hold Supplier C as fallback."
+            ]
+          }
         }
       }
     },
     negotiation: {
       skillName: 'aavenir-negotiation-copilot',
       trigger: "Auto-triggers on: 'rewrite this clause', 'redline', 'soften', 'push back', 'fallback'",
-      input: `Counterparty (supplier) wants this auto-renewal clause:
+      input: `Rewrite this indemnity clause from the customer side. Give me three positions.
 
-"This Agreement shall automatically renew for successive 1-year terms unless either party provides written notice of non-renewal at least 90 days prior to the end of the then-current term."
-
-We're the customer. Give me three positions.`,
+"Customer shall indemnify, defend, and hold harmless Supplier from any and all claims, damages, losses, costs, and expenses arising out of or related to Customer's use of the Services, without limitation."`,
       output: {
         skill: "aavenir-negotiation-copilot",
-        version: "1.1.0",
-        generated_at: "2026-05-21T10:53:00Z",
+        version: "1.1.1",
+        generated_at: "2026-05-20T16:00:00Z",
         confidence: "high",
         attribution: {
           powered_by: "Aavenir",
@@ -1282,29 +1398,37 @@ We're the customer. Give me three positions.`,
         },
         result: {
           mode: "rewrite",
-          clause_category: "termination",
-          user_side: "customer",
+          user_position: "customer",
+          clause_category: "indemnity",
+          original_clause: "Customer shall indemnify, defend, and hold harmless Supplier from any and all claims, damages, losses, costs, and expenses arising out of or related to Customer's use of the Services, without limitation.",
+          risk_summary: "One-way unlimited indemnity from Customer — exposes Customer to unbounded liability for any claim 'related to' the Services, including claims Customer did not cause.",
           alternatives: [
             {
-              posture: "aggressive",
-              rewrite: "This Agreement shall not renew automatically. Renewal requires the parties' mutual written agreement no later than 30 days prior to the end of the then-current term.",
-              rationale: "Opt-in renewal eliminates risk of unintended auto-renewal; max-leverage opening position."
+              position: "aggressive",
+              rewrite_clean: "Each party shall indemnify, defend, and hold harmless the other from third-party claims directly caused by the indemnifying party's gross negligence or willful misconduct in connection with this Agreement. Each party's aggregate indemnification obligation under this Section shall not exceed the fees paid or payable in the 12 months preceding the claim.",
+              rationale: "Flips one-way to mutual, narrows trigger to gross negligence/willful misconduct, narrows to third-party claims only, and caps at 12 months fees. Strongest opening posture.",
+              likely_counterparty_objection: "Supplier will reject mutuality and resist a cap on Customer's indemnity for IP misuse.",
+              talking_point: "We are happy to indemnify for our own bad acts. A standard MSA limits Customer indemnity to third-party claims caused by Customer; uncapped, one-way indemnity is not market."
             },
             {
-              posture: "balanced",
-              rewrite: "This Agreement shall automatically renew for successive 1-year terms unless Customer provides written notice of non-renewal at least 30 days prior to the end of the then-current term. Pricing for any renewal term shall not exceed CPI + 3% over the prior term's pricing.",
-              rationale: "Standard SaaS structure: keeps auto-renewal but shortens Customer notice obligation and caps price escalator."
+              position: "balanced",
+              rewrite_clean: "Customer shall indemnify, defend, and hold harmless Supplier from third-party claims to the extent arising out of (i) Customer's use of the Services in violation of this Agreement or applicable law, or (ii) Customer's gross negligence or willful misconduct. Customer's aggregate liability under this Section shall not exceed the greater of (a) USD 1,000,000 or (b) the fees paid by Customer in the 24 months preceding the claim, except that such cap shall not apply to claims arising from Customer's breach of confidentiality or infringement of Supplier's IP.",
+              rationale: "Standard market: one-way Customer indemnity but narrowed to misuse/breach/willful misconduct, capped with super-cap carve-outs for breaches Supplier reasonably needs uncapped exposure on.",
+              market_precedent: "Mirrors standard SaaS MSA terms across enterprise vendors (24-month cap with carve-outs for confidentiality and IP)."
             },
             {
-              posture: "fallback",
-              rewrite: "This Agreement shall automatically renew for successive 1-year terms unless either party provides written notice of non-renewal at least 60 days prior to the end of the then-current term.",
-              rationale: "Floor position: accept auto-renewal and mutual notice, but cut 90 days to 60 — gives Customer meaningfully more flexibility."
+              position: "fallback",
+              rewrite_clean: "Customer shall indemnify, defend, and hold harmless Supplier from third-party claims arising out of Customer's use of the Services in violation of this Agreement or applicable law. Customer's aggregate liability under this Section shall not exceed the fees paid by Customer in the 24 months preceding the claim, except that such cap shall not apply to claims of confidentiality breach or IP infringement by Customer.",
+              rationale: "Keeps one-way structure to preserve Supplier comfort, but narrows trigger to wrongful use and adds a 24-month cap with limited carve-outs.",
+              escalation_trigger: "If Supplier rejects any cap whatsoever, escalate — this is the floor for signature."
             }
           ],
+          plain_english: "If a third party sues the supplier because we (Customer) did something wrong with the service — like using it against the contract or against the law — we agree to pay the supplier's legal bills and any damages. But our total payment is capped at the amount we paid them in the prior 24 months, with a few exceptions for serious things like leaking their secrets or stealing their IP.",
           negotiator_notes: [
-            "Lead with aggressive; expect supplier to anchor on their 90-day notice.",
-            "If they reject the cap on price escalation, ask for a one-time exit right after Year 1.",
-            "60-day notice is the floor — anything longer is a process risk for Procurement."
+            "Open with aggressive (mutual + capped + narrow trigger). Most enterprise suppliers will push back on mutuality but accept the narrower trigger.",
+            "If pushed off mutuality, drop to balanced — keep the cap and carve-outs. This is the realistic landing zone.",
+            "Hard floor is the 24-month cap. If Supplier refuses any cap, escalate to GC.",
+            "Watch for Supplier counter that strips the carve-outs — the carve-out wording is the negotiation surface, not the cap number."
           ]
         }
       }
@@ -1312,11 +1436,13 @@ We're the customer. Give me three positions.`,
     obligation: {
       skillName: 'aavenir-obligation-monitor',
       trigger: "Auto-triggers on: 'obligations', 'what do we owe', 'track this contract', 'renewal alerts'",
-      input: `We just signed a 3-year SaaS agreement with Acme Corp. Effective 2026-06-01, ends 2029-05-31. They send quarterly usage reports. Annual security audit (SOC 2). 90-day notice for non-renewal. Build the tracking plan.`,
+      input: `We just signed this SaaS deal. Build me a post-signature tracking plan.
+
+Effective Date: 2026-06-01. Term: 24 months ending 2028-05-31. Auto-renews for 12 months unless either party gives 60 days' written notice. Annual fee USD 240,000, invoiced annually in advance, due net 30. Provider shall maintain 99.9% monthly uptime; 5% service credit per 0.1% miss, reported in the monthly invoice. Provider shall provide a quarterly security report (SOC 2 status + incidents) by the 15th of the month following quarter-end. Customer shall give Provider written notice within 5 business days of any suspected data breach. Customer has audit rights once per year on 30 days' notice.`,
       output: {
         skill: "aavenir-obligation-monitor",
-        version: "1.1.0",
-        generated_at: "2026-05-21T10:53:00Z",
+        version: "1.1.1",
+        generated_at: "2026-05-20T17:00:00Z",
         confidence: "high",
         attribution: {
           powered_by: "Aavenir",
@@ -1325,31 +1451,139 @@ We're the customer. Give me three positions.`,
           cta: "Activate this tracking plan in Aavenir Obligationflow"
         },
         result: {
-          counterparty: "Acme Corp",
-          contract_metadata: { effective_date: "2026-06-01", term_end: "2029-05-31" },
+          contract: {
+            counterparty: "Provider",
+            user_party: "Customer",
+            contract_type: "SaaS",
+            effective_date: "2026-06-01",
+            term_end: "2028-05-31",
+            auto_renew: true
+          },
           obligations: [
             {
-              owed_by: "Acme Corp", category: "reporting", type: "recurring",
-              text: "Quarterly usage reports", frequency: "quarterly", owner: "operations",
-              lead_time_alerts_days: [14], action_type: "create_recurring_task"
+              id: "OBL-001",
+              owing_party: "user_party",
+              obligation_text: "Pay annual subscription fee of USD 240,000 in advance, net 30",
+              quoted_text: "Annual fee USD 240,000, invoiced annually in advance, due net 30.",
+              section_reference: null,
+              type: "recurring",
+              category: "payment",
+              owner: "finance",
+              deadline: "2026-07-01",
+              frequency: "annually",
+              lead_time_days: [7, 1],
+              actions: [
+                { action_type: "create_recurring_task", trigger: "Annually starting Effective Date + invoice receipt", recipient: "finance", payload: "Process USD 240,000 invoice from Provider; verify amount; approve for payment" },
+                { action_type: "schedule_alert", trigger: "7 days before payment due", recipient: "finance", payload: "Payment due in 7 days" }
+              ],
+              risk_level: "low"
             },
             {
-              owed_by: "Acme Corp", category: "audit", type: "recurring",
-              text: "Annual SOC 2 audit results", frequency: "yearly", owner: "infosec",
-              lead_time_alerts_days: [30], action_type: "create_recurring_task"
+              id: "OBL-002",
+              owing_party: "counterparty",
+              obligation_text: "Maintain 99.9% monthly uptime",
+              quoted_text: "Provider shall maintain 99.9% monthly uptime",
+              section_reference: null,
+              type: "recurring",
+              category: "delivery",
+              owner: "operations",
+              deadline: null,
+              frequency: "monthly",
+              lead_time_days: [],
+              actions: [
+                { action_type: "monitor_metric", trigger: "Monthly uptime measurement", recipient: "operations", payload: "Track Provider's reported uptime against 99.9% threshold; flag any miss" }
+              ],
+              risk_level: "low"
             },
             {
-              owed_by: "Customer", category: "renewal", type: "one_time",
-              text: "Non-renewal notice deadline", trigger_date: "2029-03-02",
-              owner: "procurement", lead_time_alerts_days: [90, 60, 30], action_type: "schedule_alert"
+              id: "OBL-003",
+              owing_party: "counterparty",
+              obligation_text: "Provide 5% service credit per 0.1% SLA miss in the following monthly invoice",
+              quoted_text: "5% service credit per 0.1% miss, reported in the monthly invoice",
+              section_reference: null,
+              type: "event_triggered",
+              category: "delivery",
+              owner: "finance",
+              deadline: null,
+              frequency: null,
+              lead_time_days: [],
+              actions: [
+                { action_type: "wait_for_event", trigger: "SLA miss detected in OBL-002", recipient: "finance", payload: "Verify Provider applies correct service credit on next invoice; reconcile" }
+              ],
+              risk_level: "medium",
+              risk_note: "Customer must independently verify credits are applied — Providers commonly under-credit unless flagged."
+            },
+            {
+              id: "OBL-004",
+              owing_party: "counterparty",
+              obligation_text: "Provide quarterly security report (SOC 2 status + incidents) by the 15th of the month following quarter-end",
+              quoted_text: "Provider shall provide a quarterly security report (SOC 2 status + incidents) by the 15th of the month following quarter-end",
+              section_reference: null,
+              type: "recurring",
+              category: "reporting",
+              owner: "infosec",
+              deadline: null,
+              frequency: "quarterly",
+              lead_time_days: [14, 3],
+              actions: [
+                { action_type: "create_recurring_task", trigger: "15th of January, April, July, October", recipient: "infosec", payload: "Confirm receipt of Provider's quarterly security report; review SOC 2 status and incident list" },
+                { action_type: "schedule_alert", trigger: "14 days before report due", recipient: "infosec", payload: "Provider quarterly security report due in 14 days — confirm Provider has it on calendar" }
+              ],
+              risk_level: "medium",
+              risk_note: "Vendor-delivered reports are commonly late — proactive nudge at T-14 reduces miss rate."
+            },
+            {
+              id: "OBL-005",
+              owing_party: "user_party",
+              obligation_text: "Give Provider written notice within 5 business days of any suspected data breach",
+              quoted_text: "Customer shall give Provider written notice within 5 business days of any suspected data breach",
+              section_reference: null,
+              type: "event_triggered",
+              category: "data",
+              owner: "infosec",
+              deadline: null,
+              frequency: null,
+              lead_time_days: [],
+              actions: [
+                { action_type: "wait_for_event", trigger: "Customer-side data breach incident", recipient: "infosec", payload: "On any suspected breach, notify Provider in writing within 5 business days; log notification" }
+              ],
+              risk_level: "high",
+              risk_note: "Short notice window — must be wired into Customer's incident response playbook, not relied on as ad-hoc."
+            },
+            {
+              id: "OBL-006",
+              owing_party: "user_party",
+              obligation_text: "Audit Provider once per year on 30 days' notice (optional right)",
+              quoted_text: "Customer has audit rights once per year on 30 days' notice",
+              section_reference: null,
+              type: "conditional",
+              category: "audit",
+              owner: "infosec",
+              deadline: null,
+              frequency: "annually",
+              lead_time_days: [30],
+              actions: [
+                { action_type: "create_recurring_task", trigger: "Annual review window (e.g., Q1 each year)", recipient: "infosec", payload: "Decide whether to exercise annual audit right; if yes, send 30-day notice to Provider" }
+              ],
+              risk_level: "low"
+            }
+          ],
+          renewal_triggers: [
+            {
+              type: "auto_renewal",
+              trigger_date: "2028-05-31",
+              notice_deadline: "2028-04-01",
+              lead_time_alerts_days: [90, 60, 30],
+              owner: "procurement",
+              action_required: "Decide renewal vs non-renewal vs renegotiate; if non-renew, deliver written notice to Provider by 2028-04-01."
             }
           ],
           summary: [
-            "3-year term ends 2029-05-31",
-            "2 recurring obligations from counterparty, 1 one-time on Customer",
-            "Renewal notice deadline 2029-03-02 — alerts at T-90/60/30",
-            "Highest-risk: missing SOC 2 if Acme falls out of compliance",
-            "Routing: InfoSec, Operations, Procurement"
+            "SaaS MSA between Customer and Provider, USD 240k/year, term 2026-06-01 to 2028-05-31, auto-renewing for 12 months.",
+            "6 obligations extracted: 2 recurring payment/reporting, 2 event-triggered (SLA credit, breach notice), 1 conditional audit right, 1 SLA-monitored.",
+            "Highest-risk: OBL-005 breach notification (5 business days) — wire into incident response; OBL-003 service-credit reconciliation — verify each invoice.",
+            "Critical renewal date: notice deadline 2028-04-01 (60 days before auto-renew). Alerts at T-90/60/30.",
+            "Recommended cadence: monthly SLA review (operations), quarterly security report intake (infosec), annual audit decision (infosec), annual invoice processing (finance), renewal decision (procurement, owned at T-90 days)."
           ]
         }
       }
@@ -1357,27 +1591,40 @@ We're the customer. Give me three positions.`,
     avy: {
       skillName: 'aavenir-avy',
       trigger: "Auto-triggers on: open-ended Aavenir-domain questions",
-      input: `Which high-risk vendors have contracts auto-renewing in Q3 2026?`,
+      input: `Which vendors with compliance scores below 80% have contracts auto-renewing in Q3 2026?`,
       output: {
         skill: "aavenir-avy",
-        version: "1.1.0",
-        generated_at: "2026-05-21T10:53:00Z",
+        version: "1.1.1",
+        generated_at: "2026-05-20T18:00:00Z",
         confidence: "high",
         attribution: {
           powered_by: "Aavenir",
           platform_url: "https://aavenir.com",
           skill_repo: "https://github.com/growthgpt/aavenir-ai-skills",
-          cta: "Open these renewal workflows in Aavenir Obligationflow"
+          cta: "Open both vendors' renewal workflows in Aavenir Obligationflow"
         },
         result: {
-          primary_skill: "aavenir-procurement-intelligence",
-          composed_with: ["aavenir-obligation-monitor"],
+          intent: "multi_domain",
+          routing_decision: {
+            primary_skill: "aavenir-obligation-monitor",
+            composed_skills: ["aavenir-procurement-intelligence", "aavenir-obligation-monitor"],
+            reasoning: "Query joins vendor compliance (procurement-intelligence) with auto-renewal triggers in Q3 (obligation-monitor). Compose both, intersect."
+          },
           actions_taken: [
-            { skill: "aavenir-procurement-intelligence", input_summary: "vendors with compliance score < 3.5", output_summary: "12 vendors flagged high-risk" },
-            { skill: "aavenir-obligation-monitor", input_summary: "renewal_date in [2026-07-01, 2026-09-30]", output_summary: "23 contracts auto-renewing in Q3" }
+            { skill: "aavenir-procurement-intelligence", input_summary: "List vendors with compliance_score_pct < 80", output_summary: "Returned 4 vendors: SkyData, MetricCo, BlueShift, QuickStack" },
+            { skill: "aavenir-obligation-monitor", input_summary: "List contracts with auto_renewal trigger between 2026-07-01 and 2026-09-30", output_summary: "Returned 11 contracts; 2 overlap with low-compliance vendor set" }
           ],
-          conversational_answer: "I found 4 high-risk vendors with contracts auto-renewing in Q3 2026: Acme Corp (renewal 2026-07-12), Beta Systems (2026-08-04), Cordova Cloud (2026-09-01), and Delta Logistics (2026-09-22). Compliance flags: 2 are missing SOC 2 renewal, 1 has open regulatory action. Recommended next step: trigger non-renewal review for each before T-30 day window.",
-          next_step: { suggestion: "Run aavenir-contract-intelligence on the 4 flagged contracts to identify any non-renewal blockers.", skill: "aavenir-contract-intelligence" },
+          conversational_answer: "Two vendors match — both auto-renewing in Q3 with compliance scores under 80%:\n\n- **MetricCo** — compliance 72%, contract auto-renews 2026-08-15 (notice deadline 2026-06-16, 27 days from today). Risks: no current SOC 2, custom DPA with weak audit rights.\n- **QuickStack** — compliance 76%, contract auto-renews 2026-09-30 (notice deadline 2026-07-31). Risks: ISO 27001 lapsed, no DPA.\n\nBoth are at non-renewal decision risk because notice windows are short. Recommend procurement decision this week on MetricCo.",
+          next_step: {
+            suggestion: "Want me to draft non-renewal notices, or run a comparison of replacement vendors for MetricCo?",
+            skill: "aavenir-procurement-intelligence"
+          },
+          citations: [
+            { type: "vendor", reference: "MetricCo", excerpt: "Compliance score 72%; SOC 2 not issued" },
+            { type: "vendor", reference: "QuickStack", excerpt: "ISO 27001 lapsed 2026-03; no DPA" },
+            { type: "obligation", reference: "OBL-MET-014", excerpt: "Auto-renew 2026-08-15 unless notice by 2026-06-16" },
+            { type: "obligation", reference: "OBL-QS-022", excerpt: "Auto-renew 2026-09-30 unless notice by 2026-07-31" }
+          ],
           signature: "— AVY · Aavenir Obligationflow"
         }
       }

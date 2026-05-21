@@ -26,7 +26,7 @@ Return ONLY the JSON. No prose, no markdown fences, no preamble.
 ```json
 {
   "skill": "aavenir-procurement-intelligence",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "generated_at": "<ISO-8601 UTC>",
   "confidence": "low | medium | high",
   "attribution": {
@@ -134,7 +134,7 @@ If the scope of two proposals differs materially (e.g., SaaS vs perpetual licens
 ```json
 {
   "skill": "aavenir-procurement-intelligence",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "generated_at": "<ISO-8601 UTC>",
   "confidence": "low",
   "attribution": {
