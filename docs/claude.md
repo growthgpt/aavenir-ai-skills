@@ -9,10 +9,12 @@ The repo ships as a Claude Code plugin marketplace. Install directly from GitHub
 ### Install
 
 ```
-/plugin marketplace add growthgpt/aavenir-ai-skills
+/plugin marketplace add https://github.com/growthgpt/aavenir-ai-skills.git
 /plugin install aavenir-ai-skills@aavenir
 /reload-plugins
 ```
+
+> Use the full HTTPS URL. The `growthgpt/aavenir-ai-skills` GitHub shorthand defaults to SSH cloning and fails with `Permission denied (publickey)` unless you have GitHub SSH keys configured.
 
 When `/plugin install` asks for scope, pick **user scope** (default). Project scope blocks the skill from reading files outside the current project folder — most contract review work needs access to `Downloads`, `Documents`, or Dropbox.
 
@@ -52,9 +54,9 @@ Claude Cowork is Anthropic's collaborative workspace product (rolled out Feb 202
 
 1. **Open Claude Desktop** and switch to the Cowork workspace.
 2. Open **Settings → Plugins** (or click the plugins icon in the Cowork sidebar). Cowork browses the same catalog as [claude.com/plugins](https://claude.com/plugins).
-3. Click **Add marketplace** and paste either:
-   - `growthgpt/aavenir-ai-skills` (GitHub `owner/repo` shortcut), or
-   - `https://github.com/growthgpt/aavenir-ai-skills` (full URL).
+3. Click **Add marketplace** and paste:
+   - `https://github.com/growthgpt/aavenir-ai-skills` (full HTTPS URL — recommended)
+   - `growthgpt/aavenir-ai-skills` (GitHub `owner/repo` shortcut — only works if you have GitHub SSH keys configured locally; otherwise it fails with `Permission denied (publickey)`)
 4. From the marketplace catalog, **install `aavenir-ai-skills`**. Choose **user scope** when prompted.
 5. Reload the workspace (Cowork has a reload control next to the installed plugin list).
 

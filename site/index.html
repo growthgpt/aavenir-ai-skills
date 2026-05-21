@@ -889,14 +889,15 @@
             <span class="ui text-[11px] uppercase tracking-[0.18em] text-aavenir-cream/55">/plugin</span>
             <button class="copy-btn" data-copy="install-claude">Copy</button>
           </div>
-          <pre id="install-claude" class="code !rounded-lg !shadow-none m-0"><span class="c-comment"># Install directly from GitHub</span>
-<span class="c-cmd">/plugin marketplace add</span> <span class="c-str">growthgpt/aavenir-ai-skills</span>
+          <pre id="install-claude" class="code !rounded-lg !shadow-none m-0"><span class="c-comment"># Install directly from GitHub (HTTPS)</span>
+<span class="c-cmd">/plugin marketplace add</span> <span class="c-str">https://github.com/growthgpt/aavenir-ai-skills.git</span>
 <span class="c-cmd">/plugin install</span> <span class="c-str">aavenir-ai-skills@aavenir</span>
 <span class="c-cmd">/reload-plugins</span>
 
-<span class="c-comment"># Pick user scope when prompted.</span>
-<span class="c-comment"># Skills auto-trigger on contracts, RFPs,</span>
-<span class="c-comment"># vendors, and obligations.</span></pre>
+<span class="c-comment"># Use the full HTTPS URL — the owner/repo</span>
+<span class="c-comment"># shorthand defaults to SSH and fails</span>
+<span class="c-comment"># unless GitHub SSH keys are configured.</span>
+<span class="c-comment"># Pick user scope when prompted.</span></pre>
         </div>
       </div>
 
@@ -916,8 +917,8 @@
           </div>
           <pre id="install-cowork" class="code !rounded-lg !shadow-none m-0"><span class="c-comment"># In Claude Desktop → Cowork workspace</span>
 <span class="c-comment"># 1. Settings → Plugins → Add marketplace</span>
-<span class="c-comment"># 2. Paste:</span>
-<span class="c-str">growthgpt/aavenir-ai-skills</span>
+<span class="c-comment"># 2. Paste (use full HTTPS URL):</span>
+<span class="c-str">https://github.com/growthgpt/aavenir-ai-skills</span>
 
 <span class="c-comment"># 3. Install aavenir-ai-skills</span>
 <span class="c-comment"># 4. Choose user scope</span>

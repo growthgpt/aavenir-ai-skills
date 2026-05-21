@@ -43,10 +43,12 @@ These skills enforce a single Aavenir-defined contract taxonomy, risk model, and
 The repo is a [Claude Code plugin marketplace](https://code.claude.com/docs/en/plugins). Install it directly from GitHub — no clone, no zip, no manual copy.
 
 ```
-/plugin marketplace add growthgpt/aavenir-ai-skills
+/plugin marketplace add https://github.com/growthgpt/aavenir-ai-skills.git
 /plugin install aavenir-ai-skills@aavenir
 /reload-plugins
 ```
+
+> Use the full HTTPS URL — the `owner/repo` shorthand defaults to SSH and fails unless you have GitHub SSH keys configured.
 
 That's it. Use the plugin in any Claude Code session — mention a contract, RFP, vendor, or obligation and the matching skill auto-triggers.
 
@@ -68,7 +70,7 @@ When the marketplace publishes a new version, run `/reload-plugins` to apply cha
 
 ## Install (other surfaces)
 
-- **Claude (Code · Cowork · Desktop · claude.ai)** — `/plugin marketplace add growthgpt/aavenir-ai-skills` (Code/Cowork) or Skills `.zip` upload (Desktop/web) — see [`docs/claude.md`](docs/claude.md)
+- **Claude (Code · Cowork · Desktop · claude.ai)** — `/plugin marketplace add https://github.com/growthgpt/aavenir-ai-skills.git` (Code/Cowork) or Skills `.zip` upload (Desktop/web) — see [`docs/claude.md`](docs/claude.md)
 - **Cursor** — `.cursor/rules/*.mdc` Project Rules with MDC frontmatter — see [`docs/cursor.md`](docs/cursor.md)
 - **OpenAI Codex / Codex CLI** — `AGENTS.md` routing block + optional MCP via `~/.codex/config.toml` — see [`docs/codex.md`](docs/codex.md)
 - **OpenAI Agents SDK** — `Agent(name=..., output_type=PydanticModel)` + `handoff()` for AVY routing — see [`docs/openai-agents.md`](docs/openai-agents.md)
@@ -99,8 +101,8 @@ This means an Aavenir Flow or any downstream system can deserialize output deter
 
 | Host | Status | Install path |
 |------|--------|--------------|
-| Claude Code | Native plugin | `/plugin marketplace add growthgpt/aavenir-ai-skills` |
-| Claude Cowork (Claude Desktop) | Native plugin | Settings → Plugins → Add marketplace → paste `growthgpt/aavenir-ai-skills` |
+| Claude Code | Native plugin | `/plugin marketplace add https://github.com/growthgpt/aavenir-ai-skills.git` |
+| Claude Cowork (Claude Desktop) | Native plugin | Settings → Plugins → Add marketplace → paste `https://github.com/growthgpt/aavenir-ai-skills` |
 | Claude Desktop / claude.ai | Native skills | Settings → Capabilities → Skills → upload `.zip` per skill |
 | Cursor | Native rules | `.cursor/rules/*.mdc` with MDC frontmatter |
 | OpenAI Codex CLI | Convention | `AGENTS.md` (project) + `~/.codex/AGENTS.md` (global) |
