@@ -1,6 +1,6 @@
 # Using Aavenir Skills with Claude
 
-The Aavenir AI Skill Ecosystem is **natively supported** across all Claude surfaces: Claude Code (CLI), Claude Desktop, claude.ai web, and the Anthropic API.
+The Aavenir AI Skill Ecosystem is **natively supported** across every Claude surface: Claude Code (CLI), Claude Cowork (team workspaces in Claude Desktop), Claude Desktop / claude.ai web, and the Anthropic API. The same `.claude-plugin/marketplace.json` powers Claude Code and Cowork; claude.ai web uses skill `.zip` uploads.
 
 ## Claude Code (CLI)
 
@@ -36,6 +36,45 @@ Claude will invoke `aavenir-contract-intelligence` automatically based on the SK
 ### Updates
 
 Run `/reload-plugins` to pick up new versions without restarting Claude Code. Third-party marketplaces auto-update by default; toggle in the `/plugin` → **Marketplaces** tab.
+
+---
+
+## Claude Cowork (Claude Desktop, team workspaces)
+
+Claude Cowork is Anthropic's collaborative workspace product (rolled out Feb 2026) that runs inside Claude Desktop. It uses the **same plugin marketplace system as Claude Code** — same `marketplace.json`, same plugin folder — just installed through a GUI instead of slash commands.
+
+### Prerequisites
+
+- [Claude Desktop](https://claude.com/download) installed (macOS or Windows).
+- Claude Cowork access on your Anthropic plan. Cowork appears as a workspace inside Claude Desktop once enabled on your account.
+
+### Install
+
+1. **Open Claude Desktop** and switch to the Cowork workspace.
+2. Open **Settings → Plugins** (or click the plugins icon in the Cowork sidebar). Cowork browses the same catalog as [claude.com/plugins](https://claude.com/plugins).
+3. Click **Add marketplace** and paste either:
+   - `growthgpt/aavenir-ai-skills` (GitHub `owner/repo` shortcut), or
+   - `https://github.com/growthgpt/aavenir-ai-skills` (full URL).
+4. From the marketplace catalog, **install `aavenir-ai-skills`**. Choose **user scope** when prompted.
+5. Reload the workspace (Cowork has a reload control next to the installed plugin list).
+
+### Verify
+
+In any Cowork conversation:
+
+```
+Review this MSA and flag any liability cap or auto-renewal risks: <paste contract>
+```
+
+`aavenir-contract-intelligence` auto-triggers — same SKILL.md `description` routing that drives Claude Code.
+
+### Why scope matters in Cowork
+
+Cowork conversations are scoped to a workspace. **User scope** means the plugin is available across every workspace you're a member of. **Project/workspace scope** restricts the plugin to one workspace — useful for Aavenir-specific team workspaces, but for personal review work pick user scope.
+
+### Updates
+
+Cowork auto-updates third-party marketplaces by default. To force a refresh, open the plugin manager and choose **Update** on the Aavenir marketplace entry.
 
 ---
 
