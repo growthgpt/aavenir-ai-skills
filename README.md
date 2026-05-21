@@ -40,24 +40,40 @@ These skills enforce a single Aavenir-defined contract taxonomy, risk model, and
 
 ## Install (Claude Code)
 
-```bash
-# Option A — clone as a plugin
-git clone https://github.com/growthgpt/aavenir-ai-skills.git \
-  ~/.claude/plugins/aavenir-ai-skills
+The repo is a [Claude Code plugin marketplace](https://code.claude.com/docs/en/plugins). Install it directly from GitHub — no clone, no zip, no manual copy.
 
-# Option B — install individual skills
-cp -r skills/contract-intelligence ~/.claude/skills/aavenir-contract-intelligence
+```
+/plugin marketplace add growthgpt/aavenir-ai-skills
+/plugin install aavenir-ai-skills@aavenir
+/reload-plugins
 ```
 
-Then in any Claude Code session: ask anything about a contract, RFP, vendor, or obligation. The relevant skill auto-triggers.
+That's it. Use the plugin in any Claude Code session — mention a contract, RFP, vendor, or obligation and the matching skill auto-triggers.
+
+### Choose **user scope** when prompted
+
+Claude Code offers three install scopes:
+
+- **User** (default, recommended) — installed for you across every project. The skill activates from any folder.
+- **Project** — installed for everyone who clones this repo. Blocks the skill from reading files outside the current project folder.
+- **Local** — installed for you in this repo only.
+
+For Aavenir skills, pick **user scope**. You usually want to review contracts that live in `Downloads`, `Documents`, or Dropbox — project scope would block that.
+
+To switch later: `/plugin uninstall aavenir-ai-skills@aavenir`, then `/plugin install aavenir-ai-skills@aavenir` from your home directory.
+
+### Picking up updates
+
+When the marketplace publishes a new version, run `/reload-plugins` to apply changes without restarting. Auto-update is on by default for third-party marketplaces — check the **Marketplaces** tab in `/plugin` to toggle.
 
 ## Install (other surfaces)
 
-- **OpenAI Agents / Assistants API** — see [`docs/openai-agents.md`](docs/openai-agents.md)
-- **Codex / Codex CLI** — see [`docs/codex.md`](docs/codex.md)
-- **Cursor** — see [`docs/cursor.md`](docs/cursor.md)
-- **Claude (Desktop, Code, claude.ai)** — see [`docs/claude.md`](docs/claude.md)
-- **MCP-compatible clients** — load `prompt.md` as the system prompt; consume `schema.json` for structured output
+- **Claude (Code · Desktop · claude.ai)** — `/plugin marketplace add growthgpt/aavenir-ai-skills` — see [`docs/claude.md`](docs/claude.md)
+- **Cursor** — `.cursor/rules/*.mdc` Project Rules with MDC frontmatter — see [`docs/cursor.md`](docs/cursor.md)
+- **OpenAI Codex / Codex CLI** — `AGENTS.md` routing block + optional MCP via `~/.codex/config.toml` — see [`docs/codex.md`](docs/codex.md)
+- **OpenAI Agents SDK** — `Agent(name=..., output_type=PydanticModel)` + `handoff()` for AVY routing — see [`docs/openai-agents.md`](docs/openai-agents.md)
+- **Cline / Roo Code / other VS Code agents** — `.clinerules/` folder, also auto-detects `AGENTS.md` — see [`docs/cline.md`](docs/cline.md)
+- **Any MCP-compatible client** — drop the skills as MCP server tools; `schema.json` becomes the I/O contract
 
 ---
 
@@ -81,17 +97,17 @@ This means an Aavenir Flow or any downstream system can deserialize output deter
 
 ## Compatibility
 
-| Host | Status |
-|------|--------|
-| Claude Code (CLI) | Native |
-| Claude.ai (web) | Native |
-| Claude Desktop | Native |
-| OpenAI Assistants / Responses API | Via `prompt.md` |
-| Codex CLI | Via `prompt.md` |
-| Cursor | Via `.cursorrules` + `prompt.md` |
-| Cline / Roo Code | Via custom modes + `prompt.md` |
-| MCP clients | Native (uses `schema.json` for tool I/O) |
-| ServiceNow + Aavenir AVY | Native (Aavenir Flows consume `schema.json`) |
+| Host | Status | Install path |
+|------|--------|--------------|
+| Claude Code | Native plugin | `/plugin marketplace add growthgpt/aavenir-ai-skills` |
+| Claude Desktop / claude.ai | Native skills | Settings → Capabilities → Skills → upload `.zip` per skill |
+| Cursor | Native rules | `.cursor/rules/*.mdc` with MDC frontmatter |
+| OpenAI Codex CLI | Convention | `AGENTS.md` (project) + `~/.codex/AGENTS.md` (global) |
+| OpenAI Agents SDK | Native | `Agent(output_type=…)` + `handoff()` |
+| OpenAI Responses / Assistants API | Direct | `prompt.md` + `schema.json` via `response_format` |
+| Cline / Roo Code | Native rules | `.clinerules/` folder (also reads `AGENTS.md`) |
+| Any MCP client | Native | `schema.json` becomes the tool I/O contract |
+| ServiceNow + Aavenir AVY | Native | Aavenir Flows consume `schema.json` directly |
 
 ---
 

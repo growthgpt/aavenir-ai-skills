@@ -4,38 +4,38 @@ The Aavenir AI Skill Ecosystem is **natively supported** across all Claude surfa
 
 ## Claude Code (CLI)
 
-### Install as a plugin
+The repo ships as a Claude Code plugin marketplace. Install directly from GitHub — no clone or zip download needed.
 
-```bash
-# Clone into your Claude plugins directory
-git clone https://github.com/aavenir/aavenir-ai-skills.git \
-  ~/.claude/plugins/aavenir-ai-skills
+### Install
 
-# Enable in your Claude settings (or use /plugin enable)
+```
+/plugin marketplace add growthgpt/aavenir-ai-skills
+/plugin install aavenir-ai-skills@aavenir
+/reload-plugins
 ```
 
-The skills auto-discover. In any Claude Code session, mention a contract, RFP, vendor, or obligation and the matching skill activates.
+When `/plugin install` asks for scope, pick **user scope** (default). Project scope blocks the skill from reading files outside the current project folder — most contract review work needs access to `Downloads`, `Documents`, or Dropbox.
 
-### Install individual skills
+You can also install locally from a clone (useful for plugin development):
 
-If you only need one capability:
-
-```bash
-mkdir -p ~/.claude/skills
-cp -r skills/contract-intelligence ~/.claude/skills/aavenir-contract-intelligence
+```
+/plugin marketplace add /path/to/aavenir-ai-skills-ecosystem
 ```
 
-Restart Claude Code or run `/skills reload`.
+Tip: after typing `/plugin marketplace add ` (with a trailing space), drag the folder onto the terminal to autofill the path.
 
 ### Verify
 
 ```
-> What skills do I have?
-
-> Review this MSA: <paste contract>
+/plugin                            # opens the manager; confirm aavenir-ai-skills is installed
+Review this MSA: <paste contract>  # contract-intelligence auto-triggers
 ```
 
-Claude will invoke `aavenir-contract-intelligence` automatically.
+Claude will invoke `aavenir-contract-intelligence` automatically based on the SKILL.md trigger description.
+
+### Updates
+
+Run `/reload-plugins` to pick up new versions without restarting Claude Code. Third-party marketplaces auto-update by default; toggle in the `/plugin` → **Marketplaces** tab.
 
 ---
 

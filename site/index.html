@@ -874,59 +874,55 @@
       </p>
     </div>
 
-    <div class="mt-14 grid lg:grid-cols-2 gap-6">
-      <!-- Claude -->
+    <div class="mt-14 grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <!-- Claude Code -->
       <div class="rounded-3xl border border-aavenir-line/80 shadow-card overflow-hidden bg-white">
         <div class="px-7 py-5 flex items-center justify-between border-b border-aavenir-line/70">
           <div class="flex items-center gap-3">
             <span class="grid place-items-center w-9 h-9 rounded-lg bg-aavenir-orange/10 text-aavenir-orange font-display font-bold">C</span>
-            <h3 class="display text-[18px] font-bold text-aavenir-navy">Claude Code · Desktop · claude.ai</h3>
+            <h3 class="display text-[18px] font-bold text-aavenir-navy">Claude Code</h3>
           </div>
-          <span class="chip chip-orange">Native</span>
+          <span class="chip chip-orange">Marketplace</span>
         </div>
         <div class="p-5 bg-aavenir-ink relative">
           <div class="flex items-center justify-between mb-3">
-            <span class="ui text-[11px] uppercase tracking-[0.18em] text-aavenir-cream/55">terminal</span>
+            <span class="ui text-[11px] uppercase tracking-[0.18em] text-aavenir-cream/55">/plugin</span>
             <button class="copy-btn" data-copy="install-claude">Copy</button>
           </div>
-          <pre id="install-claude" class="code !rounded-lg !shadow-none m-0"><span class="c-comment"># Clone as a Claude Code plugin</span>
-<span class="c-cmd">git clone</span> <span class="c-str">https://github.com/growthgpt/aavenir-ai-skills.git</span> \
-  <span class="c-str">~/.claude/plugins/aavenir-ai-skills</span>
+          <pre id="install-claude" class="code !rounded-lg !shadow-none m-0"><span class="c-comment"># Install directly from GitHub</span>
+<span class="c-cmd">/plugin marketplace add</span> <span class="c-str">growthgpt/aavenir-ai-skills</span>
+<span class="c-cmd">/plugin install</span> <span class="c-str">aavenir-ai-skills@aavenir</span>
+<span class="c-cmd">/reload-plugins</span>
 
-<span class="c-comment"># Or copy individual skills</span>
-<span class="c-cmd">cp -r</span> <span class="c-str">skills/contract-intelligence</span> \
-  <span class="c-str">~/.claude/skills/aavenir-contract-intelligence</span></pre>
+<span class="c-comment"># Pick user scope when prompted.</span>
+<span class="c-comment"># Skills auto-trigger on contracts, RFPs,</span>
+<span class="c-comment"># vendors, and obligations.</span></pre>
         </div>
       </div>
 
-      <!-- OpenAI Agents -->
+      <!-- Claude Desktop / claude.ai -->
       <div class="rounded-3xl border border-aavenir-line/80 shadow-card overflow-hidden bg-white">
         <div class="px-7 py-5 flex items-center justify-between border-b border-aavenir-line/70">
           <div class="flex items-center gap-3">
-            <span class="grid place-items-center w-9 h-9 rounded-lg bg-aavenir-teal/15 text-aavenir-teal2 font-display font-bold">O</span>
-            <h3 class="display text-[18px] font-bold text-aavenir-navy">OpenAI Agents / Responses</h3>
+            <span class="grid place-items-center w-9 h-9 rounded-lg bg-aavenir-orange/10 text-aavenir-orange font-display font-bold">⌘</span>
+            <h3 class="display text-[18px] font-bold text-aavenir-navy">Claude Desktop · claude.ai</h3>
           </div>
-          <span class="chip chip-teal">via prompt.md</span>
+          <span class="chip chip-orange">Skills</span>
         </div>
         <div class="p-5 bg-aavenir-ink">
           <div class="flex items-center justify-between mb-3">
-            <span class="ui text-[11px] uppercase tracking-[0.18em] text-aavenir-cream/55">python</span>
-            <button class="copy-btn" data-copy="install-openai">Copy</button>
+            <span class="ui text-[11px] uppercase tracking-[0.18em] text-aavenir-cream/55">upload</span>
+            <button class="copy-btn" data-copy="install-claudeai">Copy</button>
           </div>
-          <pre id="install-openai" class="code !rounded-lg !shadow-none m-0"><span class="c-cmd">from</span> openai <span class="c-cmd">import</span> OpenAI
-<span class="c-cmd">import</span> json, pathlib
+          <pre id="install-claudeai" class="code !rounded-lg !shadow-none m-0"><span class="c-comment"># Each skill folder packs as a .zip</span>
+<span class="c-cmd">cd</span> skills <span class="c-cmd">&amp;&amp;</span> \
+  <span class="c-cmd">for</span> s <span class="c-cmd">in</span> */; <span class="c-cmd">do</span> \
+    zip -r <span class="c-str">"aavenir-${s%/}.zip"</span> <span class="c-str">"$s"</span>; \
+  <span class="c-cmd">done</span>
 
-skill = pathlib.Path(<span class="c-str">"skills/contract-intelligence"</span>)
-prompt = (skill / <span class="c-str">"prompt.md"</span>).read_text()
-schema = json.loads((skill / <span class="c-str">"schema.json"</span>).read_text())
-
-resp = OpenAI().responses.create(
-  model=<span class="c-str">"gpt-4.1"</span>,
-  instructions=prompt,
-  input=user_message,
-  response_format={<span class="c-key">"type"</span>: <span class="c-str">"json_schema"</span>,
-                   <span class="c-key">"json_schema"</span>: schema}
-)</pre>
+<span class="c-comment"># In claude.ai or Claude Desktop:</span>
+<span class="c-comment"># Settings → Capabilities → Skills</span>
+<span class="c-comment"># → Upload .zip (one per skill)</span></pre>
         </div>
       </div>
 
@@ -937,45 +933,113 @@ resp = OpenAI().responses.create(
             <span class="grid place-items-center w-9 h-9 rounded-lg bg-aavenir-navy/10 text-aavenir-navy font-display font-bold">▸</span>
             <h3 class="display text-[18px] font-bold text-aavenir-navy">Cursor</h3>
           </div>
-          <span class="chip chip-navy">via .cursorrules</span>
+          <span class="chip chip-navy">Project Rules</span>
         </div>
         <div class="p-5 bg-aavenir-ink">
           <div class="flex items-center justify-between mb-3">
-            <span class="ui text-[11px] uppercase tracking-[0.18em] text-aavenir-cream/55">.cursorrules</span>
+            <span class="ui text-[11px] uppercase tracking-[0.18em] text-aavenir-cream/55">.cursor/rules/*.mdc</span>
             <button class="copy-btn" data-copy="install-cursor">Copy</button>
           </div>
-          <pre id="install-cursor" class="code !rounded-lg !shadow-none m-0"><span class="c-comment"># Drop the skill prompts into Cursor rules</span>
-<span class="c-cmd">cat</span> skills/contract-intelligence/prompt.md \
-  >> .cursorrules
+          <pre id="install-cursor" class="code !rounded-lg !shadow-none m-0"><span class="c-comment"># Drop each skill in as an MDC rule</span>
+<span class="c-cmd">mkdir -p</span> .cursor/rules
 
-<span class="c-comment"># Or per-project mode</span>
-<span class="c-cmd">cp</span> skills/contract-intelligence/prompt.md \
-  .cursor/rules/aavenir-contract.mdc</pre>
+<span class="c-cmd">cat &gt;</span> <span class="c-str">.cursor/rules/aavenir-contract.mdc</span> <span class="c-cmd">&lt;&lt;</span><span class="c-str">'MDC'</span>
+<span class="c-key">---</span>
+<span class="c-key">description:</span> <span class="c-str">Enterprise contract review.</span>
+  <span class="c-str">Use on MSAs, NDAs, SOWs, SaaS, DPAs.</span>
+<span class="c-key">---</span>
+<span class="c-comment"># paste skills/contract-intelligence/prompt.md</span>
+MDC</pre>
         </div>
       </div>
 
-      <!-- MCP -->
+      <!-- Codex CLI -->
+      <div class="rounded-3xl border border-aavenir-line/80 shadow-card overflow-hidden bg-white">
+        <div class="px-7 py-5 flex items-center justify-between border-b border-aavenir-line/70">
+          <div class="flex items-center gap-3">
+            <span class="grid place-items-center w-9 h-9 rounded-lg bg-aavenir-teal/15 text-aavenir-teal2 font-display font-bold">$</span>
+            <h3 class="display text-[18px] font-bold text-aavenir-navy">OpenAI Codex CLI</h3>
+          </div>
+          <span class="chip chip-teal">AGENTS.md</span>
+        </div>
+        <div class="p-5 bg-aavenir-ink">
+          <div class="flex items-center justify-between mb-3">
+            <span class="ui text-[11px] uppercase tracking-[0.18em] text-aavenir-cream/55">AGENTS.md</span>
+            <button class="copy-btn" data-copy="install-codex">Copy</button>
+          </div>
+          <pre id="install-codex" class="code !rounded-lg !shadow-none m-0"><span class="c-comment"># Add to ./AGENTS.md (project) or</span>
+<span class="c-comment"># ~/.codex/AGENTS.md (global):</span>
+
+<span class="c-key">## Aavenir Domain Skills</span>
+When asked about contracts, vendors,
+RFPs, or obligations — follow the
+matching skill prompt under
+<span class="c-str">./aavenir-ai-skills-ecosystem/skills/</span>
+&lt;skill&gt;<span class="c-str">/prompt.md</span>.
+
+Each prompt returns JSON conforming
+to its <span class="c-str">schema.json</span>.</pre>
+        </div>
+      </div>
+
+      <!-- OpenAI Agents SDK -->
+      <div class="rounded-3xl border border-aavenir-line/80 shadow-card overflow-hidden bg-white">
+        <div class="px-7 py-5 flex items-center justify-between border-b border-aavenir-line/70">
+          <div class="flex items-center gap-3">
+            <span class="grid place-items-center w-9 h-9 rounded-lg bg-aavenir-teal/15 text-aavenir-teal2 font-display font-bold">O</span>
+            <h3 class="display text-[18px] font-bold text-aavenir-navy">OpenAI Agents SDK</h3>
+          </div>
+          <span class="chip chip-teal">handoffs</span>
+        </div>
+        <div class="p-5 bg-aavenir-ink">
+          <div class="flex items-center justify-between mb-3">
+            <span class="ui text-[11px] uppercase tracking-[0.18em] text-aavenir-cream/55">python</span>
+            <button class="copy-btn" data-copy="install-openai">Copy</button>
+          </div>
+          <pre id="install-openai" class="code !rounded-lg !shadow-none m-0"><span class="c-cmd">from</span> agents <span class="c-cmd">import</span> Agent, Runner
+<span class="c-cmd">from</span> pydantic <span class="c-cmd">import</span> BaseModel
+<span class="c-cmd">from</span> pathlib <span class="c-cmd">import</span> Path
+
+<span class="c-cmd">class</span> ContractReview(BaseModel):
+    parties: <span class="c-cmd">list</span>[<span class="c-cmd">str</span>]
+    risks:   <span class="c-cmd">list</span>[<span class="c-cmd">dict</span>]
+
+agent = Agent(
+  name=<span class="c-str">"aavenir-contract"</span>,
+  instructions=Path(
+    <span class="c-str">"skills/contract-intelligence/prompt.md"</span>
+  ).read_text(),
+  output_type=ContractReview,
+)
+
+result = Runner.run_sync(agent, <span class="c-str">"…"</span>)</pre>
+        </div>
+      </div>
+
+      <!-- Cline / MCP -->
       <div class="rounded-3xl border border-aavenir-line/80 shadow-card overflow-hidden bg-white">
         <div class="px-7 py-5 flex items-center justify-between border-b border-aavenir-line/70">
           <div class="flex items-center gap-3">
             <span class="grid place-items-center w-9 h-9 rounded-lg bg-aavenir-orange/10 text-aavenir-orange font-display font-bold">⌬</span>
-            <h3 class="display text-[18px] font-bold text-aavenir-navy">MCP Clients (Cline, Roo, …)</h3>
+            <h3 class="display text-[18px] font-bold text-aavenir-navy">Cline · Roo · MCP clients</h3>
           </div>
-          <span class="chip chip-orange">Native</span>
+          <span class="chip chip-orange">.clinerules + MCP</span>
         </div>
         <div class="p-5 bg-aavenir-ink">
           <div class="flex items-center justify-between mb-3">
-            <span class="ui text-[11px] uppercase tracking-[0.18em] text-aavenir-cream/55">.mcp.json</span>
+            <span class="ui text-[11px] uppercase tracking-[0.18em] text-aavenir-cream/55">.clinerules/ + .mcp.json</span>
             <button class="copy-btn" data-copy="install-mcp">Copy</button>
           </div>
-          <pre id="install-mcp" class="code !rounded-lg !shadow-none m-0">{
-  <span class="c-key">"servers"</span>: {
+          <pre id="install-mcp" class="code !rounded-lg !shadow-none m-0"><span class="c-comment"># Project rules — one file per skill</span>
+<span class="c-cmd">mkdir -p</span> .clinerules
+<span class="c-cmd">cp</span> skills/*/prompt.md .clinerules/
+
+<span class="c-comment"># Or expose as MCP tools:</span>
+{
+  <span class="c-key">"mcpServers"</span>: {
     <span class="c-key">"aavenir-skills"</span>: {
       <span class="c-key">"command"</span>: <span class="c-str">"node"</span>,
-      <span class="c-key">"args"</span>: [<span class="c-str">"./mcp/aavenir-skills.mjs"</span>],
-      <span class="c-key">"env"</span>: {
-        <span class="c-key">"AAVENIR_SCHEMA_DIR"</span>: <span class="c-str">"./skills"</span>
-      }
+      <span class="c-key">"args"</span>: [<span class="c-str">"./mcp/aavenir-skills.mjs"</span>]
     }
   }
 }</pre>
