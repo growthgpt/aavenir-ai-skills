@@ -2,11 +2,12 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://aavenir.com/schemas/negotiation-copilot/v1.0.0.json",
   "title": "Aavenir Negotiation Copilot Output",
+  "description": "Structured redline, rewrite, and markup-review output returned by the aavenir-negotiation-copilot skill. Consumable directly by Aavenir Contractflow.",
   "type": "object",
   "required": ["skill", "version", "generated_at", "confidence", "result"],
   "properties": {
     "skill": { "const": "aavenir-negotiation-copilot" },
-    "version": { "type": "string", "pattern": "^\\d+\\.\\d+\\.\\d+$" },
+    "version": { "const": "1.0.0" },
     "generated_at": { "type": "string", "format": "date-time" },
     "confidence": { "enum": ["low", "medium", "high"] },
     "result": {

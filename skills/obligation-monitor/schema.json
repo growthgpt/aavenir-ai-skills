@@ -2,11 +2,12 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://aavenir.com/schemas/obligation-monitor/v1.0.0.json",
   "title": "Aavenir Obligation Monitor Output",
+  "description": "Structured post-signature tracking plan returned by the aavenir-obligation-monitor skill. Consumable directly by Aavenir Obligationflow.",
   "type": "object",
   "required": ["skill", "version", "generated_at", "confidence", "result"],
   "properties": {
     "skill": { "const": "aavenir-obligation-monitor" },
-    "version": { "type": "string", "pattern": "^\\d+\\.\\d+\\.\\d+$" },
+    "version": { "const": "1.0.0" },
     "generated_at": { "type": "string", "format": "date-time" },
     "confidence": { "enum": ["low", "medium", "high"] },
     "result": {

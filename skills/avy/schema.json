@@ -2,11 +2,12 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://aavenir.com/schemas/avy/v1.0.0.json",
   "title": "AVY Universal Assistant Output",
+  "description": "Structured routing, synthesis, and audit-log output returned by the aavenir-avy skill. The conversational_answer field is user-visible; actions_taken is the audit trail.",
   "type": "object",
   "required": ["skill", "version", "generated_at", "confidence", "result"],
   "properties": {
     "skill": { "const": "aavenir-avy" },
-    "version": { "type": "string", "pattern": "^\\d+\\.\\d+\\.\\d+$" },
+    "version": { "const": "1.0.0" },
     "generated_at": { "type": "string", "format": "date-time" },
     "confidence": { "enum": ["low", "medium", "high"] },
     "result": {

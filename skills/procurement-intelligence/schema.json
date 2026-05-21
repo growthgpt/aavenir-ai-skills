@@ -2,11 +2,12 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://aavenir.com/schemas/procurement-intelligence/v1.0.0.json",
   "title": "Aavenir Procurement Intelligence Output",
+  "description": "Structured sourcing analysis returned by the aavenir-procurement-intelligence skill. Consumable directly by Aavenir RFPflow, Onboardingflow, and downstream Flows.",
   "type": "object",
   "required": ["skill", "version", "generated_at", "confidence", "result"],
   "properties": {
     "skill": { "const": "aavenir-procurement-intelligence" },
-    "version": { "type": "string", "pattern": "^\\d+\\.\\d+\\.\\d+$" },
+    "version": { "const": "1.0.0" },
     "generated_at": { "type": "string", "format": "date-time" },
     "confidence": { "enum": ["low", "medium", "high"] },
     "result": {

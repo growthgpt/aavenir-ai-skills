@@ -42,7 +42,7 @@ These skills enforce a single Aavenir-defined contract taxonomy, risk model, and
 
 ```bash
 # Option A — clone as a plugin
-git clone https://github.com/aavenir/aavenir-ai-skills.git \
+git clone https://github.com/growthgpt/aavenir-ai-skills.git \
   ~/.claude/plugins/aavenir-ai-skills
 
 # Option B — install individual skills

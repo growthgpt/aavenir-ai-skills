@@ -8,7 +8,10 @@
   },
   "license": "Apache-2.0",
   "homepage": "https://aavenir.com",
-  "repository": "https://github.com/aavenir/aavenir-ai-skills",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/growthgpt/aavenir-ai-skills.git"
+  },
   "keywords": [
     "aavenir",
     "clm",
