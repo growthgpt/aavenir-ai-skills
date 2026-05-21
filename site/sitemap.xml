@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+  <url>
+    <loc>https://growthgpt.github.io/aavenir-ai-skills/</loc>
+    <lastmod>2026-05-21</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+    <image:image>
+      <image:loc>https://growthgpt.github.io/aavenir-ai-skills/assets/og-image.png</image:loc>
+      <image:title>Aavenir AI Skills Hub — From Scattered AI to an AI Ecosystem</image:title>
+      <image:caption>Five enterprise AI skills for contracts, procurement, negotiation, and obligations. Works with Claude, Codex, Cursor, OpenAI Agents, and MCP.</image:caption>
+    </image:image>
+  </url>
+</urlset>

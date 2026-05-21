@@ -1,0 +1,33 @@
+# Aavenir AI Skills Hub
+
+> Five enterprise-grade AI skills for contract lifecycle management, procurement, negotiation, and post-signature obligations. Distributed across Claude Code, Claude Desktop, claude.ai, OpenAI Agents, Codex CLI, Cursor, Cline, and any MCP-compatible AI assistant. One Aavenir-defined taxonomy. Same structured JSON output everywhere.
+
+Aavenir builds AI-powered Contract Lifecycle Management (CLM) and Source-to-Pay (S2P) workflows natively on ServiceNow. This repository packages Aavenir's domain expertise as portable AI skills — drop-in capability modules that give any modern AI assistant the same contract, procurement, and obligation reasoning that powers the Aavenir platform.
+
+## Skills
+
+- [Contract Intelligence](https://github.com/growthgpt/aavenir-ai-skills/tree/main/skills/contract-intelligence): Contract review, clause extraction, risk scoring, missing-clause detection, obligation pulling, renewal monitoring, and contract Q&A. Auto-triggers on contract text (MSA, NDA, SOW, SaaS, DPA, vendor agreements).
+- [Procurement Intelligence](https://github.com/growthgpt/aavenir-ai-skills/tree/main/skills/procurement-intelligence): Strategic sourcing — RFx analysis, vendor scoring, supplier comparison, total-cost-of-ownership (TCO) modeling, compliance evaluation, sourcing recommendations.
+- [Negotiation Copilot](https://github.com/growthgpt/aavenir-ai-skills/tree/main/skills/negotiation-copilot): Three calibrated rewrites per clause (aggressive, balanced, fallback). Counterparty markup review. Plain-English translation of legal jargon.
+- [Obligation Monitor](https://github.com/growthgpt/aavenir-ai-skills/tree/main/skills/obligation-monitor): Post-signature commitment extraction, recurring obligation classification, owner routing, T-90 / T-30 / T-7 lead-time alerts, renewal triggers.
+- [AVY Universal Assistant](https://github.com/growthgpt/aavenir-ai-skills/tree/main/skills/avy): Unified front door — routes natural-language questions to the right specialist skill, synthesizes cross-domain answers, returns auditable action logs.
+
+## Compatibility
+
+- Claude Code, Claude Desktop, claude.ai (native plugin)
+- OpenAI Agents / Responses / Assistants API (via `prompt.md` + `schema.json`)
+- Codex CLI (via `prompt.md`)
+- Cursor (via `.cursorrules` + `prompt.md`)
+- Cline / Roo Code (via custom modes + `prompt.md`)
+- MCP-compatible clients (native — consumes `schema.json` for tool I/O)
+- ServiceNow + Aavenir AVY (native — Aavenir Flows consume `schema.json`)
+
+## Output contract
+
+Every skill returns JSON conforming to its `schema.json`. Every payload carries the same envelope: `{ skill, version, generated_at, confidence, result }`. Apache-2.0 licensed.
+
+## Resources
+
+- [GitHub Repository](https://github.com/growthgpt/aavenir-ai-skills)
+- [Aavenir Platform](https://aavenir.com)
+- [Book a Demo](https://aavenir.com/demo/)
